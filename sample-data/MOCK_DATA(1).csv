@@ -1,0 +1,1001 @@
+order_id,order_date,customer_id,customer_name,product_id,product_name,category,region,quantity,unit_price,discount,total_amount
+ORD-10299,5/26/2025,CUST-836,Customer Corp 836,PROD-402,Ergonomic Chair,Furniture,West,12,6873.04,217.91,82258.57
+ORD-10225,7/22/2025,CUST-807,Customer Corp 807,PROD-408,Webcam HD,Electronics,West,3,11996.98,18.03,35972.91
+ORD-10234,4/20/2025,CUST-811,Customer Corp 811,PROD-406,USB-C Hub,Accessories,South,7,6235.24,182.39,43464.29
+ORD-10146,6/14/2025,CUST-803,Customer Corp 803,PROD-401,Mechanical Keyboard,Electronics,East,1,$12101.1,237.49,11863.61
+ORD-10261,6/20/2025,CUST-840,Customer Corp 840,PROD-403,27-inch 4K Monitor,Electronics,East,11,14366.21,254.03,
+ORD-10314,2026-99-12,CUST-825,Customer Corp 825,PROD-401,Mechanical Keyboard,Electronics,South,4,9524.12,189.57,37906.91
+ORD-10117,12/18/2025,CUST-806,Customer Corp 806,PROD-406,USB-C Hub,Accessories,East,14,11389.57,138.04,159315.94
+ORD-10098,10/13/2025,CUST-820,Customer Corp 820,PROD-406,USB-C Hub,Accessories,West,13,8732.2,139.95,113378.65
+ORD-10214,3/25/2025,CUST-845,Customer Corp 845,PROD-406,USB-C Hub,Accessories,North,11,2484.49,30.97,27298.42
+ORD-10179,2/2/2026,CUST-824,Customer Corp 824,PROD-407,Noise Cancelling Headphones,Electronics,West,5,10033.33,180.33,49986.32
+ORD-10170,7/9/2025,CUST-843,Customer Corp 843,PROD-404,Wireless Mouse,Electronics,East,10,8597.12,88.78,85882.42
+ORD-10342,4/26/2025,CUST-838,Customer Corp 838,PROD-406,USB-C Hub,Accessories,East,4,13951.75,85.4,55721.6
+ORD-10015,8/21/2025,CUST-848,Customer Corp 848,PROD-401,Mechanical Keyboard,Electronics,South,14,1962.64,83.9,27393.06
+ORD-10236,N/A,CUST-824,Customer Corp 824,PROD-401,Mechanical Keyboard,Electronics,West,9,11126.71,26.96,100113.43
+ORD-10266,12/17/2025,CUST-839,Customer Corp 839,PROD-401,Mechanical Keyboard,Electronics,North,11,11297.0,246.56,124020.44
+ORD-10059,10/22/2025,CUST-833,Customer Corp 833,PROD-406,USB-C Hub,Accessories,South,11,7448.33,158.95,81772.68
+ORD-10205,5/17/2025,CUST-807,Customer Corp 807,PROD-407,Noise Cancelling Headphones,Electronics,North,14,1711.53,85.3,23876.12
+ORD-10163,4/25/2025,CUST-813,Customer Corp 813,PROD-407,Noise Cancelling Headphones,Electronics,North,10,4152.04,118.81,41401.59
+ORD-10177,3/19/2026,CUST-821,Customer Corp 821,PROD-405,Standing Desk,Furniture,North,6,877.24,195.94,5067.5
+ORD-10222,5/9/2025,CUST-816,Customer Corp 816,PROD-406,USB-C Hub,Accessories,South,13,2558.42,170.84,33088.62
+ORD-10232,3/18/2025,CUST-811,Customer Corp 811,PROD-401,Mechanical Keyboard,Electronics,North,8,14878.39,200.17,118826.95
+ORD-10020,1/9/2025,CUST-840,Customer Corp 840,PROD-405,Standing Desk,Furniture,North,6,11422.91,88.26,68449.2
+ORD-10134,2/6/2026,CUST-835,Customer Corp 835,PROD-405,Standing Desk,Furniture,South,8,7101.1,255.35,56553.45
+ORD-10318,10/20/2025,CUST-805,Customer Corp 805,PROD-408,Webcam HD,,West,11,9231.06,53.9,
+ORD-10002,6/12/2025,CUST-821,Customer Corp 821,PROD-405,Standing Desk,Furniture,South,12,7250.97,237.54,86774.1
+ORD-10112,1/3/2025,CUST-847,Customer Corp 847,PROD-401,Mechanical Keyboard,Electronics,West,3,2281.49,231.72,6612.75
+ORD-10155,4/13/2025,CUST-837,Customer Corp 837,PROD-406,USB-C Hub,Accessories,East,15,11553.37,214.66,173085.89
+ORD-10201,7/14/2025,CUST-815,Customer Corp 815,PROD-405,Standing Desk,Furniture,West,4,14389.84,269.59,57289.77
+ORD-10263,1/10/2025,CUST-843,Customer Corp 843,PROD-402,Ergonomic Chair,Furniture,West,6,13965.94,175.82,83619.82
+ORD-10272,3/31/2025,CUST-807,Customer Corp 807,PROD-405,Standing Desk,Furniture,North,9,4505.17,286.78,
+ORD-10005,2/7/2025,CUST-830,Customer Corp 830,PROD-401,Mechanical Keyboard,Electronics,West,6,7555.88,112.09,45223.19
+ORD-10020,N/A,CUST-829,Customer Corp 829,PROD-406,USB-C Hub,Accessories,East,5,12959.13,128.18,64667.47
+ORD-10096,1/12/2025,CUST-850,Customer Corp 850,PROD-402,Ergonomic Chair,Furniture,North,9,5668.39,88.38,50927.13
+ORD-10313,2026-99-12,CUST-812,Customer Corp 812,PROD-403,27-inch 4K Monitor,Electronics,West,8,9288.9,174.94,74136.26
+ORD-10150,3/14/2025,CUST-817,Customer Corp 817,PROD-403,27-inch 4K Monitor,Electronics,South,14,13424.88,168.65,187779.67
+ORD-10231,3/27/2026,CUST-828,Customer Corp 828,PROD-408,Webcam HD,Electronics,North,10,5412.67,245.93,53880.77
+ORD-10050,1/7/2025,CUST-831,Customer Corp 831,PROD-403,27-inch 4K Monitor,Electronics,East,3,5112.56,252.21,15085.47
+ORD-10017,,CUST-838,Customer Corp 838,PROD-408,Webcam HD,Electronics,South,15,8064.23,7.6,120955.85
+ORD-10158,2026-99-12,CUST-801,Customer Corp 801,PROD-403,27-inch 4K Monitor,Electronics,West,5,11264.92,20.92,56303.68
+ORD-10339,9/3/2025,CUST-812,Customer Corp 812,PROD-406,USB-C Hub,Accessories,West,2,$11189.69,112.86,22266.52
+ORD-10250,9/22/2025,CUST-834,Customer Corp 834,PROD-401,Mechanical Keyboard,Electronics,East,13,10908.75,207.99,141605.76
+ORD-10330,9/4/2025,CUST-828,Customer Corp 828,PROD-407,Noise Cancelling Headphones,Electronics,South,6,14568.12,23.54,87385.18
+ORD-10126,1/7/2025,CUST-834,Customer Corp 834,PROD-401,Mechanical Keyboard,Electronics,West,15,$2208.14,149.01,32973.09
+ORD-10273,3/6/2025,CUST-842,Customer Corp 842,PROD-404,Wireless Mouse,Electronics,West,9,6409.75,78.98,57608.77
+ORD-10332,3/19/2026,CUST-820,Customer Corp 820,PROD-406,USB-C Hub,Accessories,East,2,8024.08,57.56,
+ORD-10050,6/8/2025,CUST-803,Customer Corp 803,PROD-403,27-inch 4K Monitor,Electronics,East,6,1302.4,260.88,7553.52
+ORD-10326,2026-99-12,CUST-822,Customer Corp 822,PROD-405,Standing Desk,Furniture,South,4,14606.14,61.49,58363.07
+ORD-10267,3/2/2026,CUST-824,Customer Corp 824,PROD-404,Wireless Mouse,Electronics,East,5,9634.02,84.07,48086.03
+ORD-10230,9/28/2025,CUST-844,Customer Corp 844,PROD-405,Standing Desk,Furniture,South,9,11775.78,12.91,105969.11
+ORD-10267,3/23/2026,CUST-814,Customer Corp 814,PROD-407,Noise Cancelling Headphones,Electronics,South,8,13884.09,175.09,
+ORD-10273,2026-99-12,CUST-812,Customer Corp 812,PROD-404,Wireless Mouse,Electronics,East,12,9863.69,290.72,118073.56
+ORD-10095,6/10/2025,CUST-828,Customer Corp 828,PROD-401,Mechanical Keyboard,Electronics,South,11,4683.8,150.61,51371.19
+ORD-10348,9/4/2025,CUST-846,Customer Corp 846,PROD-403,27-inch 4K Monitor,Electronics,North,6,14302.46,65.85,85748.91
+ORD-10253,2/12/2026,CUST-841,Customer Corp 841,PROD-405,Standing Desk,Furniture,West,6,7724.43,28.81,46317.77
+ORD-10332,1/16/2026,CUST-841,Customer Corp 841,PROD-408,Webcam HD,Electronics,West,12,10702.14,47.04,128378.64
+ORD-10115,2/22/2025,CUST-837,Customer Corp 837,PROD-408,Webcam HD,Electronics,West,9,3010.09,256.55,26834.26
+ORD-10216,4/23/2025,CUST-816,Customer Corp 816,PROD-407,Noise Cancelling Headphones,Electronics,,1,9289.05,205.54,9083.51
+ORD-10170,2026-99-12,CUST-844,Customer Corp 844,PROD-402,Ergonomic Chair,Furniture,South,13,8656.3,42.56,112489.34
+ORD-10291,11/14/2025,CUST-845,Customer Corp 845,PROD-404,Wireless Mouse,Electronics,East,11,4017.6,0.12,44193.48
+ORD-10269,1/18/2026,CUST-830,Customer Corp 830,PROD-408,Webcam HD,Electronics,East,4,8924.05,105.36,35590.84
+ORD-10029,2/23/2025,CUST-820,Customer Corp 820,PROD-405,Standing Desk,Furniture,West,2,2028.5,29.21,
+ORD-10157,5/16/2025,CUST-829,Customer Corp 829,PROD-405,Standing Desk,Furniture,South,2,3601.77,146.89,7056.65
+ORD-10263,2/16/2025,CUST-832,Customer Corp 832,PROD-403,27-inch 4K Monitor,Electronics,East,5,1485.82,38.36,7390.74
+ORD-10121,3/16/2026,CUST-820,Customer Corp 820,PROD-407,Noise Cancelling Headphones,Electronics,,4,3230.23,40.16,12880.76
+ORD-10050,10/13/2025,CUST-813,Customer Corp 813,PROD-408,Webcam HD,Electronics,South,3,12839.66,253.4,38265.58
+ORD-10219,2026-99-12,CUST-835,Customer Corp 835,PROD-406,USB-C Hub,Accessories,North,-5,12631.5,117.34,-63274.84
+ORD-10095,2/3/2025,CUST-835,Customer Corp 835,PROD-401,Mechanical Keyboard,Electronics,,1,4508.92,284.08,4224.84
+ORD-10321,3/19/2026,CUST-841,Customer Corp 841,PROD-408,Webcam HD,Electronics,,4,3707.53,258.1,14572.02
+ORD-10009,9/5/2025,CUST-823,Customer Corp 823,PROD-406,USB-C Hub,Accessories,East,3,$8575.49,230.66,25495.81
+ORD-10021,9/5/2025,CUST-822,Customer Corp 822,PROD-405,Standing Desk,Furniture,North,10,9640.44,196.02,96208.38
+ORD-10295,11/10/2025,CUST-831,Customer Corp 831,PROD-406,USB-C Hub,Accessories,South,15,8243.46,102.43,123549.47
+ORD-10028,2026-99-12,CUST-816,Customer Corp 816,PROD-407,Noise Cancelling Headphones,Electronics,West,6,8837.57,13.17,53012.25
+ORD-10268,5/16/2025,CUST-821,Customer Corp 821,PROD-401,Mechanical Keyboard,Electronics,South,5,11775.8,183.28,58695.72
+ORD-10051,11/1/2025,CUST-815,Customer Corp 815,PROD-402,Ergonomic Chair,Furniture,South,10,7530.54,233.55,75071.85
+ORD-10167,3/29/2026,CUST-803,Customer Corp 803,PROD-407,Noise Cancelling Headphones,Electronics,West,2,,73.31,
+ORD-10349,1/30/2025,CUST-845,Customer Corp 845,PROD-402,Ergonomic Chair,Furniture,North,3,10247.96,35.13,30708.75
+ORD-10286,5/26/2025,CUST-843,Customer Corp 843,PROD-407,Noise Cancelling Headphones,Electronics,West,5,2574.28,192.32,12679.08
+ORD-10091,6/26/2025,CUST-825,Customer Corp 825,PROD-405,Standing Desk,Furniture,North,5,11477.13,283.68,57101.97
+ORD-10001,8/8/2025,CUST-850,Customer Corp 850,PROD-408,Webcam HD,Electronics,South,8,1697.63,90.14,
+ORD-10043,7/9/2025,CUST-814,Customer Corp 814,PROD-406,USB-C Hub,Accessories,South,14,4785.92,55.55,66947.33
+ORD-10071,9/8/2025,CUST-836,Customer Corp 836,PROD-404,Wireless Mouse,Electronics,South,6,₹13817.39,148.58,82755.76
+ORD-10102,2026-99-12,CUST-840,Customer Corp 840,PROD-405,Standing Desk,Furniture,West,5,3835.51,241.44,18936.11
+ORD-10192,6/2/2025,CUST-850,Customer Corp 850,PROD-401,Mechanical Keyboard,Electronics,South,12,13410.96,291.54,160639.98
+ORD-10349,3/6/2026,CUST-837,Customer Corp 837,PROD-402,Ergonomic Chair,Furniture,West,10,14600.51,163.51,
+ORD-10300,1/11/2025,CUST-815,Customer Corp 815,PROD-404,Wireless Mouse,,North,10,4860.11,128.1,48473
+ORD-10326,6/19/2025,CUST-803,Customer Corp 803,PROD-408,Webcam HD,Electronics,East,14,4662.58,89.31,65186.81
+ORD-10192,4/10/2025,CUST-812,Customer Corp 812,PROD-406,USB-C Hub,Accessories,West,-5,6323.45,87.0,-31704.25
+ORD-10048,7/22/2025,CUST-847,Customer Corp 847,PROD-405,Standing Desk,Furniture,South,10,13058.38,210.56,130373.24
+ORD-10149,11/20/2025,CUST-818,Customer Corp 818,PROD-401,Mechanical Keyboard,Electronics,East,5,3941.85,220.62,
+ORD-10265,11/17/2025,CUST-812,Customer Corp 812,PROD-403,27-inch 4K Monitor,Electronics,North,6,8642.81,77.29,51779.57
+ORD-10081,2/16/2026,CUST-822,Customer Corp 822,PROD-403,27-inch 4K Monitor,Electronics,West,13,14665.11,3.5,190642.93
+ORD-10257,4/24/2025,CUST-808,Customer Corp 808,PROD-408,Webcam HD,Electronics,North,4,4370.8,16.44,17466.76
+ORD-10236,7/12/2025,CUST-817,Customer Corp 817,PROD-401,Mechanical Keyboard,Electronics,North,6,₹7426.68,186.58,44373.5
+ORD-10199,8/13/2025,CUST-842,Customer Corp 842,PROD-403,27-inch 4K Monitor,Electronics,South,2,7041.18,104.57,13977.79
+ORD-10089,11/24/2025,CUST-848,Customer Corp 848,PROD-408,Webcam HD,Electronics,North,10,11842.36,7.35,118416.25
+ORD-10266,10/26/2025,CUST-817,Customer Corp 817,PROD-401,Mechanical Keyboard,Electronics,West,6,5624.45,182.05,33564.65
+ORD-10236,2/25/2025,CUST-827,Customer Corp 827,PROD-407,Noise Cancelling Headphones,Electronics,West,3,14653.79,300.0,43661.37
+ORD-10261,2/27/2025,CUST-809,Customer Corp 809,PROD-405,Standing Desk,Furniture,East,12,6068.42,27.91,72793.13
+ORD-10218,1/26/2026,CUST-830,Customer Corp 830,PROD-404,Wireless Mouse,Electronics,North,2,10709.07,154.86,21263.28
+ORD-10172,2/20/2025,CUST-817,Customer Corp 817,PROD-405,Standing Desk,Furniture,South,4,2651.55,134.62,10471.58
+ORD-10148,3/1/2026,CUST-820,Customer Corp 820,PROD-401,Mechanical Keyboard,Electronics,South,6,10018.35,123.27,59986.83
+ORD-10234,11/2/2025,CUST-839,Customer Corp 839,PROD-403,27-inch 4K Monitor,Electronics,South,9,13739.39,129.49,123525.02
+ORD-10308,9/24/2025,CUST-824,Customer Corp 824,PROD-406,USB-C Hub,Accessories,North,9,11443.01,14.48,102972.61
+ORD-10020,3/25/2025,CUST-840,Customer Corp 840,PROD-405,Standing Desk,Furniture,North,14,13358.74,135.07,186887.29
+ORD-10199,9/1/2025,CUST-826,Customer Corp 826,PROD-407,Noise Cancelling Headphones,Electronics,North,3,8264.28,179.63,24613.21
+ORD-10211,10/6/2025,CUST-807,Customer Corp 807,PROD-401,Mechanical Keyboard,Electronics,North,8,12598.66,220.22,100569.06
+ORD-10169,3/25/2025,CUST-850,Customer Corp 850,PROD-406,USB-C Hub,Accessories,East,3,6714.95,160.51,19984.34
+ORD-10337,12/7/2025,CUST-803,Customer Corp 803,PROD-406,USB-C Hub,Accessories,West,10,5904.85,233.05,58815.45
+ORD-10170,7/2/2025,CUST-807,Customer Corp 807,PROD-407,Noise Cancelling Headphones,Electronics,North,8,1674.82,159.0,13239.56
+ORD-10023,2/26/2025,CUST-817,Customer Corp 817,PROD-401,Mechanical Keyboard,,North,14,13432.0,149.31,187898.69
+ORD-10342,1/26/2026,CUST-834,Customer Corp 834,PROD-408,Webcam HD,Electronics,North,12,13677.19,115.97,164010.31
+ORD-10212,5/5/2025,CUST-846,Customer Corp 846,PROD-405,Standing Desk,Furniture,West,6,5490.87,10.32,32934.9
+ORD-10030,6/2/2025,CUST-841,Customer Corp 841,PROD-402,Ergonomic Chair,Furniture,East,8,₹8325.7,83.8,66521.8
+ORD-10016,5/7/2025,CUST-825,Customer Corp 825,PROD-408,Webcam HD,Electronics,South,7,5597.2,297.2,38883.2
+ORD-10320,,CUST-817,Customer Corp 817,PROD-403,27-inch 4K Monitor,Electronics,East,1,8764.63,100.46,8664.17
+ORD-10346,6/29/2025,CUST-846,Customer Corp 846,PROD-401,Mechanical Keyboard,Electronics,West,10,6626.81,199.07,66069.03
+ORD-10206,7/2/2025,CUST-804,Customer Corp 804,PROD-401,Mechanical Keyboard,Electronics,West,9,12099.31,189.38,108704.41
+ORD-10011,9/4/2025,CUST-836,Customer Corp 836,PROD-407,Noise Cancelling Headphones,Electronics,,13,4614.21,54.48,59930.25
+ORD-10294,12/22/2025,CUST-841,Customer Corp 841,PROD-404,Wireless Mouse,Electronics,,14,6379.3,0.66,89309.54
+ORD-10085,2/10/2025,CUST-823,Customer Corp 823,PROD-404,Wireless Mouse,Electronics,,15,11292.51,252.49,169135.16
+ORD-10180,9/5/2025,CUST-843,Customer Corp 843,PROD-404,Wireless Mouse,Electronics,South,13,13710.53,103.12,178133.77
+ORD-10293,9/3/2025,CUST-829,Customer Corp 829,PROD-402,Ergonomic Chair,Furniture,North,11,7202.71,85.42,79144.39
+ORD-10248,10/7/2025,CUST-828,Customer Corp 828,PROD-402,Ergonomic Chair,Furniture,South,9,13613.86,43.07,122481.67
+ORD-10090,5/5/2025,CUST-833,Customer Corp 833,PROD-401,Mechanical Keyboard,Electronics,East,1,2359.45,243.52,2115.93
+ORD-10333,6/29/2025,CUST-831,Customer Corp 831,PROD-404,Wireless Mouse,Electronics,East,8,3565.52,5.78,28518.38
+ORD-10122,10/2/2025,CUST-804,Customer Corp 804,PROD-405,Standing Desk,Furniture,West,12,4186.17,29.37,50204.67
+ORD-10103,2026-99-12,CUST-820,Customer Corp 820,PROD-407,Noise Cancelling Headphones,Electronics,North,10,8670.4,213.51,86490.49
+ORD-10250,1/4/2026,CUST-847,Customer Corp 847,PROD-408,Webcam HD,Electronics,South,-5,6061.98,233.06,-30542.96
+ORD-10306,8/4/2025,CUST-825,Customer Corp 825,PROD-408,Webcam HD,Electronics,North,7,$14002.87,100.58,97919.51
+ORD-10256,4/28/2025,CUST-832,Customer Corp 832,PROD-403,27-inch 4K Monitor,Electronics,North,6,$6404.65,30.02,38397.88
+ORD-10168,8/4/2025,CUST-835,Customer Corp 835,PROD-408,Webcam HD,Electronics,South,-5,12282.76,150.42,-61564.22
+ORD-10258,12/13/2025,CUST-840,Customer Corp 840,PROD-403,27-inch 4K Monitor,Electronics,East,4,13874.08,238.53,55257.79
+ORD-10170,3/16/2026,CUST-804,Customer Corp 804,PROD-403,27-inch 4K Monitor,Electronics,,11,3340.68,160.26,36587.22
+ORD-10145,3/21/2025,CUST-811,Customer Corp 811,PROD-403,27-inch 4K Monitor,Electronics,West,4,7269.96,177.69,28902.15
+ORD-10261,7/6/2025,CUST-849,Customer Corp 849,PROD-404,Wireless Mouse,Electronics,East,11,2184.51,186.73,23842.88
+ORD-10012,9/7/2025,CUST-806,Customer Corp 806,PROD-405,Standing Desk,Furniture,East,8,11981.82,298.33,
+ORD-10153,11/10/2025,CUST-842,Customer Corp 842,PROD-402,Ergonomic Chair,Furniture,West,2,10089.58,181.41,19997.75
+ORD-10043,10/24/2025,CUST-810,Customer Corp 810,PROD-405,Standing Desk,,North,13,6320.43,146.35,82019.24
+ORD-10165,,CUST-850,Customer Corp 850,PROD-406,USB-C Hub,Accessories,South,6,9552.09,49.54,57263
+ORD-10332,12/1/2025,CUST-849,Customer Corp 849,PROD-404,Wireless Mouse,Electronics,,9,6412.55,278.91,57434.04
+ORD-10324,1/10/2026,CUST-810,Customer Corp 810,PROD-406,USB-C Hub,,East,2,7392.07,276.92,14507.22
+ORD-10243,2/5/2025,CUST-822,Customer Corp 822,PROD-403,27-inch 4K Monitor,Electronics,East,14,5528.52,223.34,
+ORD-10003,6/5/2025,CUST-820,Customer Corp 820,PROD-403,27-inch 4K Monitor,Electronics,West,7,10498.97,185.66,73307.13
+ORD-10018,3/4/2025,CUST-802,Customer Corp 802,PROD-406,USB-C Hub,Accessories,West,3,7845.98,266.98,
+ORD-10044,3/10/2025,CUST-840,Customer Corp 840,PROD-404,Wireless Mouse,Electronics,East,2,11806.18,164.12,23448.24
+ORD-10068,6/13/2025,CUST-844,Customer Corp 844,PROD-401,Mechanical Keyboard,Electronics,West,15,5346.81,146.39,80055.76
+ORD-10289,8/23/2025,CUST-807,Customer Corp 807,PROD-401,Mechanical Keyboard,Electronics,East,4,13875.13,136.79,55363.73
+ORD-10135,2/22/2026,CUST-802,Customer Corp 802,PROD-408,Webcam HD,Electronics,East,4,5440.36,95.7,21665.74
+ORD-10216,5/23/2025,CUST-850,Customer Corp 850,PROD-401,Mechanical Keyboard,Electronics,East,10,4669.78,285.09,46412.71
+ORD-10104,6/22/2025,CUST-833,Customer Corp 833,PROD-401,Mechanical Keyboard,Electronics,West,1,9828.1,76.52,9751.58
+ORD-10302,9/17/2025,CUST-824,Customer Corp 824,PROD-408,Webcam HD,,East,3,9031.82,232.99,26862.47
+ORD-10318,1/4/2025,CUST-849,Customer Corp 849,PROD-404,Wireless Mouse,Electronics,East,3,11081.4,52.51,33191.69
+ORD-10111,1/30/2026,CUST-850,Customer Corp 850,PROD-406,USB-C Hub,Accessories,West,15,1132.59,150.29,16838.56
+ORD-10060,10/24/2025,CUST-822,Customer Corp 822,PROD-403,27-inch 4K Monitor,Electronics,North,7,14478.36,199.76,101148.76
+ORD-10224,5/16/2025,CUST-817,Customer Corp 817,PROD-403,27-inch 4K Monitor,Electronics,North,8,1827.11,65.77,14551.11
+ORD-10293,3/10/2025,CUST-803,Customer Corp 803,PROD-408,Webcam HD,,East,13,1513.08,9.67,19660.37
+ORD-10242,9/20/2025,CUST-810,Customer Corp 810,PROD-404,Wireless Mouse,Electronics,East,8,523.98,191.87,3999.97
+ORD-10228,8/27/2025,CUST-819,Customer Corp 819,PROD-408,Webcam HD,Electronics,North,8,3125.36,97.9,24904.98
+ORD-10142,5/5/2025,CUST-814,Customer Corp 814,PROD-402,Ergonomic Chair,Furniture,East,15,9273.26,115.72,138983.18
+ORD-10290,7/16/2025,CUST-826,Customer Corp 826,PROD-408,Webcam HD,Electronics,North,7,12146.25,49.88,84973.87
+ORD-10066,2/14/2025,CUST-831,Customer Corp 831,PROD-407,Noise Cancelling Headphones,Electronics,West,3,8500.82,39.97,25462.49
+ORD-10270,6/20/2025,CUST-832,Customer Corp 832,PROD-406,USB-C Hub,Accessories,South,1,,45.65,
+ORD-10062,3/16/2025,CUST-837,Customer Corp 837,PROD-401,Mechanical Keyboard,Electronics,South,6,9779.73,211.79,58466.59
+ORD-10234,9/23/2025,CUST-842,Customer Corp 842,PROD-404,Wireless Mouse,,East,9,11633.69,12.77,104690.44
+ORD-10326,2/16/2026,CUST-837,Customer Corp 837,PROD-405,Standing Desk,Furniture,North,1,4021.49,292.51,3728.98
+ORD-10253,9/26/2025,CUST-807,Customer Corp 807,PROD-402,Ergonomic Chair,Furniture,South,7,4057.68,224.37,
+ORD-10036,9/16/2025,CUST-817,Customer Corp 817,PROD-408,Webcam HD,Electronics,West,14,6653.67,218.17,92933.21
+ORD-10268,11/18/2025,CUST-817,Customer Corp 817,PROD-405,Standing Desk,Furniture,West,1,1489.69,256.79,1232.9
+ORD-10220,2026-99-12,CUST-836,Customer Corp 836,PROD-407,Noise Cancelling Headphones,Electronics,South,13,9435.83,220.28,122445.51
+ORD-10021,,CUST-839,Customer Corp 839,PROD-406,USB-C Hub,Accessories,East,6,6196.1,183.3,36993.3
+ORD-10063,2/12/2026,CUST-808,Customer Corp 808,PROD-401,Mechanical Keyboard,Electronics,North,4,2663.4,34.85,10618.75
+ORD-10082,7/16/2025,CUST-847,Customer Corp 847,PROD-408,Webcam HD,Electronics,East,3,9816.01,166.87,29281.16
+ORD-10172,10/7/2025,CUST-845,Customer Corp 845,PROD-408,Webcam HD,Electronics,South,5,6679.58,106.61,33291.29
+ORD-10002,1/29/2026,CUST-827,Customer Corp 827,PROD-402,Ergonomic Chair,,West,12,$1907.76,102.54,22790.58
+ORD-10268,3/24/2025,CUST-813,Customer Corp 813,PROD-401,Mechanical Keyboard,Electronics,North,10,7771.22,195.75,77516.45
+ORD-10023,1/17/2025,CUST-810,Customer Corp 810,PROD-406,USB-C Hub,Accessories,East,9,4679.04,236.3,
+ORD-10147,2/21/2026,CUST-823,Customer Corp 823,PROD-406,USB-C Hub,Accessories,South,11,12826.92,270.96,140825.16
+ORD-10149,11/13/2025,CUST-806,Customer Corp 806,PROD-406,USB-C Hub,,East,15,12751.37,279.98,190990.57
+ORD-10004,11/26/2025,CUST-827,Customer Corp 827,PROD-401,Mechanical Keyboard,Electronics,West,4,4989.66,181.13,19777.51
+ORD-10337,7/31/2025,CUST-842,Customer Corp 842,PROD-408,Webcam HD,Electronics,West,12,2615.05,98.61,31281.99
+ORD-10177,4/27/2025,CUST-847,Customer Corp 847,PROD-401,Mechanical Keyboard,Electronics,East,11,1590.96,1.97,
+ORD-10259,3/13/2026,CUST-810,Customer Corp 810,PROD-408,Webcam HD,Electronics,North,7,13224.58,167.34,92404.72
+ORD-10171,5/31/2025,CUST-802,Customer Corp 802,PROD-408,Webcam HD,,West,1,₹11875.31,135.15,11740.16
+ORD-10338,6/8/2025,CUST-817,Customer Corp 817,PROD-404,Wireless Mouse,Electronics,West,12,3034.1,115.24,36293.96
+ORD-10140,11/9/2025,CUST-807,Customer Corp 807,PROD-402,Ergonomic Chair,Furniture,North,8,9521.38,44.23,76126.81
+ORD-10125,9/21/2025,CUST-807,Customer Corp 807,PROD-406,USB-C Hub,Accessories,West,11,3193.48,99.0,35029.28
+ORD-10313,,CUST-805,Customer Corp 805,PROD-405,Standing Desk,Furniture,East,1,₹10931.61,93.11,
+ORD-10198,10/24/2025,CUST-821,Customer Corp 821,PROD-405,Standing Desk,Furniture,East,4,6122.54,21.77,24468.39
+ORD-10202,2/15/2026,CUST-818,Customer Corp 818,PROD-404,Wireless Mouse,Electronics,East,14,3822.34,238.89,53273.87
+ORD-10026,1/20/2025,CUST-834,Customer Corp 834,PROD-401,Mechanical Keyboard,Electronics,East,12,,186.61,
+ORD-10315,3/12/2025,CUST-801,Customer Corp 801,PROD-408,Webcam HD,Electronics,South,-5,₹13972.69,53.44,-69916.89
+ORD-10037,6/28/2025,CUST-802,Customer Corp 802,PROD-408,Webcam HD,Electronics,South,14,939.61,271.88,12882.66
+ORD-10298,1/25/2026,CUST-831,Customer Corp 831,PROD-401,Mechanical Keyboard,,East,8,3786.96,75.09,30220.59
+ORD-10055,2/2/2026,CUST-843,Customer Corp 843,PROD-406,USB-C Hub,Accessories,North,6,1808.2,230.98,10618.22
+ORD-10208,2026-99-12,CUST-821,Customer Corp 821,PROD-402,Ergonomic Chair,Furniture,East,2,7849.47,280.82,15418.12
+ORD-10220,3/6/2025,CUST-843,Customer Corp 843,PROD-407,Noise Cancelling Headphones,Electronics,West,7,14918.92,169.37,104263.07
+ORD-10313,,CUST-816,Customer Corp 816,PROD-402,Ergonomic Chair,Furniture,South,11,627.76,102.41,6802.95
+ORD-10061,2026-99-12,CUST-829,Customer Corp 829,PROD-406,USB-C Hub,Accessories,North,9,7406.06,169.28,66485.26
+ORD-10291,9/18/2025,CUST-828,Customer Corp 828,PROD-406,USB-C Hub,Accessories,,6,776.67,132.32,4527.7
+ORD-10301,3/4/2025,CUST-848,Customer Corp 848,PROD-405,Standing Desk,Furniture,North,6,7963.4,190.44,47589.96
+ORD-10250,2/12/2026,CUST-814,Customer Corp 814,PROD-406,USB-C Hub,Accessories,North,13,14066.74,158.18,182709.44
+ORD-10080,4/26/2025,CUST-831,Customer Corp 831,PROD-402,Ergonomic Chair,Furniture,West,7,6371.94,66.21,44537.37
+ORD-10337,9/26/2025,CUST-826,Customer Corp 826,PROD-408,Webcam HD,Electronics,East,7,$6775.21,219.0,47207.47
+ORD-10349,1/6/2026,CUST-816,Customer Corp 816,PROD-403,27-inch 4K Monitor,Electronics,North,10,9183.24,229.24,91603.16
+ORD-10289,11/22/2025,CUST-814,Customer Corp 814,PROD-402,Ergonomic Chair,Furniture,West,2,3127.73,227.05,6028.41
+ORD-10213,3/27/2026,CUST-832,Customer Corp 832,PROD-406,USB-C Hub,Accessories,South,2,3136.84,251.35,6022.33
+ORD-10272,10/7/2025,CUST-830,Customer Corp 830,PROD-408,Webcam HD,Electronics,South,6,₹7991.47,80.44,47868.38
+ORD-10198,,CUST-844,Customer Corp 844,PROD-406,USB-C Hub,Accessories,,13,12887.12,44.02,167488.54
+ORD-10285,3/2/2025,CUST-835,Customer Corp 835,PROD-406,USB-C Hub,Accessories,South,12,9062.19,175.8,108570.48
+ORD-10124,4/17/2025,CUST-849,Customer Corp 849,PROD-406,USB-C Hub,Accessories,North,5,6719.35,284.15,33312.6
+ORD-10047,11/20/2025,CUST-831,Customer Corp 831,PROD-404,Wireless Mouse,Electronics,East,12,13763.81,199.48,164966.24
+ORD-10137,7/21/2025,CUST-838,Customer Corp 838,PROD-408,Webcam HD,Electronics,North,9,1473.09,89.15,
+ORD-10267,12/15/2025,CUST-818,Customer Corp 818,PROD-404,Wireless Mouse,Electronics,South,6,10270.57,79.56,61543.86
+ORD-10110,3/1/2025,CUST-804,Customer Corp 804,PROD-402,Ergonomic Chair,Furniture,East,-5,12448.74,259.08,-62502.78
+ORD-10319,4/20/2025,CUST-837,Customer Corp 837,PROD-406,USB-C Hub,Accessories,South,7,9527.93,143.27,66552.24
+ORD-10316,3/21/2025,CUST-812,Customer Corp 812,PROD-401,Mechanical Keyboard,Electronics,West,11,11936.89,37.52,131268.27
+ORD-10182,3/16/2025,CUST-825,Customer Corp 825,PROD-407,Noise Cancelling Headphones,Electronics,East,12,$12165.18,6.08,145976.08
+ORD-10320,9/22/2025,CUST-846,Customer Corp 846,PROD-408,Webcam HD,Electronics,West,8,8785.62,133.73,70151.23
+ORD-10292,11/11/2025,CUST-807,Customer Corp 807,PROD-405,Standing Desk,Furniture,North,6,4174.77,45.39,25003.23
+ORD-10283,3/9/2025,CUST-837,Customer Corp 837,PROD-405,Standing Desk,Furniture,East,7,1092.11,90.82,7553.95
+ORD-10011,2/3/2026,CUST-805,Customer Corp 805,PROD-406,USB-C Hub,Accessories,North,14,11755.69,129.84,164449.82
+ORD-10324,1/9/2026,CUST-847,Customer Corp 847,PROD-406,USB-C Hub,Accessories,East,9,7051.27,223.83,63237.6
+ORD-10024,3/18/2025,CUST-804,Customer Corp 804,PROD-404,Wireless Mouse,Electronics,,-5,9479.17,43.34,-47439.19
+ORD-10346,8/5/2025,CUST-804,Customer Corp 804,PROD-407,Noise Cancelling Headphones,Electronics,West,-5,9469.75,196.05,-47544.8
+ORD-10104,3/27/2026,CUST-808,Customer Corp 808,PROD-404,Wireless Mouse,Electronics,North,12,3009.82,131.64,35986.2
+ORD-10052,2/11/2026,CUST-846,Customer Corp 846,PROD-405,Standing Desk,Furniture,North,1,4699.2,108.18,4591.02
+ORD-10053,11/9/2025,CUST-814,Customer Corp 814,PROD-406,USB-C Hub,Accessories,North,5,14265.4,153.53,71173.47
+ORD-10086,12/12/2025,CUST-818,Customer Corp 818,PROD-403,27-inch 4K Monitor,Electronics,West,15,12689.06,239.28,190096.62
+ORD-10236,11/23/2025,CUST-814,Customer Corp 814,PROD-401,Mechanical Keyboard,Electronics,North,14,10733.29,51.36,150214.7
+ORD-10337,8/18/2025,CUST-822,Customer Corp 822,PROD-405,Standing Desk,Furniture,West,2,6530.59,288.44,12772.74
+ORD-10293,3/17/2025,CUST-816,Customer Corp 816,PROD-408,Webcam HD,Electronics,South,12,₹14619.33,240.82,
+ORD-10340,5/30/2025,CUST-820,Customer Corp 820,PROD-406,USB-C Hub,Accessories,South,3,2934.63,153.01,8650.88
+ORD-10203,2/6/2026,CUST-841,Customer Corp 841,PROD-402,Ergonomic Chair,Furniture,South,10,11539.28,44.46,
+ORD-10065,2/11/2026,CUST-823,Customer Corp 823,PROD-408,Webcam HD,Electronics,North,4,4912.29,296.35,19352.81
+ORD-10080,1/15/2025,CUST-834,Customer Corp 834,PROD-406,USB-C Hub,Accessories,North,4,8909.75,116.78,35522.22
+ORD-10087,2/10/2026,CUST-829,Customer Corp 829,PROD-404,Wireless Mouse,Electronics,East,5,2044.44,88.17,10134.03
+ORD-10293,1/13/2025,CUST-811,Customer Corp 811,PROD-408,Webcam HD,Electronics,East,2,11098.17,100.2,22096.14
+ORD-10133,7/5/2025,CUST-841,Customer Corp 841,PROD-407,Noise Cancelling Headphones,Electronics,East,7,3538.64,145.36,24625.12
+ORD-10199,12/15/2025,CUST-821,Customer Corp 821,PROD-406,USB-C Hub,Accessories,South,10,11007.2,208.07,109863.93
+ORD-10147,10/28/2025,CUST-850,Customer Corp 850,PROD-402,Ergonomic Chair,Furniture,South,9,14119.71,106.21,126971.18
+ORD-10035,7/20/2025,CUST-823,Customer Corp 823,PROD-404,Wireless Mouse,Electronics,East,7,3159.4,79.04,
+ORD-10180,3/30/2026,CUST-828,Customer Corp 828,PROD-404,Wireless Mouse,Electronics,South,11,9207.83,97.51,101188.62
+ORD-10349,5/10/2025,CUST-850,Customer Corp 850,PROD-403,27-inch 4K Monitor,Electronics,West,14,7670.86,187.68,107204.36
+ORD-10156,2026-99-12,CUST-847,Customer Corp 847,PROD-407,Noise Cancelling Headphones,Electronics,West,4,5694.93,43.2,22736.52
+ORD-10308,4/16/2025,CUST-848,Customer Corp 848,PROD-407,Noise Cancelling Headphones,Electronics,West,1,7604.36,31.63,7572.73
+ORD-10304,3/29/2026,CUST-813,Customer Corp 813,PROD-406,USB-C Hub,Accessories,West,11,3584.39,253.83,39174.46
+ORD-10243,1/14/2025,CUST-838,Customer Corp 838,PROD-407,Noise Cancelling Headphones,Electronics,East,3,11096.82,1.7,33288.76
+ORD-10331,1/8/2025,CUST-829,Customer Corp 829,PROD-403,27-inch 4K Monitor,Electronics,West,7,10916.59,296.29,76119.84
+ORD-10108,1/28/2026,CUST-812,Customer Corp 812,PROD-403,27-inch 4K Monitor,Electronics,East,13,13187.73,225.7,171214.79
+ORD-10231,3/10/2026,CUST-846,Customer Corp 846,PROD-402,Ergonomic Chair,Furniture,South,10,14934.94,196.13,149153.27
+ORD-10141,12/9/2025,CUST-824,Customer Corp 824,PROD-403,27-inch 4K Monitor,Electronics,South,4,1301.76,78.33,5128.71
+ORD-10155,6/6/2025,CUST-809,Customer Corp 809,PROD-408,Webcam HD,Electronics,,13,13853.03,114.41,179974.98
+ORD-10108,4/16/2025,CUST-816,Customer Corp 816,PROD-406,USB-C Hub,Accessories,East,1,2007.58,34.01,1973.57
+ORD-10111,1/9/2026,CUST-820,Customer Corp 820,PROD-405,Standing Desk,Furniture,North,14,7776.66,286.87,108586.37
+ORD-10083,2026-99-12,CUST-830,Customer Corp 830,PROD-401,Mechanical Keyboard,Electronics,East,4,8429.29,192.18,33524.98
+ORD-10165,11/22/2025,CUST-842,Customer Corp 842,PROD-408,Webcam HD,,South,9,10377.85,178.99,93221.66
+ORD-10124,8/13/2025,CUST-803,Customer Corp 803,PROD-405,Standing Desk,Furniture,East,2,13901.35,94.68,
+ORD-10305,11/13/2025,CUST-806,Customer Corp 806,PROD-401,Mechanical Keyboard,Electronics,South,4,₹5566.91,172.31,22095.33
+ORD-10103,6/19/2025,CUST-828,Customer Corp 828,PROD-407,Noise Cancelling Headphones,Electronics,North,1,4204.22,251.97,3952.25
+ORD-10265,12/12/2025,CUST-810,Customer Corp 810,PROD-407,Noise Cancelling Headphones,Electronics,South,8,9278.72,201.16,74028.6
+ORD-10076,8/26/2025,CUST-827,Customer Corp 827,PROD-406,USB-C Hub,Accessories,North,10,$9304.97,264.02,92785.68
+ORD-10152,8/16/2025,CUST-825,Customer Corp 825,PROD-404,Wireless Mouse,Electronics,North,-5,3105.68,293.97,-15822.37
+ORD-10182,10/6/2025,CUST-850,Customer Corp 850,PROD-408,Webcam HD,Electronics,,13,4213.99,147.74,54634.13
+ORD-10175,5/1/2025,CUST-808,Customer Corp 808,PROD-403,27-inch 4K Monitor,Electronics,North,12,13130.81,36.83,157532.89
+ORD-10203,4/28/2025,CUST-812,Customer Corp 812,PROD-402,Ergonomic Chair,Furniture,South,4,3168.77,199.01,12476.07
+ORD-10017,6/6/2025,CUST-813,Customer Corp 813,PROD-407,Noise Cancelling Headphones,Electronics,East,7,2419.27,226.45,
+ORD-10308,7/31/2025,CUST-841,Customer Corp 841,PROD-405,Standing Desk,Furniture,North,6,5888.71,179.39,35152.87
+ORD-10063,1/26/2026,CUST-821,Customer Corp 821,PROD-408,Webcam HD,Electronics,West,12,1012.29,25.64,
+ORD-10191,8/31/2025,CUST-811,Customer Corp 811,PROD-407,Noise Cancelling Headphones,Electronics,South,9,13574.52,268.75,121901.93
+ORD-10158,5/3/2025,CUST-849,Customer Corp 849,PROD-406,USB-C Hub,Accessories,South,13,2987.41,206.29,38630.04
+ORD-10218,3/23/2026,CUST-816,Customer Corp 816,PROD-402,Ergonomic Chair,Furniture,North,-5,6331.42,144.01,-31801.11
+ORD-10077,6/25/2025,CUST-842,Customer Corp 842,PROD-406,USB-C Hub,Accessories,North,7,7107.35,41.72,49709.73
+ORD-10119,5/28/2025,CUST-843,Customer Corp 843,PROD-405,Standing Desk,Furniture,West,15,2883.51,264.4,42988.25
+ORD-10281,2/27/2026,CUST-830,Customer Corp 830,PROD-403,27-inch 4K Monitor,,East,8,4666.15,121.62,37207.58
+ORD-10278,8/25/2025,CUST-807,Customer Corp 807,PROD-408,Webcam HD,Electronics,South,14,14754.6,138.27,
+ORD-10302,N/A,CUST-830,Customer Corp 830,PROD-401,Mechanical Keyboard,Electronics,East,9,11504.97,293.27,103251.46
+ORD-10244,7/9/2025,CUST-804,Customer Corp 804,PROD-406,USB-C Hub,Accessories,South,7,1593.05,271.08,10880.27
+ORD-10176,3/6/2026,CUST-830,Customer Corp 830,PROD-405,Standing Desk,Furniture,North,4,10642.95,293.5,42278.3
+ORD-10212,3/15/2025,CUST-837,Customer Corp 837,PROD-405,Standing Desk,Furniture,East,-5,1193.84,5.88,-5975.08
+ORD-10344,1/30/2026,CUST-810,Customer Corp 810,PROD-403,27-inch 4K Monitor,Electronics,East,9,2458.55,215.72,21911.23
+ORD-10132,5/15/2025,CUST-847,Customer Corp 847,PROD-404,Wireless Mouse,Electronics,South,11,$13553.17,269.88,
+ORD-10237,2/12/2026,CUST-826,Customer Corp 826,PROD-403,27-inch 4K Monitor,Electronics,West,8,14297.34,87.79,114290.93
+ORD-10085,8/4/2025,CUST-848,Customer Corp 848,PROD-406,USB-C Hub,Accessories,West,11,12804.62,12.51,140838.31
+ORD-10299,4/5/2025,CUST-827,Customer Corp 827,PROD-408,Webcam HD,Electronics,East,10,13355.45,177.18,133377.32
+ORD-10231,2/8/2026,CUST-845,Customer Corp 845,PROD-403,27-inch 4K Monitor,,East,15,4802.23,174.56,71858.89
+ORD-10209,5/12/2025,CUST-845,Customer Corp 845,PROD-408,Webcam HD,Electronics,West,2,3653.86,298.92,7008.8
+ORD-10145,6/25/2025,CUST-805,Customer Corp 805,PROD-408,Webcam HD,Electronics,West,14,4205.02,72.3,58797.98
+ORD-10083,9/22/2025,CUST-807,Customer Corp 807,PROD-401,Mechanical Keyboard,Electronics,North,2,$11708.76,44.42,23373.1
+ORD-10175,7/19/2025,CUST-828,Customer Corp 828,PROD-406,USB-C Hub,Accessories,North,10,$4899.3,244.3,48748.7
+ORD-10112,4/18/2025,CUST-803,Customer Corp 803,PROD-401,Mechanical Keyboard,Electronics,North,1,5120.98,131.45,4989.53
+ORD-10323,12/1/2025,CUST-830,Customer Corp 830,PROD-408,Webcam HD,,,6,2817.03,237.65,16664.53
+ORD-10261,,CUST-821,Customer Corp 821,PROD-404,Wireless Mouse,Electronics,South,1,1860.39,243.75,1616.64
+ORD-10349,2/10/2025,CUST-815,Customer Corp 815,PROD-408,Webcam HD,Electronics,South,14,8729.45,232.81,121979.49
+ORD-10322,5/21/2025,CUST-845,Customer Corp 845,PROD-407,Noise Cancelling Headphones,Electronics,South,1,$2350.64,243.52,2107.12
+ORD-10282,10/17/2025,CUST-842,Customer Corp 842,PROD-401,Mechanical Keyboard,Electronics,West,1,10899.24,272.09,10627.15
+ORD-10254,5/6/2025,CUST-817,Customer Corp 817,PROD-403,27-inch 4K Monitor,Electronics,West,12,10384.53,216.48,124397.88
+ORD-10146,2/23/2025,CUST-834,Customer Corp 834,PROD-407,Noise Cancelling Headphones,Electronics,South,3,10036.17,129.59,29978.92
+ORD-10143,2/24/2026,CUST-839,Customer Corp 839,PROD-405,Standing Desk,Furniture,South,12,893.77,296.84,10428.4
+ORD-10108,2/14/2026,CUST-850,Customer Corp 850,PROD-402,Ergonomic Chair,Furniture,West,1,5727.75,92.16,5635.59
+ORD-10222,4/2/2025,CUST-844,Customer Corp 844,PROD-404,Wireless Mouse,Electronics,South,3,13798.1,229.88,41164.42
+ORD-10165,3/6/2025,CUST-836,Customer Corp 836,PROD-408,Webcam HD,Electronics,East,1,₹4519.92,199.78,4320.14
+ORD-10153,12/29/2025,CUST-818,Customer Corp 818,PROD-402,Ergonomic Chair,Furniture,West,11,5941.23,74.8,
+ORD-10164,12/19/2025,CUST-843,Customer Corp 843,PROD-406,USB-C Hub,Accessories,North,15,13453.79,142.33,201664.52
+ORD-10301,1/14/2025,CUST-806,Customer Corp 806,PROD-403,27-inch 4K Monitor,Electronics,,11,1317.33,276.85,14213.78
+ORD-10181,6/1/2025,CUST-801,Customer Corp 801,PROD-408,Webcam HD,Electronics,North,13,10739.87,243.91,139374.4
+ORD-10162,2026-99-12,CUST-824,Customer Corp 824,PROD-408,Webcam HD,Electronics,West,14,11659.59,282.23,162952.03
+ORD-10228,4/2/2025,CUST-845,Customer Corp 845,PROD-404,Wireless Mouse,Electronics,East,3,715.51,84.91,2061.62
+ORD-10317,,CUST-827,Customer Corp 827,PROD-404,Wireless Mouse,Electronics,West,5,6983.66,171.75,34746.55
+ORD-10124,5/18/2025,CUST-827,Customer Corp 827,PROD-408,Webcam HD,Electronics,South,1,$3437.94,188.68,3249.26
+ORD-10032,7/24/2025,CUST-822,Customer Corp 822,PROD-404,Wireless Mouse,Electronics,South,15,8276.41,197.59,123948.56
+ORD-10213,10/5/2025,CUST-843,Customer Corp 843,PROD-408,Webcam HD,Electronics,South,15,6840.51,290.31,102317.34
+ORD-10304,5/11/2025,CUST-850,Customer Corp 850,PROD-408,Webcam HD,Electronics,North,4,9376.24,111.1,37393.86
+ORD-10018,9/13/2025,CUST-849,Customer Corp 849,PROD-404,Wireless Mouse,Electronics,West,1,808.56,266.02,542.54
+ORD-10121,7/22/2025,CUST-849,Customer Corp 849,PROD-403,27-inch 4K Monitor,Electronics,East,11,$3089.23,36.13,33945.4
+ORD-10094,1/27/2026,CUST-831,Customer Corp 831,PROD-408,Webcam HD,Electronics,West,13,6113.93,172.93,79308.16
+ORD-10155,9/3/2025,CUST-824,Customer Corp 824,PROD-405,Standing Desk,Furniture,East,4,7740.55,250.29,30711.91
+ORD-10144,3/21/2025,CUST-810,Customer Corp 810,PROD-402,Ergonomic Chair,Furniture,East,11,7446.71,64.93,81848.88
+ORD-10059,9/4/2025,CUST-839,Customer Corp 839,PROD-401,Mechanical Keyboard,Electronics,South,4,5475.16,157.7,21742.94
+ORD-10015,,CUST-830,Customer Corp 830,PROD-402,Ergonomic Chair,Furniture,North,12,13897.63,229.36,166542.2
+ORD-10030,9/22/2025,CUST-838,Customer Corp 838,PROD-405,Standing Desk,Furniture,South,12,1899.8,139.5,22658.1
+ORD-10084,1/24/2026,CUST-803,Customer Corp 803,PROD-401,Mechanical Keyboard,Electronics,West,2,10234.34,28.86,20439.82
+ORD-10309,6/6/2025,CUST-846,Customer Corp 846,PROD-404,Wireless Mouse,Electronics,North,3,14901.68,69.29,44635.75
+ORD-10032,2/12/2025,CUST-832,Customer Corp 832,PROD-403,27-inch 4K Monitor,Electronics,East,6,12493.41,27.29,74933.17
+ORD-10157,9/21/2025,CUST-826,Customer Corp 826,PROD-402,Ergonomic Chair,Furniture,West,10,8785.68,163.03,87693.77
+ORD-10253,7/11/2025,CUST-836,Customer Corp 836,PROD-404,Wireless Mouse,Electronics,West,5,13875.69,39.2,
+ORD-10019,4/4/2025,CUST-826,Customer Corp 826,PROD-403,27-inch 4K Monitor,Electronics,West,4,5777.34,267.68,22841.68
+ORD-10188,3/14/2025,CUST-805,Customer Corp 805,PROD-403,27-inch 4K Monitor,Electronics,East,5,14087.05,224.72,70210.53
+ORD-10114,9/5/2025,CUST-844,Customer Corp 844,PROD-403,27-inch 4K Monitor,Electronics,West,8,13944.41,127.49,111427.79
+ORD-10245,3/3/2025,CUST-840,Customer Corp 840,PROD-403,27-inch 4K Monitor,Electronics,South,6,14055.29,96.6,84235.14
+ORD-10236,5/26/2025,CUST-839,Customer Corp 839,PROD-407,Noise Cancelling Headphones,Electronics,West,7,4653.43,238.89,32335.12
+ORD-10137,8/28/2025,CUST-818,Customer Corp 818,PROD-406,USB-C Hub,Accessories,East,9,9861.16,258.02,88492.42
+ORD-10184,2/18/2026,CUST-835,Customer Corp 835,PROD-406,USB-C Hub,Accessories,West,10,5409.56,190.87,53904.73
+ORD-10119,8/14/2025,CUST-825,Customer Corp 825,PROD-401,Mechanical Keyboard,Electronics,South,11,3986.62,290.96,43561.86
+ORD-10163,12/27/2025,CUST-829,Customer Corp 829,PROD-403,27-inch 4K Monitor,Electronics,West,4,8417.57,295.39,33374.89
+ORD-10166,1/10/2026,CUST-847,Customer Corp 847,PROD-407,Noise Cancelling Headphones,Electronics,West,14,12937.73,295.39,180832.83
+ORD-10208,2/28/2026,CUST-823,Customer Corp 823,PROD-408,Webcam HD,Electronics,South,14,12749.06,241.66,178245.18
+ORD-10336,4/11/2025,CUST-826,Customer Corp 826,PROD-408,Webcam HD,Electronics,North,12,2312.51,63.55,27686.57
+ORD-10117,10/2/2025,CUST-810,Customer Corp 810,PROD-405,Standing Desk,Furniture,North,4,13596.0,125.26,54258.74
+ORD-10228,7/24/2025,CUST-809,Customer Corp 809,PROD-408,Webcam HD,Electronics,East,1,5393.47,95.67,5297.8
+ORD-10052,8/26/2025,CUST-839,Customer Corp 839,PROD-407,Noise Cancelling Headphones,Electronics,West,5,2536.2,185.32,12495.68
+ORD-10106,2026-99-12,CUST-803,Customer Corp 803,PROD-405,Standing Desk,Furniture,North,2,6924.91,158.42,13691.4
+ORD-10198,7/11/2025,CUST-803,Customer Corp 803,PROD-406,USB-C Hub,Accessories,South,4,4576.75,227.44,18079.56
+ORD-10065,4/14/2025,CUST-842,Customer Corp 842,PROD-402,Ergonomic Chair,Furniture,East,1,9359.36,255.39,9103.97
+ORD-10192,4/18/2025,CUST-805,Customer Corp 805,PROD-407,Noise Cancelling Headphones,Electronics,North,13,11645.6,155.38,
+ORD-10199,11/14/2025,CUST-838,Customer Corp 838,PROD-408,Webcam HD,Electronics,South,11,3941.98,294.24,
+ORD-10305,12/8/2025,CUST-850,Customer Corp 850,PROD-408,Webcam HD,Electronics,West,10,14481.26,294.57,
+ORD-10118,2/20/2026,CUST-810,Customer Corp 810,PROD-406,USB-C Hub,Accessories,South,6,515.9,187.98,
+ORD-10111,12/2/2025,CUST-815,Customer Corp 815,PROD-406,USB-C Hub,Accessories,North,3,14671.97,220.27,43795.64
+ORD-10117,2/2/2026,CUST-847,Customer Corp 847,PROD-408,Webcam HD,Electronics,North,7,$13449.35,23.28,
+ORD-10183,11/12/2025,CUST-824,Customer Corp 824,PROD-404,Wireless Mouse,Electronics,East,9,1729.51,174.87,15390.72
+ORD-10257,3/14/2026,CUST-812,Customer Corp 812,PROD-408,Webcam HD,Electronics,West,14,1214.04,50.48,16946.08
+ORD-10345,11/10/2025,CUST-807,Customer Corp 807,PROD-402,Ergonomic Chair,Furniture,East,3,12569.07,195.77,37511.44
+ORD-10031,4/20/2025,CUST-815,Customer Corp 815,PROD-401,Mechanical Keyboard,Electronics,South,10,740.85,97.94,7310.56
+ORD-10146,3/3/2026,CUST-845,Customer Corp 845,PROD-405,Standing Desk,Furniture,East,9,4547.82,159.57,40770.81
+ORD-10305,2/4/2025,CUST-822,Customer Corp 822,PROD-406,USB-C Hub,Accessories,West,2,13653.76,263.64,27043.88
+ORD-10322,3/10/2026,CUST-848,Customer Corp 848,PROD-401,Mechanical Keyboard,Electronics,West,8,10953.22,77.93,87547.83
+ORD-10146,2/17/2025,CUST-828,Customer Corp 828,PROD-402,Ergonomic Chair,Furniture,South,6,6008.15,29.72,36019.18
+ORD-10208,3/15/2025,CUST-840,Customer Corp 840,PROD-403,27-inch 4K Monitor,Electronics,West,9,8965.16,255.53,80430.91
+ORD-10133,1/4/2026,CUST-834,Customer Corp 834,PROD-405,Standing Desk,Furniture,,3,2709.55,232.06,7896.59
+ORD-10087,7/16/2025,CUST-821,Customer Corp 821,PROD-402,Ergonomic Chair,Furniture,North,11,1058.02,213.15,11425.07
+ORD-10246,2026-99-12,CUST-801,Customer Corp 801,PROD-402,Ergonomic Chair,Furniture,,9,₹4130.6,122.11,37053.29
+ORD-10320,7/11/2025,CUST-802,Customer Corp 802,PROD-404,Wireless Mouse,Electronics,North,9,7210.51,38.05,64856.54
+ORD-10322,10/18/2025,CUST-849,Customer Corp 849,PROD-402,Ergonomic Chair,,West,10,8959.67,262.74,89333.96
+ORD-10174,9/19/2025,CUST-807,Customer Corp 807,PROD-406,USB-C Hub,Accessories,East,8,11234.75,174.99,
+ORD-10048,7/9/2025,CUST-813,Customer Corp 813,PROD-408,Webcam HD,Electronics,North,15,1102.95,36.37,
+ORD-10226,7/13/2025,CUST-803,Customer Corp 803,PROD-408,Webcam HD,Electronics,East,10,9224.64,105.11,92141.29
+ORD-10257,4/18/2025,CUST-832,Customer Corp 832,PROD-407,Noise Cancelling Headphones,Electronics,North,12,14185.71,10.88,170217.64
+ORD-10317,11/28/2025,CUST-834,Customer Corp 834,PROD-402,Ergonomic Chair,Furniture,North,3,910.61,153.1,2578.73
+ORD-10259,3/17/2026,CUST-847,Customer Corp 847,PROD-407,Noise Cancelling Headphones,Electronics,South,13,8219.96,94.61,106764.87
+ORD-10299,3/16/2025,CUST-802,Customer Corp 802,PROD-405,Standing Desk,Furniture,South,6,2628.63,82.09,15689.69
+ORD-10273,6/18/2025,CUST-812,Customer Corp 812,PROD-401,Mechanical Keyboard,Electronics,East,1,2153.31,243.64,1909.67
+ORD-10030,1/29/2025,CUST-835,Customer Corp 835,PROD-406,USB-C Hub,Accessories,North,5,8785.66,189.88,43738.42
+ORD-10281,6/15/2025,CUST-848,Customer Corp 848,PROD-401,Mechanical Keyboard,Electronics,West,14,,89.12,
+ORD-10160,7/23/2025,CUST-849,Customer Corp 849,PROD-401,Mechanical Keyboard,Electronics,North,3,14820.94,173.09,44289.73
+ORD-10278,,CUST-847,Customer Corp 847,PROD-405,Standing Desk,Furniture,East,9,10934.55,164.26,98246.69
+ORD-10255,2/15/2026,CUST-801,Customer Corp 801,PROD-406,USB-C Hub,Accessories,,2,14511.93,11.66,29012.2
+ORD-10345,3/11/2025,CUST-831,Customer Corp 831,PROD-407,Noise Cancelling Headphones,Electronics,North,1,11674.24,243.79,11430.45
+ORD-10204,8/19/2025,CUST-808,Customer Corp 808,PROD-402,Ergonomic Chair,Furniture,East,14,1207.37,130.45,16772.73
+ORD-10150,3/27/2026,CUST-829,Customer Corp 829,PROD-401,Mechanical Keyboard,Electronics,North,10,2948.16,78.05,29403.55
+ORD-10312,11/29/2025,CUST-814,Customer Corp 814,PROD-401,Mechanical Keyboard,Electronics,East,13,14567.98,22.81,189360.93
+ORD-10249,12/25/2025,CUST-810,Customer Corp 810,PROD-407,Noise Cancelling Headphones,Electronics,West,2,7545.6,220.67,14870.53
+ORD-10071,9/8/2025,CUST-812,Customer Corp 812,PROD-403,27-inch 4K Monitor,Electronics,East,8,,146.76,
+ORD-10199,9/27/2025,CUST-829,Customer Corp 829,PROD-405,Standing Desk,Furniture,North,10,4865.76,107.59,
+ORD-10166,2026-99-12,CUST-839,Customer Corp 839,PROD-403,27-inch 4K Monitor,Electronics,East,9,12659.69,158.97,113778.24
+ORD-10221,3/18/2026,CUST-832,Customer Corp 832,PROD-404,Wireless Mouse,Electronics,East,2,638.97,211.6,1066.34
+ORD-10307,3/23/2026,CUST-847,Customer Corp 847,PROD-408,Webcam HD,Electronics,South,10,₹9674.11,125.31,96615.79
+ORD-10022,7/15/2025,CUST-837,Customer Corp 837,PROD-402,Ergonomic Chair,Furniture,West,10,5845.59,87.21,58368.69
+ORD-10061,10/19/2025,CUST-813,Customer Corp 813,PROD-402,Ergonomic Chair,Furniture,North,13,14711.09,136.49,191107.68
+ORD-10082,1/1/2025,CUST-804,Customer Corp 804,PROD-404,Wireless Mouse,Electronics,North,11,2706.52,209.98,29561.74
+ORD-10085,6/1/2025,CUST-829,Customer Corp 829,PROD-404,Wireless Mouse,Electronics,East,8,2730.42,94.09,21749.27
+ORD-10117,4/23/2025,CUST-832,Customer Corp 832,PROD-402,Ergonomic Chair,Furniture,West,12,14451.67,96.81,173323.23
+ORD-10161,3/15/2026,CUST-824,Customer Corp 824,PROD-406,USB-C Hub,Accessories,South,11,2569.74,246.16,28020.98
+ORD-10054,7/6/2025,CUST-850,Customer Corp 850,PROD-401,Mechanical Keyboard,Electronics,West,10,1741.52,156.37,17258.83
+ORD-10020,3/5/2025,CUST-826,Customer Corp 826,PROD-405,Standing Desk,Furniture,West,8,10983.05,101.31,87763.09
+ORD-10315,11/6/2025,CUST-818,Customer Corp 818,PROD-403,27-inch 4K Monitor,Electronics,South,12,9101.26,155.1,109060.02
+ORD-10181,11/11/2025,CUST-814,Customer Corp 814,PROD-408,Webcam HD,Electronics,South,8,14916.05,214.83,119113.57
+ORD-10051,12/6/2025,CUST-833,Customer Corp 833,PROD-408,Webcam HD,Electronics,East,5,679.67,117.44,3280.91
+ORD-10050,1/24/2026,CUST-825,Customer Corp 825,PROD-402,Ergonomic Chair,Furniture,South,15,10641.41,73.58,159547.57
+ORD-10052,12/20/2025,CUST-835,Customer Corp 835,PROD-407,Noise Cancelling Headphones,Electronics,West,11,10717.58,257.32,117636.06
+ORD-10200,8/25/2025,CUST-805,Customer Corp 805,PROD-403,27-inch 4K Monitor,Electronics,West,13,5564.8,80.87,72261.53
+ORD-10245,3/4/2025,CUST-847,Customer Corp 847,PROD-407,Noise Cancelling Headphones,Electronics,West,6,6649.65,81.05,39816.85
+ORD-10186,5/7/2025,CUST-829,Customer Corp 829,PROD-405,Standing Desk,Furniture,West,3,1293.54,107.61,3773.01
+ORD-10229,4/18/2025,CUST-805,Customer Corp 805,PROD-404,Wireless Mouse,Electronics,,2,5520.63,255.15,10786.11
+ORD-10265,2026-99-12,CUST-841,Customer Corp 841,PROD-405,Standing Desk,Furniture,South,14,13408.15,249.86,187464.24
+ORD-10349,1/27/2025,CUST-848,Customer Corp 848,PROD-405,Standing Desk,Furniture,North,4,952.14,234.85,3573.71
+ORD-10076,4/21/2025,CUST-830,Customer Corp 830,PROD-408,Webcam HD,Electronics,East,14,4519.33,129.35,63141.27
+ORD-10072,2/24/2025,CUST-830,Customer Corp 830,PROD-403,27-inch 4K Monitor,Electronics,South,4,10014.56,148.79,39909.45
+ORD-10338,4/6/2025,CUST-812,Customer Corp 812,PROD-402,Ergonomic Chair,Furniture,North,13,6906.04,173.27,89605.25
+ORD-10269,2/17/2026,CUST-819,Customer Corp 819,PROD-401,Mechanical Keyboard,Electronics,North,6,7841.54,185.87,46863.37
+ORD-10280,2026-99-12,CUST-841,Customer Corp 841,PROD-401,Mechanical Keyboard,Electronics,South,10,3456.84,121.91,34446.49
+ORD-10173,1/27/2026,CUST-847,Customer Corp 847,PROD-402,Ergonomic Chair,Furniture,South,7,9146.71,148.1,63878.87
+ORD-10005,4/6/2025,CUST-828,Customer Corp 828,PROD-405,Standing Desk,Furniture,East,11,634.36,149.67,6828.29
+ORD-10174,5/11/2025,CUST-821,Customer Corp 821,PROD-407,Noise Cancelling Headphones,Electronics,North,4,$3660.7,103.82,14538.98
+ORD-10209,3/1/2025,CUST-841,Customer Corp 841,PROD-402,Ergonomic Chair,Furniture,North,2,₹2380.39,149.61,4611.17
+ORD-10067,8/6/2025,CUST-836,Customer Corp 836,PROD-407,Noise Cancelling Headphones,Electronics,South,6,13757.17,195.06,82347.96
+ORD-10315,6/9/2025,CUST-804,Customer Corp 804,PROD-404,Wireless Mouse,Electronics,West,4,6575.95,126.94,26176.86
+ORD-10202,8/9/2025,CUST-844,Customer Corp 844,PROD-401,Mechanical Keyboard,Electronics,West,13,13301.13,241.48,172673.21
+ORD-10264,11/28/2025,CUST-829,Customer Corp 829,PROD-404,Wireless Mouse,Electronics,,7,3953.76,181.84,27494.48
+ORD-10160,3/9/2026,CUST-829,Customer Corp 829,PROD-402,Ergonomic Chair,Furniture,East,9,10100.07,125.27,90775.36
+ORD-10104,12/3/2025,CUST-835,Customer Corp 835,PROD-405,Standing Desk,Furniture,West,1,14098.56,87.37,
+ORD-10077,3/20/2025,CUST-802,Customer Corp 802,PROD-405,Standing Desk,Furniture,West,15,,76.76,
+ORD-10341,N/A,CUST-847,Customer Corp 847,PROD-405,Standing Desk,Furniture,East,1,14407.04,169.27,14237.77
+ORD-10305,9/26/2025,CUST-801,Customer Corp 801,PROD-401,Mechanical Keyboard,Electronics,North,5,10796.31,137.1,53844.45
+ORD-10084,1/28/2026,CUST-820,Customer Corp 820,PROD-408,Webcam HD,Electronics,North,11,12347.39,81.93,135739.36
+ORD-10224,4/23/2025,CUST-848,Customer Corp 848,PROD-405,Standing Desk,Furniture,North,-5,5737.41,158.87,-28845.92
+ORD-10280,11/24/2025,CUST-850,Customer Corp 850,PROD-404,Wireless Mouse,Electronics,East,9,7131.1,74.49,64105.41
+ORD-10197,5/10/2025,CUST-827,Customer Corp 827,PROD-407,Noise Cancelling Headphones,Electronics,West,14,6944.79,230.37,96996.69
+ORD-10167,10/2/2025,CUST-837,Customer Corp 837,PROD-403,27-inch 4K Monitor,Electronics,North,4,2743.11,148.67,10823.77
+ORD-10089,10/20/2025,CUST-815,Customer Corp 815,PROD-407,Noise Cancelling Headphones,Electronics,South,1,$5932.19,132.52,5799.67
+ORD-10202,2026-99-12,CUST-818,Customer Corp 818,PROD-403,27-inch 4K Monitor,,West,2,8398.02,10.76,16785.28
+ORD-10118,10/31/2025,CUST-818,Customer Corp 818,PROD-407,Noise Cancelling Headphones,Electronics,East,5,8200.73,179.67,40823.98
+ORD-10218,3/25/2025,CUST-808,Customer Corp 808,PROD-402,Ergonomic Chair,Furniture,East,-5,14575.44,25.11,-72902.31
+ORD-10108,2/18/2026,CUST-814,Customer Corp 814,PROD-404,Wireless Mouse,Electronics,East,10,9311.18,1.97,
+ORD-10316,10/3/2025,CUST-828,Customer Corp 828,PROD-401,Mechanical Keyboard,Electronics,West,3,5425.77,160.93,16116.38
+ORD-10013,8/25/2025,CUST-819,Customer Corp 819,PROD-406,USB-C Hub,Accessories,East,4,3915.15,289.23,15371.37
+ORD-10005,12/28/2025,CUST-804,Customer Corp 804,PROD-407,Noise Cancelling Headphones,Electronics,North,12,8641.4,294.13,103402.67
+ORD-10061,11/7/2025,CUST-837,Customer Corp 837,PROD-402,Ergonomic Chair,Furniture,West,13,8091.18,112.99,105072.35
+ORD-10071,3/18/2025,CUST-803,Customer Corp 803,PROD-402,Ergonomic Chair,Furniture,North,13,10303.43,171.56,133773.03
+ORD-10206,11/12/2025,CUST-836,Customer Corp 836,PROD-404,Wireless Mouse,Electronics,South,12,520.57,92.37,6154.47
+ORD-10221,6/6/2025,CUST-820,Customer Corp 820,PROD-406,USB-C Hub,Accessories,South,15,5153.66,52.89,77252.01
+ORD-10335,11/4/2025,CUST-821,Customer Corp 821,PROD-405,Standing Desk,Furniture,North,1,6801.46,37.58,6763.88
+ORD-10238,2/15/2025,CUST-830,Customer Corp 830,PROD-407,Noise Cancelling Headphones,Electronics,East,4,14807.86,222.27,59009.17
+ORD-10273,4/11/2025,CUST-804,Customer Corp 804,PROD-404,Wireless Mouse,Electronics,East,5,2753.9,47.02,13722.48
+ORD-10178,4/23/2025,CUST-823,Customer Corp 823,PROD-404,Wireless Mouse,Electronics,West,2,$8128.77,259.74,15997.8
+ORD-10141,8/27/2025,CUST-801,Customer Corp 801,PROD-403,27-inch 4K Monitor,Electronics,North,15,8802.19,244.99,131787.86
+ORD-10349,1/1/2025,CUST-807,Customer Corp 807,PROD-403,27-inch 4K Monitor,Electronics,South,7,12845.27,143.18,89773.71
+ORD-10302,5/30/2025,CUST-832,Customer Corp 832,PROD-407,Noise Cancelling Headphones,Electronics,East,9,2656.02,117.99,23786.19
+ORD-10134,9/11/2025,CUST-814,Customer Corp 814,PROD-403,27-inch 4K Monitor,Electronics,West,10,₹4095.15,63.37,
+ORD-10174,8/7/2025,CUST-820,Customer Corp 820,PROD-407,Noise Cancelling Headphones,Electronics,South,-5,10365.16,139.93,-51965.73
+ORD-10179,8/9/2025,CUST-801,Customer Corp 801,PROD-405,Standing Desk,Furniture,South,15,2851.9,256.09,42522.41
+ORD-10172,2/24/2026,CUST-837,Customer Corp 837,PROD-405,Standing Desk,Furniture,North,10,13119.86,75.95,131122.65
+ORD-10212,4/8/2025,CUST-850,Customer Corp 850,PROD-406,USB-C Hub,Accessories,East,3,5005.31,229.9,14786.03
+ORD-10076,7/16/2025,CUST-850,Customer Corp 850,PROD-401,Mechanical Keyboard,Electronics,West,4,₹4647.85,20.84,18570.56
+ORD-10087,6/24/2025,CUST-826,Customer Corp 826,PROD-403,27-inch 4K Monitor,Electronics,East,6,$14222.78,24.48,85312.2
+ORD-10251,7/24/2025,CUST-816,Customer Corp 816,PROD-408,Webcam HD,Electronics,North,13,10598.97,188.38,
+ORD-10025,2/28/2025,CUST-850,Customer Corp 850,PROD-404,Wireless Mouse,Electronics,South,2,1701.53,288.88,3114.18
+ORD-10065,9/15/2025,CUST-825,Customer Corp 825,PROD-403,27-inch 4K Monitor,Electronics,East,10,6727.63,25.31,67250.99
+ORD-10010,4/27/2025,CUST-826,Customer Corp 826,PROD-401,Mechanical Keyboard,,South,14,8702.9,254.11,121586.49
+ORD-10138,11/15/2025,CUST-842,Customer Corp 842,PROD-408,Webcam HD,Electronics,East,2,12428.24,253.91,24602.57
+ORD-10170,12/13/2025,CUST-817,Customer Corp 817,PROD-402,Ergonomic Chair,Furniture,South,7,2672.84,12.56,18697.32
+ORD-10320,4/6/2025,CUST-804,Customer Corp 804,PROD-406,USB-C Hub,Accessories,West,13,14005.0,153.95,181911.05
+ORD-10035,6/13/2025,CUST-816,Customer Corp 816,PROD-406,USB-C Hub,Accessories,North,11,3060.49,30.06,33635.33
+ORD-10336,7/16/2025,CUST-810,Customer Corp 810,PROD-405,Standing Desk,Furniture,South,8,14106.61,34.1,112818.78
+ORD-10102,7/19/2025,CUST-829,Customer Corp 829,PROD-406,USB-C Hub,Accessories,East,-5,11423.68,160.64,-57279.04
+ORD-10134,1/8/2026,CUST-820,Customer Corp 820,PROD-403,27-inch 4K Monitor,Electronics,East,2,5650.93,243.76,11058.1
+ORD-10276,6/4/2025,CUST-849,Customer Corp 849,PROD-408,Webcam HD,Electronics,North,6,13415.96,157.28,
+ORD-10143,6/15/2025,CUST-843,Customer Corp 843,PROD-401,Mechanical Keyboard,Electronics,West,15,979.6,66.48,14627.52
+ORD-10247,2/4/2026,CUST-848,Customer Corp 848,PROD-407,Noise Cancelling Headphones,Electronics,East,5,11840.34,85.77,59115.93
+ORD-10329,1/9/2026,CUST-844,Customer Corp 844,PROD-407,Noise Cancelling Headphones,Electronics,North,15,9567.6,262.13,143251.87
+ORD-10345,1/8/2025,CUST-830,Customer Corp 830,PROD-407,Noise Cancelling Headphones,Electronics,South,12,12696.72,43.92,152316.72
+ORD-10311,3/20/2026,CUST-833,Customer Corp 833,PROD-408,Webcam HD,Electronics,West,9,1132.15,198.46,
+ORD-10029,5/31/2025,CUST-811,Customer Corp 811,PROD-405,Standing Desk,Furniture,North,9,3243.83,256.0,28938.47
+ORD-10295,7/6/2025,CUST-802,Customer Corp 802,PROD-406,USB-C Hub,Accessories,North,5,3482.18,133.2,17277.7
+ORD-10078,6/1/2025,CUST-803,Customer Corp 803,PROD-407,Noise Cancelling Headphones,Electronics,,3,11259.4,5.61,33772.59
+ORD-10038,2/10/2025,CUST-812,Customer Corp 812,PROD-403,27-inch 4K Monitor,Electronics,East,3,8765.06,195.88,
+ORD-10103,2026-99-12,CUST-828,Customer Corp 828,PROD-406,USB-C Hub,Accessories,East,8,2964.08,296.28,23416.36
+ORD-10184,12/6/2025,CUST-850,Customer Corp 850,PROD-402,Ergonomic Chair,Furniture,North,14,6525.57,268.87,91089.11
+ORD-10022,9/4/2025,CUST-817,Customer Corp 817,PROD-405,Standing Desk,Furniture,West,11,10107.44,169.26,111012.58
+ORD-10246,9/4/2025,CUST-843,Customer Corp 843,PROD-408,Webcam HD,Electronics,West,12,1553.66,98.62,18545.3
+ORD-10287,8/27/2025,CUST-819,Customer Corp 819,PROD-402,Ergonomic Chair,Furniture,East,14,2293.91,41.36,32073.38
+ORD-10070,2/7/2025,CUST-838,Customer Corp 838,PROD-408,Webcam HD,Electronics,South,8,14047.16,121.85,112255.43
+ORD-10110,1/10/2025,CUST-831,Customer Corp 831,PROD-402,Ergonomic Chair,Furniture,North,4,1892.88,265.28,7306.24
+ORD-10294,3/28/2025,CUST-848,Customer Corp 848,PROD-404,Wireless Mouse,Electronics,South,5,8260.1,50.79,41249.71
+ORD-10021,1/13/2026,CUST-818,Customer Corp 818,PROD-405,Standing Desk,Furniture,North,9,890.89,106.19,7911.82
+ORD-10236,5/23/2025,CUST-842,Customer Corp 842,PROD-402,Ergonomic Chair,Furniture,South,4,1202.95,173.49,4638.31
+ORD-10169,5/2/2025,CUST-820,Customer Corp 820,PROD-401,Mechanical Keyboard,Electronics,West,1,7383.91,147.16,7236.75
+ORD-10133,12/7/2025,CUST-836,Customer Corp 836,PROD-406,USB-C Hub,Accessories,North,7,9702.76,69.14,67850.18
+ORD-10239,10/11/2025,CUST-847,Customer Corp 847,PROD-408,Webcam HD,Electronics,East,11,₹10901.88,75.83,119844.85
+ORD-10158,5/2/2025,CUST-810,Customer Corp 810,PROD-403,27-inch 4K Monitor,Electronics,West,8,606.68,78.47,4774.97
+ORD-10008,7/28/2025,CUST-829,Customer Corp 829,PROD-407,Noise Cancelling Headphones,Electronics,East,8,6161.3,13.06,49277.34
+ORD-10289,11/24/2025,CUST-835,Customer Corp 835,PROD-403,27-inch 4K Monitor,Electronics,North,5,9596.46,278.35,47703.95
+ORD-10347,6/14/2025,CUST-814,Customer Corp 814,PROD-408,Webcam HD,Electronics,South,9,12707.31,273.44,
+ORD-10006,2/12/2026,CUST-832,Customer Corp 832,PROD-401,Mechanical Keyboard,Electronics,West,5,5484.6,127.9,27295.1
+ORD-10255,6/25/2025,CUST-827,Customer Corp 827,PROD-405,Standing Desk,Furniture,West,10,11692.56,78.88,116846.72
+ORD-10317,8/8/2025,CUST-801,Customer Corp 801,PROD-408,Webcam HD,Electronics,North,11,13214.98,237.75,145127.03
+ORD-10178,3/4/2026,CUST-807,Customer Corp 807,PROD-404,Wireless Mouse,,East,6,9062.57,201.1,54174.32
+ORD-10184,4/8/2025,CUST-810,Customer Corp 810,PROD-404,Wireless Mouse,Electronics,West,8,5682.15,243.31,
+ORD-10207,3/26/2025,CUST-845,Customer Corp 845,PROD-405,Standing Desk,Furniture,North,7,12344.9,158.92,86255.38
+ORD-10322,4/1/2025,CUST-816,Customer Corp 816,PROD-407,Noise Cancelling Headphones,Electronics,East,11,7835.1,199.08,85987.02
+ORD-10213,9/19/2025,CUST-841,Customer Corp 841,PROD-406,USB-C Hub,Accessories,South,2,4299.1,12.58,
+ORD-10095,8/25/2025,CUST-840,Customer Corp 840,PROD-406,USB-C Hub,Accessories,West,5,4692.02,253.37,23206.73
+ORD-10173,10/4/2025,CUST-804,Customer Corp 804,PROD-406,USB-C Hub,Accessories,East,5,1772.41,210.72,8651.33
+ORD-10309,11/20/2025,CUST-827,Customer Corp 827,PROD-406,USB-C Hub,Accessories,North,11,9177.95,10.78,100946.67
+ORD-10026,3/10/2026,CUST-801,Customer Corp 801,PROD-407,Noise Cancelling Headphones,Electronics,North,4,8212.66,272.99,32577.65
+ORD-10315,11/2/2025,CUST-823,Customer Corp 823,PROD-402,Ergonomic Chair,Furniture,North,8,9275.23,234.06,73967.78
+ORD-10070,11/26/2025,CUST-815,Customer Corp 815,PROD-402,Ergonomic Chair,Furniture,North,8,6686.55,252.68,53239.72
+ORD-10037,11/5/2025,CUST-822,Customer Corp 822,PROD-403,27-inch 4K Monitor,Electronics,South,12,$1452.48,268.9,
+ORD-10270,9/16/2025,CUST-812,Customer Corp 812,PROD-401,Mechanical Keyboard,Electronics,North,9,9443.16,51.57,84936.87
+ORD-10206,3/11/2025,CUST-802,Customer Corp 802,PROD-408,Webcam HD,Electronics,North,9,5312.89,72.32,47743.69
+ORD-10238,9/14/2025,CUST-825,Customer Corp 825,PROD-403,27-inch 4K Monitor,Electronics,East,9,14098.62,124.99,126762.59
+ORD-10275,7/26/2025,CUST-845,Customer Corp 845,PROD-406,USB-C Hub,Accessories,South,15,$1618.9,235.92,24047.58
+ORD-10313,3/26/2025,CUST-841,Customer Corp 841,PROD-401,Mechanical Keyboard,Electronics,North,7,9285.44,244.06,64754.02
+ORD-10239,11/7/2025,CUST-822,Customer Corp 822,PROD-405,Standing Desk,Furniture,North,15,14474.23,104.96,217008.49
+ORD-10186,7/20/2025,CUST-843,Customer Corp 843,PROD-403,27-inch 4K Monitor,Electronics,West,5,5659.34,58.39,28238.31
+ORD-10076,4/21/2025,CUST-830,Customer Corp 830,PROD-403,27-inch 4K Monitor,,West,10,14056.73,50.11,140517.19
+ORD-10327,3/11/2025,CUST-822,Customer Corp 822,PROD-404,Wireless Mouse,,North,2,5602.09,290.6,10913.58
+ORD-10004,2/3/2025,CUST-834,Customer Corp 834,PROD-403,27-inch 4K Monitor,Electronics,North,1,14351.68,156.06,14195.62
+ORD-10149,6/24/2025,CUST-822,Customer Corp 822,PROD-401,Mechanical Keyboard,Electronics,East,-5,9474.66,28.04,-47401.34
+ORD-10173,2/5/2026,CUST-832,Customer Corp 832,PROD-408,Webcam HD,Electronics,East,7,$781.9,123.74,5349.56
+ORD-10006,11/29/2025,CUST-849,Customer Corp 849,PROD-407,Noise Cancelling Headphones,Electronics,East,9,14890.91,218.54,133799.65
+ORD-10286,2/7/2026,CUST-845,Customer Corp 845,PROD-401,Mechanical Keyboard,Electronics,East,4,6576.19,98.05,26206.71
+ORD-10189,5/24/2025,CUST-845,Customer Corp 845,PROD-406,USB-C Hub,Accessories,West,10,12216.08,24.54,122136.26
+ORD-10307,11/10/2025,CUST-844,Customer Corp 844,PROD-406,USB-C Hub,Accessories,North,15,7895.24,71.66,
+ORD-10032,1/4/2026,CUST-811,Customer Corp 811,PROD-403,27-inch 4K Monitor,Electronics,North,10,2923.51,262.04,
+ORD-10125,2/24/2026,CUST-849,Customer Corp 849,PROD-401,Mechanical Keyboard,Electronics,East,2,2647.45,208.13,5086.77
+ORD-10050,3/9/2025,CUST-837,Customer Corp 837,PROD-403,27-inch 4K Monitor,Electronics,,6,₹13978.83,81.45,83791.53
+ORD-10019,10/2/2025,CUST-807,Customer Corp 807,PROD-405,Standing Desk,Furniture,West,7,3668.02,231.39,25444.75
+ORD-10132,3/11/2026,CUST-839,Customer Corp 839,PROD-406,USB-C Hub,Accessories,East,12,3561.44,60.67,42676.61
+ORD-10001,3/30/2026,CUST-845,Customer Corp 845,PROD-402,Ergonomic Chair,,West,2,767.68,111.0,1424.36
+ORD-10041,,CUST-818,Customer Corp 818,PROD-405,Standing Desk,Furniture,West,12,2729.49,259.23,32494.65
+ORD-10113,1/22/2025,CUST-818,Customer Corp 818,PROD-407,Noise Cancelling Headphones,Electronics,North,9,$12773.45,51.97,114909.08
+ORD-10127,12/10/2025,CUST-828,Customer Corp 828,PROD-402,Ergonomic Chair,Furniture,East,15,13534.07,96.93,202914.12
+ORD-10255,2/3/2026,CUST-827,Customer Corp 827,PROD-405,Standing Desk,Furniture,West,15,9601.41,130.85,143890.3
+ORD-10213,9/13/2025,CUST-830,Customer Corp 830,PROD-407,Noise Cancelling Headphones,Electronics,West,15,9446.51,43.25,141654.4
+ORD-10099,10/13/2025,CUST-838,Customer Corp 838,PROD-405,Standing Desk,Furniture,East,9,3639.77,182.28,32575.65
+ORD-10235,7/30/2025,CUST-801,Customer Corp 801,PROD-408,Webcam HD,Electronics,West,12,13652.63,214.85,163616.71
+ORD-10270,8/8/2025,CUST-813,Customer Corp 813,PROD-406,USB-C Hub,Accessories,East,2,10076.31,177.0,19975.62
+ORD-10094,2/16/2025,CUST-825,Customer Corp 825,PROD-403,27-inch 4K Monitor,Electronics,West,2,5906.91,173.19,11640.63
+ORD-10215,3/20/2026,CUST-807,Customer Corp 807,PROD-401,Mechanical Keyboard,Electronics,North,7,5861.27,39.78,40989.11
+ORD-10155,11/3/2025,CUST-843,Customer Corp 843,PROD-401,Mechanical Keyboard,Electronics,East,1,6055.0,244.26,5810.74
+ORD-10303,3/24/2026,CUST-820,Customer Corp 820,PROD-403,27-inch 4K Monitor,Electronics,West,10,4514.73,158.33,44988.97
+ORD-10196,2/21/2025,CUST-806,Customer Corp 806,PROD-402,Ergonomic Chair,Furniture,East,6,13647.12,138.26,81744.46
+ORD-10019,1/13/2026,CUST-830,Customer Corp 830,PROD-402,Ergonomic Chair,Furniture,East,7,9038.54,227.66,63042.12
+ORD-10319,2/16/2026,CUST-848,Customer Corp 848,PROD-404,Wireless Mouse,Electronics,,15,8073.68,183.19,120922.01
+ORD-10157,7/19/2025,CUST-828,Customer Corp 828,PROD-403,27-inch 4K Monitor,Electronics,North,6,1107.25,160.67,6482.83
+ORD-10345,4/16/2025,CUST-835,Customer Corp 835,PROD-403,27-inch 4K Monitor,Electronics,West,1,10927.14,22.33,10904.81
+ORD-10049,9/10/2025,CUST-817,Customer Corp 817,PROD-401,Mechanical Keyboard,Electronics,East,4,2654.21,85.82,10531.02
+ORD-10233,2/18/2025,CUST-848,Customer Corp 848,PROD-401,Mechanical Keyboard,Electronics,North,2,6375.01,80.76,12669.26
+ORD-10203,8/29/2025,CUST-835,Customer Corp 835,PROD-402,Ergonomic Chair,Furniture,East,10,852.35,159.51,8363.99
+ORD-10172,10/16/2025,CUST-808,Customer Corp 808,PROD-403,27-inch 4K Monitor,Electronics,North,6,2501.0,208.01,14797.99
+ORD-10240,12/3/2025,CUST-813,Customer Corp 813,PROD-405,Standing Desk,Furniture,West,11,3294.87,77.07,
+ORD-10021,10/21/2025,CUST-835,Customer Corp 835,PROD-407,Noise Cancelling Headphones,Electronics,South,10,9195.12,29.65,91921.55
+ORD-10085,1/2/2025,CUST-845,Customer Corp 845,PROD-401,Mechanical Keyboard,Electronics,South,10,3816.01,286.56,37873.54
+ORD-10118,9/8/2025,CUST-801,Customer Corp 801,PROD-402,Ergonomic Chair,Furniture,,2,2711.32,198.56,5224.08
+ORD-10020,9/19/2025,CUST-801,Customer Corp 801,PROD-401,Mechanical Keyboard,Electronics,North,14,,39.58,
+ORD-10047,12/8/2025,CUST-805,Customer Corp 805,PROD-408,Webcam HD,Electronics,North,-5,5166.18,143.48,-25974.38
+ORD-10044,7/8/2025,CUST-849,Customer Corp 849,PROD-401,Mechanical Keyboard,Electronics,North,4,1838.26,188.19,
+ORD-10304,11/17/2025,CUST-826,Customer Corp 826,PROD-407,Noise Cancelling Headphones,Electronics,South,14,,289.39,
+ORD-10095,2/23/2025,CUST-817,Customer Corp 817,PROD-402,Ergonomic Chair,Furniture,West,10,9348.24,232.22,93250.18
+ORD-10320,6/2/2025,CUST-847,Customer Corp 847,PROD-402,Ergonomic Chair,Furniture,North,9,10697.41,268.96,96007.73
+ORD-10081,2/3/2025,CUST-842,Customer Corp 842,PROD-406,USB-C Hub,Accessories,South,10,13591.66,231.27,135685.33
+ORD-10032,2/19/2025,CUST-843,Customer Corp 843,PROD-408,Webcam HD,Electronics,West,2,₹12866.0,149.04,25582.96
+ORD-10035,12/31/2025,CUST-815,Customer Corp 815,PROD-401,Mechanical Keyboard,Electronics,South,-5,5021.3,87.7,-25194.2
+ORD-10253,8/29/2025,CUST-803,Customer Corp 803,PROD-405,Standing Desk,Furniture,West,11,2909.22,151.48,31849.94
+ORD-10152,12/23/2025,CUST-804,Customer Corp 804,PROD-406,USB-C Hub,Accessories,North,2,3127.84,169.16,6086.52
+ORD-10159,8/7/2025,CUST-815,Customer Corp 815,PROD-408,Webcam HD,Electronics,West,8,14996.77,250.98,119723.18
+ORD-10239,8/10/2025,CUST-805,Customer Corp 805,PROD-407,Noise Cancelling Headphones,Electronics,East,-5,11515.74,135.7,-57714.4
+ORD-10085,6/26/2025,CUST-827,Customer Corp 827,PROD-403,27-inch 4K Monitor,Electronics,West,7,11522.13,251.26,80403.65
+ORD-10172,6/14/2025,CUST-836,Customer Corp 836,PROD-405,Standing Desk,Furniture,West,14,5726.04,254.64,79909.92
+ORD-10081,2/27/2026,CUST-817,Customer Corp 817,PROD-405,Standing Desk,Furniture,East,3,3103.34,207.04,9102.98
+ORD-10331,2/23/2025,CUST-820,Customer Corp 820,PROD-401,Mechanical Keyboard,Electronics,West,14,1147.41,273.54,15790.2
+ORD-10114,12/8/2025,CUST-805,Customer Corp 805,PROD-405,Standing Desk,Furniture,South,4,8387.12,210.45,33338.03
+ORD-10040,6/14/2025,CUST-804,Customer Corp 804,PROD-406,USB-C Hub,Accessories,North,1,2626.59,211.39,2415.2
+ORD-10109,5/1/2025,CUST-845,Customer Corp 845,PROD-403,27-inch 4K Monitor,Electronics,South,2,₹13132.41,146.24,26118.58
+ORD-10279,9/20/2025,CUST-821,Customer Corp 821,PROD-401,Mechanical Keyboard,Electronics,South,9,9193.61,12.21,82730.28
+ORD-10171,11/6/2025,CUST-846,Customer Corp 846,PROD-405,Standing Desk,Furniture,North,3,11173.98,60.74,33461.2
+ORD-10047,5/12/2025,CUST-829,Customer Corp 829,PROD-407,Noise Cancelling Headphones,Electronics,East,13,8415.9,254.39,109152.31
+ORD-10277,11/18/2025,CUST-828,Customer Corp 828,PROD-406,USB-C Hub,Accessories,,12,10994.96,8.85,131930.67
+ORD-10322,6/17/2025,CUST-846,Customer Corp 846,PROD-407,Noise Cancelling Headphones,Electronics,West,7,2288.09,155.95,15860.68
+ORD-10291,11/14/2025,CUST-817,Customer Corp 817,PROD-408,Webcam HD,Electronics,East,13,12613.13,266.63,163704.06
+ORD-10293,6/18/2025,CUST-833,Customer Corp 833,PROD-402,Ergonomic Chair,Furniture,North,7,5635.55,3.53,39445.32
+ORD-10164,9/14/2025,CUST-845,Customer Corp 845,PROD-406,USB-C Hub,Accessories,East,4,2772.99,241.98,10849.98
+ORD-10063,1/27/2026,CUST-815,Customer Corp 815,PROD-407,Noise Cancelling Headphones,Electronics,East,11,9046.25,179.68,99329.07
+ORD-10243,1/15/2025,CUST-813,Customer Corp 813,PROD-402,Ergonomic Chair,Furniture,East,13,5460.51,153.31,70833.32
+ORD-10290,2/14/2025,CUST-837,Customer Corp 837,PROD-405,Standing Desk,Furniture,South,5,3487.08,221.29,17214.11
+ORD-10338,10/17/2025,CUST-831,Customer Corp 831,PROD-404,Wireless Mouse,,East,5,11109.42,210.38,55336.72
+ORD-10076,9/5/2025,CUST-818,Customer Corp 818,PROD-406,USB-C Hub,Accessories,East,11,7695.09,287.9,84358.09
+ORD-10106,3/22/2026,CUST-808,Customer Corp 808,PROD-405,Standing Desk,Furniture,South,14,8846.34,19.8,123828.96
+ORD-10273,3/12/2026,CUST-845,Customer Corp 845,PROD-402,Ergonomic Chair,Furniture,South,4,,228.93,
+ORD-10333,5/22/2025,CUST-837,Customer Corp 837,PROD-401,Mechanical Keyboard,Electronics,North,9,₹11700.71,29.04,105277.35
+ORD-10250,6/15/2025,CUST-802,Customer Corp 802,PROD-406,USB-C Hub,Accessories,South,6,8467.37,174.9,50629.32
+ORD-10262,3/14/2026,CUST-831,Customer Corp 831,PROD-405,Standing Desk,Furniture,West,9,3408.02,283.19,30388.99
+ORD-10022,5/7/2025,CUST-803,Customer Corp 803,PROD-401,Mechanical Keyboard,Electronics,East,15,5353.18,232.22,80065.48
+ORD-10218,7/9/2025,CUST-848,Customer Corp 848,PROD-403,27-inch 4K Monitor,Electronics,West,8,12789.82,170.94,
+ORD-10201,3/21/2026,CUST-824,Customer Corp 824,PROD-404,Wireless Mouse,Electronics,North,-5,6906.39,0.95,-34532.9
+ORD-10002,11/5/2025,CUST-831,Customer Corp 831,PROD-408,Webcam HD,Electronics,North,7,5257.35,117.65,36683.8
+ORD-10327,1/28/2025,CUST-842,Customer Corp 842,PROD-408,Webcam HD,Electronics,South,9,10252.02,246.4,92021.78
+ORD-10330,4/17/2025,CUST-809,Customer Corp 809,PROD-404,Wireless Mouse,Electronics,,11,5831.13,0.19,64142.24
+ORD-10269,3/5/2026,CUST-810,Customer Corp 810,PROD-405,Standing Desk,Furniture,West,1,11131.2,108.01,11023.19
+ORD-10026,2/20/2026,CUST-823,Customer Corp 823,PROD-407,Noise Cancelling Headphones,Electronics,East,10,3373.43,31.89,33702.41
+ORD-10140,4/11/2025,CUST-812,Customer Corp 812,PROD-401,Mechanical Keyboard,Electronics,North,11,13346.88,30.18,146785.5
+ORD-10176,8/30/2025,CUST-805,Customer Corp 805,PROD-405,Standing Desk,Furniture,South,14,7386.99,277.04,103140.82
+ORD-10278,,CUST-840,Customer Corp 840,PROD-401,Mechanical Keyboard,Electronics,East,1,8728.21,201.15,8527.06
+ORD-10121,3/4/2026,CUST-829,Customer Corp 829,PROD-402,Ergonomic Chair,Furniture,,2,14952.29,91.18,29813.4
+ORD-10070,12/17/2025,CUST-838,Customer Corp 838,PROD-406,USB-C Hub,Accessories,West,10,7360.49,219.51,73385.39
+ORD-10071,8/29/2025,CUST-822,Customer Corp 822,PROD-401,Mechanical Keyboard,Electronics,West,12,6479.04,96.57,77651.91
+ORD-10038,2/14/2025,CUST-818,Customer Corp 818,PROD-408,Webcam HD,Electronics,North,4,₹10211.4,132.28,40713.32
+ORD-10098,4/13/2025,CUST-843,Customer Corp 843,PROD-402,Ergonomic Chair,Furniture,West,3,11314.6,83.46,33860.34
+ORD-10137,11/24/2025,CUST-827,Customer Corp 827,PROD-407,Noise Cancelling Headphones,Electronics,East,5,10410.17,285.01,51765.84
+ORD-10264,2026-99-12,CUST-831,Customer Corp 831,PROD-401,Mechanical Keyboard,Electronics,East,8,3532.66,154.93,28106.35
+ORD-10290,7/8/2025,CUST-842,Customer Corp 842,PROD-402,Ergonomic Chair,Furniture,,14,13979.8,281.58,195435.62
+ORD-10250,7/24/2025,CUST-821,Customer Corp 821,PROD-401,Mechanical Keyboard,Electronics,East,4,$2484.58,159.19,9779.13
+ORD-10278,2/11/2025,CUST-833,Customer Corp 833,PROD-401,Mechanical Keyboard,Electronics,North,7,7259.22,144.12,50670.42
+ORD-10022,11/24/2025,CUST-826,Customer Corp 826,PROD-407,Noise Cancelling Headphones,Electronics,North,4,5641.16,279.19,22285.45
+ORD-10105,11/7/2025,CUST-840,Customer Corp 840,PROD-403,27-inch 4K Monitor,Electronics,,9,952.18,98.58,8471.04
+ORD-10079,1/15/2025,CUST-834,Customer Corp 834,PROD-404,Wireless Mouse,Electronics,West,4,3452.97,288.92,13522.96
+ORD-10338,4/22/2025,CUST-819,Customer Corp 819,PROD-407,Noise Cancelling Headphones,,East,14,$11597.36,86.51,162276.53
+ORD-10292,10/4/2025,CUST-833,Customer Corp 833,PROD-404,Wireless Mouse,Electronics,West,1,3714.53,287.02,3427.51
+ORD-10271,1/20/2025,CUST-820,Customer Corp 820,PROD-405,Standing Desk,Furniture,North,2,3894.9,105.29,7684.51
+ORD-10270,3/2/2025,CUST-839,Customer Corp 839,PROD-404,Wireless Mouse,Electronics,East,3,9924.67,291.56,29482.45
+ORD-10074,11/12/2025,CUST-836,Customer Corp 836,PROD-406,USB-C Hub,Accessories,North,7,14677.46,270.54,102471.68
+ORD-10315,5/30/2025,CUST-838,Customer Corp 838,PROD-402,Ergonomic Chair,Furniture,South,10,13911.04,11.89,139098.51
+ORD-10237,9/4/2025,CUST-841,Customer Corp 841,PROD-403,27-inch 4K Monitor,Electronics,East,14,$6605.34,135.2,92339.56
+ORD-10003,2/21/2026,CUST-823,Customer Corp 823,PROD-404,Wireless Mouse,Electronics,West,1,13866.9,62.44,13804.46
+ORD-10043,2026-99-12,CUST-813,Customer Corp 813,PROD-401,Mechanical Keyboard,Electronics,North,4,14056.49,253.94,55972.02
+ORD-10214,5/9/2025,CUST-839,Customer Corp 839,PROD-401,Mechanical Keyboard,Electronics,East,4,8098.49,161.5,32232.46
+ORD-10305,,CUST-836,Customer Corp 836,PROD-407,Noise Cancelling Headphones,Electronics,South,15,8528.25,0.48,127923.27
+ORD-10234,11/22/2025,CUST-827,Customer Corp 827,PROD-401,Mechanical Keyboard,Electronics,South,2,1121.79,210.09,2033.49
+ORD-10206,N/A,CUST-816,Customer Corp 816,PROD-403,27-inch 4K Monitor,Electronics,East,11,13963.86,68.31,153534.15
+ORD-10173,3/7/2025,CUST-829,Customer Corp 829,PROD-404,Wireless Mouse,Electronics,East,13,6378.03,137.04,82777.35
+ORD-10214,3/24/2025,CUST-818,Customer Corp 818,PROD-405,Standing Desk,Furniture,South,9,14554.67,196.16,130795.87
+ORD-10053,1/19/2026,CUST-812,Customer Corp 812,PROD-404,Wireless Mouse,Electronics,West,7,3001.71,255.36,
+ORD-10343,6/13/2025,CUST-825,Customer Corp 825,PROD-404,Wireless Mouse,Electronics,West,8,5559.54,77.35,44398.97
+ORD-10173,2/12/2026,CUST-811,Customer Corp 811,PROD-405,Standing Desk,Furniture,North,11,,191.05,
+ORD-10130,10/25/2025,CUST-809,Customer Corp 809,PROD-408,Webcam HD,,North,1,14733.39,191.15,14542.24
+ORD-10136,8/24/2025,CUST-811,Customer Corp 811,PROD-402,Ergonomic Chair,Furniture,North,1,9400.41,104.19,9296.22
+ORD-10123,10/22/2025,CUST-841,Customer Corp 841,PROD-407,Noise Cancelling Headphones,Electronics,East,11,4357.55,167.43,47765.62
+ORD-10342,4/18/2025,CUST-834,Customer Corp 834,PROD-403,27-inch 4K Monitor,Electronics,West,7,,72.33,
+ORD-10146,12/31/2025,CUST-831,Customer Corp 831,PROD-408,Webcam HD,Electronics,,8,7495.64,63.0,59902.12
+ORD-10175,8/30/2025,CUST-835,Customer Corp 835,PROD-404,Wireless Mouse,Electronics,West,3,14005.44,219.95,41796.37
+ORD-10248,1/21/2026,CUST-824,Customer Corp 824,PROD-408,Webcam HD,Electronics,East,8,2533.11,286.47,19978.41
+ORD-10263,8/12/2025,CUST-817,Customer Corp 817,PROD-403,27-inch 4K Monitor,Electronics,North,3,6374.03,121.61,19000.48
+ORD-10187,6/11/2025,CUST-833,Customer Corp 833,PROD-405,Standing Desk,Furniture,North,11,11246.43,82.87,123627.86
+ORD-10215,3/16/2026,CUST-809,Customer Corp 809,PROD-406,USB-C Hub,Accessories,East,1,2923.31,83.46,2839.85
+ORD-10066,8/20/2025,CUST-850,Customer Corp 850,PROD-405,Standing Desk,Furniture,West,2,7762.16,122.11,15402.21
+ORD-10349,1/26/2026,CUST-804,Customer Corp 804,PROD-403,27-inch 4K Monitor,Electronics,East,10,3074.44,28.75,30715.65
+ORD-10128,12/16/2025,CUST-802,Customer Corp 802,PROD-402,Ergonomic Chair,Furniture,East,-5,3345.45,284.37,-17011.62
+ORD-10250,12/14/2025,CUST-803,Customer Corp 803,PROD-408,Webcam HD,Electronics,East,6,4757.05,186.7,28355.6
+ORD-10035,8/7/2025,CUST-835,Customer Corp 835,PROD-406,USB-C Hub,Accessories,West,-5,1667.59,14.64,-8352.59
+ORD-10216,10/26/2025,CUST-847,Customer Corp 847,PROD-404,Wireless Mouse,Electronics,,6,13512.23,96.58,80976.8
+ORD-10096,9/24/2025,CUST-834,Customer Corp 834,PROD-402,Ergonomic Chair,Furniture,West,7,8622.27,140.39,60215.5
+ORD-10263,3/24/2025,CUST-832,Customer Corp 832,PROD-408,Webcam HD,Electronics,South,4,7957.84,106.65,31724.71
+ORD-10010,3/30/2026,CUST-823,Customer Corp 823,PROD-406,USB-C Hub,Accessories,East,9,14908.73,86.11,134092.46
+ORD-10027,8/19/2025,CUST-819,Customer Corp 819,PROD-404,Wireless Mouse,Electronics,West,8,4069.05,61.69,32490.71
+ORD-10256,1/24/2025,CUST-825,Customer Corp 825,PROD-407,Noise Cancelling Headphones,Electronics,East,9,7242.5,271.06,64911.44
+ORD-10038,11/26/2025,CUST-828,Customer Corp 828,PROD-407,Noise Cancelling Headphones,Electronics,West,1,13791.55,228.0,13563.55
+ORD-10236,8/13/2025,CUST-803,Customer Corp 803,PROD-405,Standing Desk,Furniture,West,12,8044.06,266.47,96262.25
+ORD-10234,2/26/2025,CUST-837,Customer Corp 837,PROD-403,27-inch 4K Monitor,Electronics,North,4,6557.42,285.1,25944.58
+ORD-10286,7/30/2025,CUST-816,Customer Corp 816,PROD-406,USB-C Hub,Accessories,East,12,7581.58,206.42,90772.54
+ORD-10331,12/25/2025,CUST-843,Customer Corp 843,PROD-405,Standing Desk,Furniture,South,2,5968.0,129.2,11806.8
+ORD-10196,,CUST-824,Customer Corp 824,PROD-404,Wireless Mouse,Electronics,South,15,2637.92,194.43,39374.37
+ORD-10118,7/2/2025,CUST-824,Customer Corp 824,PROD-404,Wireless Mouse,Electronics,West,14,₹4787.81,8.97,67020.37
+ORD-10214,1/8/2025,CUST-850,Customer Corp 850,PROD-407,Noise Cancelling Headphones,Electronics,South,9,$8978.69,198.79,80609.42
+ORD-10017,1/21/2025,CUST-838,Customer Corp 838,PROD-405,Standing Desk,Furniture,South,15,12604.23,255.98,
+ORD-10168,N/A,CUST-821,Customer Corp 821,PROD-402,Ergonomic Chair,Furniture,West,13,4644.22,32.91,60341.95
+ORD-10031,8/5/2025,CUST-820,Customer Corp 820,PROD-403,27-inch 4K Monitor,Electronics,East,7,5930.7,260.14,41254.76
+ORD-10192,2/7/2025,CUST-847,Customer Corp 847,PROD-403,27-inch 4K Monitor,Electronics,South,15,₹2162.89,103.73,32339.62
+ORD-10217,10/25/2025,CUST-840,Customer Corp 840,PROD-407,Noise Cancelling Headphones,Electronics,West,12,12143.23,56.67,145662.09
+ORD-10064,7/26/2025,CUST-822,Customer Corp 822,PROD-407,Noise Cancelling Headphones,Electronics,North,12,9018.0,111.17,108104.83
+ORD-10303,9/5/2025,CUST-807,Customer Corp 807,PROD-401,Mechanical Keyboard,Electronics,East,5,5650.24,17.31,28233.89
+ORD-10234,8/13/2025,CUST-801,Customer Corp 801,PROD-402,Ergonomic Chair,Furniture,North,13,512.98,174.06,
+ORD-10149,6/8/2025,CUST-846,Customer Corp 846,PROD-401,Mechanical Keyboard,Electronics,South,11,9927.93,90.29,109116.94
+ORD-10297,2/10/2026,CUST-845,Customer Corp 845,PROD-402,Ergonomic Chair,Furniture,North,-5,8785.69,111.12,-44039.57
+ORD-10182,5/17/2025,CUST-818,Customer Corp 818,PROD-402,Ergonomic Chair,Furniture,South,1,4771.74,242.74,4529
+ORD-10192,10/14/2025,CUST-830,Customer Corp 830,PROD-406,USB-C Hub,Accessories,North,8,9606.74,52.32,76801.6
+ORD-10057,1/4/2026,CUST-829,Customer Corp 829,PROD-408,Webcam HD,Electronics,,13,11602.8,154.3,150682.1
+ORD-10208,1/29/2026,CUST-804,Customer Corp 804,PROD-407,Noise Cancelling Headphones,Electronics,South,11,3704.04,45.73,40698.71
+ORD-10163,11/14/2025,CUST-829,Customer Corp 829,PROD-407,Noise Cancelling Headphones,Electronics,South,15,9597.36,25.93,143934.47
+ORD-10323,9/13/2025,CUST-825,Customer Corp 825,PROD-407,Noise Cancelling Headphones,Electronics,,1,1161.38,80.07,1081.31
+ORD-10113,3/17/2026,CUST-831,Customer Corp 831,PROD-401,Mechanical Keyboard,Electronics,South,9,4120.95,202.83,36885.72
+ORD-10291,5/6/2025,CUST-827,Customer Corp 827,PROD-401,Mechanical Keyboard,Electronics,East,12,11854.59,32.83,142222.25
+ORD-10177,2/12/2026,CUST-819,Customer Corp 819,PROD-403,27-inch 4K Monitor,Electronics,South,13,10144.08,205.8,131667.24
+ORD-10218,9/22/2025,CUST-801,Customer Corp 801,PROD-402,Ergonomic Chair,Furniture,South,1,14240.01,168.35,14071.66
+ORD-10259,N/A,CUST-803,Customer Corp 803,PROD-408,Webcam HD,Electronics,,13,₹2144.77,118.29,27763.72
+ORD-10134,4/11/2025,CUST-811,Customer Corp 811,PROD-407,Noise Cancelling Headphones,Electronics,North,13,798.34,138.9,10239.52
+ORD-10216,5/29/2025,CUST-846,Customer Corp 846,PROD-407,Noise Cancelling Headphones,Electronics,East,10,8847.29,212.26,88260.64
+ORD-10196,3/6/2025,CUST-826,Customer Corp 826,PROD-407,Noise Cancelling Headphones,Electronics,East,5,10308.03,74.82,51465.33
+ORD-10092,2/4/2026,CUST-844,Customer Corp 844,PROD-405,Standing Desk,,South,14,6514.31,275.64,90924.7
+ORD-10062,1/23/2025,CUST-806,Customer Corp 806,PROD-406,USB-C Hub,Accessories,East,11,11512.92,265.09,126377.03
+ORD-10264,2/9/2026,CUST-845,Customer Corp 845,PROD-403,27-inch 4K Monitor,Electronics,West,8,5407.51,194.92,43065.16
+ORD-10289,1/25/2026,CUST-840,Customer Corp 840,PROD-401,Mechanical Keyboard,Electronics,,4,1222.17,219.67,4669.01
+ORD-10078,8/20/2025,CUST-831,Customer Corp 831,PROD-408,Webcam HD,,North,14,1926.31,83.92,26884.42
+ORD-10167,10/28/2025,CUST-837,Customer Corp 837,PROD-404,Wireless Mouse,Electronics,North,3,14862.83,150.95,44437.54
+ORD-10066,5/5/2025,CUST-833,Customer Corp 833,PROD-407,Noise Cancelling Headphones,Electronics,South,11,2462.6,88.71,26999.89
+ORD-10218,2/25/2026,CUST-814,Customer Corp 814,PROD-405,Standing Desk,Furniture,West,5,7465.8,220.79,37108.21
+ORD-10184,11/7/2025,CUST-824,Customer Corp 824,PROD-403,27-inch 4K Monitor,,East,11,9741.86,124.32,107036.14
+ORD-10071,1/6/2026,CUST-834,Customer Corp 834,PROD-405,Standing Desk,Furniture,South,11,2549.24,260.71,27780.93
+ORD-10229,7/18/2025,CUST-810,Customer Corp 810,PROD-404,Wireless Mouse,Electronics,East,12,9755.36,231.83,116832.49
+ORD-10302,3/6/2025,CUST-814,Customer Corp 814,PROD-401,Mechanical Keyboard,Electronics,West,11,1636.43,264.06,17736.67
+ORD-10079,5/15/2025,CUST-802,Customer Corp 802,PROD-408,Webcam HD,Electronics,North,1,10662.48,272.34,10390.14
+ORD-10139,2/27/2026,CUST-837,Customer Corp 837,PROD-407,Noise Cancelling Headphones,Electronics,South,14,11960.73,93.33,167356.89
+ORD-10259,1/27/2026,CUST-829,Customer Corp 829,PROD-408,Webcam HD,Electronics,South,12,10539.79,185.42,
+ORD-10123,3/3/2026,CUST-802,Customer Corp 802,PROD-401,Mechanical Keyboard,Electronics,East,9,3839.19,117.88,
+ORD-10028,11/17/2025,CUST-846,Customer Corp 846,PROD-406,USB-C Hub,Accessories,North,-5,13758.2,39.6,-68830.6
+ORD-10115,6/6/2025,CUST-810,Customer Corp 810,PROD-402,Ergonomic Chair,Furniture,North,4,3400.67,262.84,13339.84
+ORD-10196,1/6/2025,CUST-817,Customer Corp 817,PROD-401,Mechanical Keyboard,Electronics,East,12,12848.96,29.48,154158.04
+ORD-10294,9/16/2025,CUST-803,Customer Corp 803,PROD-405,Standing Desk,Furniture,West,15,14528.02,214.7,
+ORD-10222,2/10/2025,CUST-809,Customer Corp 809,PROD-406,USB-C Hub,Accessories,South,8,9782.57,176.49,78084.07
+ORD-10226,4/5/2025,CUST-814,Customer Corp 814,PROD-403,27-inch 4K Monitor,Electronics,East,4,4812.83,99.05,19152.27
+ORD-10165,10/14/2025,CUST-802,Customer Corp 802,PROD-407,Noise Cancelling Headphones,Electronics,West,15,5884.29,28.49,88235.86
+ORD-10005,1/31/2026,CUST-819,Customer Corp 819,PROD-402,Ergonomic Chair,Furniture,West,10,1546.99,172.57,15297.33
+ORD-10210,5/30/2025,CUST-840,Customer Corp 840,PROD-407,Noise Cancelling Headphones,Electronics,South,4,11763.46,274.72,
+ORD-10186,9/5/2025,CUST-822,Customer Corp 822,PROD-406,USB-C Hub,Accessories,South,3,3605.11,163.4,10651.93
+ORD-10033,9/13/2025,CUST-843,Customer Corp 843,PROD-404,Wireless Mouse,Electronics,East,6,$13892.27,94.39,83259.23
+ORD-10110,2/28/2025,CUST-820,Customer Corp 820,PROD-405,Standing Desk,Furniture,East,9,3898.76,267.28,
+ORD-10064,2/7/2026,CUST-830,Customer Corp 830,PROD-408,Webcam HD,Electronics,West,11,6181.17,215.4,
+ORD-10290,7/29/2025,CUST-821,Customer Corp 821,PROD-403,27-inch 4K Monitor,Electronics,South,14,1164.07,69.52,16227.46
+ORD-10147,6/16/2025,CUST-814,Customer Corp 814,PROD-407,Noise Cancelling Headphones,Electronics,West,14,5157.96,96.84,72114.6
+ORD-10098,9/21/2025,CUST-816,Customer Corp 816,PROD-401,Mechanical Keyboard,Electronics,South,9,13610.78,223.13,122273.89
+ORD-10179,7/15/2025,CUST-846,Customer Corp 846,PROD-405,Standing Desk,Furniture,South,11,11947.76,11.61,131413.75
+ORD-10148,6/8/2025,CUST-808,Customer Corp 808,PROD-407,Noise Cancelling Headphones,Electronics,West,8,8727.0,134.17,
+ORD-10112,6/9/2025,CUST-850,Customer Corp 850,PROD-408,Webcam HD,Electronics,East,2,9174.29,152.38,18196.2
+ORD-10021,2/17/2026,CUST-814,Customer Corp 814,PROD-404,Wireless Mouse,Electronics,,7,4954.66,90.57,34592.05
+ORD-10220,1/29/2026,CUST-823,Customer Corp 823,PROD-405,Standing Desk,Furniture,North,5,13555.36,207.25,67569.55
+ORD-10248,2/25/2025,CUST-803,Customer Corp 803,PROD-408,Webcam HD,Electronics,West,7,10846.07,237.52,75684.97
+ORD-10146,5/25/2025,CUST-813,Customer Corp 813,PROD-405,Standing Desk,Furniture,South,11,819.4,290.32,8723.08
+ORD-10304,5/6/2025,CUST-836,Customer Corp 836,PROD-408,Webcam HD,,North,10,7548.25,52.33,75430.17
+ORD-10151,10/8/2025,CUST-802,Customer Corp 802,PROD-403,27-inch 4K Monitor,Electronics,West,14,11826.57,17.31,165554.67
+ORD-10176,5/8/2025,CUST-832,Customer Corp 832,PROD-407,Noise Cancelling Headphones,Electronics,West,3,1879.58,175.84,5462.9
+ORD-10339,6/10/2025,CUST-825,Customer Corp 825,PROD-403,27-inch 4K Monitor,Electronics,West,6,14718.76,285.99,88026.57
+ORD-10306,2/28/2026,CUST-820,Customer Corp 820,PROD-404,Wireless Mouse,Electronics,East,-5,3706.49,108.23,-18640.68
+ORD-10269,9/13/2025,CUST-809,Customer Corp 809,PROD-408,Webcam HD,Electronics,North,10,7954.53,34.4,
+ORD-10170,2/2/2026,CUST-811,Customer Corp 811,PROD-406,USB-C Hub,,South,2,8716.02,237.18,17194.86
+ORD-10215,3/9/2026,CUST-838,Customer Corp 838,PROD-401,Mechanical Keyboard,Electronics,East,9,4460.72,54.15,40092.33
+ORD-10226,4/13/2025,CUST-810,Customer Corp 810,PROD-405,Standing Desk,Furniture,South,12,4891.8,64.57,58637.03
+ORD-10294,2/15/2026,CUST-825,Customer Corp 825,PROD-406,USB-C Hub,Accessories,East,15,8798.2,221.55,131751.45
+ORD-10149,2/22/2026,CUST-820,Customer Corp 820,PROD-407,Noise Cancelling Headphones,Electronics,North,4,13136.69,207.73,52339.03
+ORD-10280,9/2/2025,CUST-822,Customer Corp 822,PROD-408,Webcam HD,Electronics,,3,4430.26,4.19,13286.59
+ORD-10335,12/13/2025,CUST-840,Customer Corp 840,PROD-401,Mechanical Keyboard,Electronics,West,11,7672.99,231.76,84171.13
+ORD-10235,2/5/2025,CUST-822,Customer Corp 822,PROD-402,Ergonomic Chair,Furniture,South,14,9035.47,24.62,126471.96
+ORD-10243,2/15/2026,CUST-823,Customer Corp 823,PROD-402,Ergonomic Chair,Furniture,South,10,11603.89,163.6,115875.3
+ORD-10252,4/7/2025,CUST-801,Customer Corp 801,PROD-405,Standing Desk,Furniture,East,5,4484.26,81.63,22339.67
+ORD-10127,3/3/2026,CUST-806,Customer Corp 806,PROD-406,USB-C Hub,Accessories,West,15,9135.43,167.91,136863.54
+ORD-10049,7/2/2025,CUST-822,Customer Corp 822,PROD-404,Wireless Mouse,Electronics,West,5,11249.53,38.07,56209.58
+ORD-10135,8/3/2025,CUST-839,Customer Corp 839,PROD-407,Noise Cancelling Headphones,Electronics,South,11,11326.41,83.56,124506.95
+ORD-10277,8/26/2025,CUST-808,Customer Corp 808,PROD-406,USB-C Hub,,North,9,13310.05,18.11,119772.34
+ORD-10115,3/7/2025,CUST-841,Customer Corp 841,PROD-406,USB-C Hub,Accessories,West,11,3822.51,40.77,42006.84
+ORD-10238,3/10/2026,CUST-827,Customer Corp 827,PROD-407,Noise Cancelling Headphones,Electronics,West,2,₹14802.86,42.92,29562.8
+ORD-10125,8/15/2025,CUST-833,Customer Corp 833,PROD-401,Mechanical Keyboard,Electronics,North,12,14155.56,118.05,169748.67
+ORD-10284,3/1/2026,CUST-835,Customer Corp 835,PROD-403,27-inch 4K Monitor,Electronics,East,5,2912.66,60.13,14503.17
+ORD-10201,4/21/2025,CUST-810,Customer Corp 810,PROD-406,USB-C Hub,Accessories,East,14,2788.22,97.87,38937.21
+ORD-10231,4/27/2025,CUST-848,Customer Corp 848,PROD-406,USB-C Hub,Accessories,North,12,13404.04,59.62,160788.86
+ORD-10091,1/23/2026,CUST-817,Customer Corp 817,PROD-408,Webcam HD,Electronics,West,5,12153.91,215.17,
+ORD-10127,9/21/2025,CUST-813,Customer Corp 813,PROD-407,Noise Cancelling Headphones,Electronics,East,10,8119.81,84.81,81113.29
+ORD-10139,8/24/2025,CUST-849,Customer Corp 849,PROD-404,Wireless Mouse,Electronics,South,14,11056.92,279.68,154517.2
+ORD-10101,3/27/2025,CUST-850,Customer Corp 850,PROD-406,USB-C Hub,Accessories,East,1,12595.94,196.99,12398.95
+ORD-10022,1/29/2025,CUST-830,Customer Corp 830,PROD-403,27-inch 4K Monitor,Electronics,East,10,10695.41,23.24,106930.86
+ORD-10268,10/16/2025,CUST-819,Customer Corp 819,PROD-404,Wireless Mouse,Electronics,South,8,10319.46,253.22,82302.46
+ORD-10240,8/25/2025,CUST-834,Customer Corp 834,PROD-404,Wireless Mouse,Electronics,West,7,1141.22,193.23,7795.31
+ORD-10004,2026-99-12,CUST-808,Customer Corp 808,PROD-406,USB-C Hub,Accessories,South,3,2125.19,130.25,6245.32
+ORD-10151,1/11/2025,CUST-832,Customer Corp 832,PROD-404,Wireless Mouse,Electronics,North,13,14003.45,67.82,181977.03
+ORD-10118,1/29/2025,CUST-837,Customer Corp 837,PROD-408,Webcam HD,Electronics,East,15,10018.0,109.2,150160.8
+ORD-10141,3/15/2025,CUST-841,Customer Corp 841,PROD-403,27-inch 4K Monitor,Electronics,West,3,4434.89,30.17,13274.5
+ORD-10307,4/12/2025,CUST-801,Customer Corp 801,PROD-406,USB-C Hub,Accessories,West,3,6725.33,74.73,20101.26
+ORD-10008,2/17/2025,CUST-824,Customer Corp 824,PROD-405,Standing Desk,Furniture,West,9,4618.09,52.59,41510.22
+ORD-10193,12/11/2025,CUST-813,Customer Corp 813,PROD-404,Wireless Mouse,Electronics,,5,7667.54,147.06,38190.64
+ORD-10130,8/11/2025,CUST-838,Customer Corp 838,PROD-408,Webcam HD,Electronics,North,8,3957.57,291.91,31368.65
+ORD-10118,5/4/2025,CUST-834,Customer Corp 834,PROD-404,Wireless Mouse,Electronics,East,2,8680.01,133.55,17226.47
+ORD-10332,1/4/2025,CUST-801,Customer Corp 801,PROD-405,Standing Desk,Furniture,North,7,3626.3,273.27,25110.83
+ORD-10054,4/21/2025,CUST-847,Customer Corp 847,PROD-406,USB-C Hub,Accessories,West,5,14110.8,6.41,70547.59
+ORD-10124,7/8/2025,CUST-849,Customer Corp 849,PROD-402,Ergonomic Chair,Furniture,,10,2129.68,226.07,21070.73
+ORD-10105,11/5/2025,CUST-812,Customer Corp 812,PROD-406,USB-C Hub,Accessories,East,12,10506.4,109.84,125966.96
+ORD-10258,2/24/2026,CUST-804,Customer Corp 804,PROD-403,27-inch 4K Monitor,Electronics,,13,1617.84,150.67,20881.25
+ORD-10232,2/20/2025,CUST-845,Customer Corp 845,PROD-408,Webcam HD,Electronics,South,13,2888.08,260.2,37284.84
+ORD-10161,9/15/2025,CUST-827,Customer Corp 827,PROD-406,USB-C Hub,Accessories,South,15,9064.52,245.23,135722.57
+ORD-10303,1/28/2026,CUST-819,Customer Corp 819,PROD-403,27-inch 4K Monitor,Electronics,West,5,₹11741.07,229.14,58476.21
+ORD-10148,8/14/2025,CUST-802,Customer Corp 802,PROD-408,Webcam HD,Electronics,South,12,10594.68,77.58,127058.58
+ORD-10094,2026-99-12,CUST-842,Customer Corp 842,PROD-405,Standing Desk,Furniture,East,6,13015.36,248.6,77843.56
+ORD-10232,10/15/2025,CUST-841,Customer Corp 841,PROD-407,Noise Cancelling Headphones,Electronics,West,11,2784.84,294.81,30338.43
+ORD-10314,9/4/2025,CUST-833,Customer Corp 833,PROD-408,Webcam HD,Electronics,East,10,10364.66,159.5,103487.1
+ORD-10025,10/30/2025,CUST-832,Customer Corp 832,PROD-408,Webcam HD,Electronics,West,10,3465.53,127.6,34527.7
+ORD-10068,5/5/2025,CUST-842,Customer Corp 842,PROD-401,Mechanical Keyboard,Electronics,East,13,12572.77,217.56,163228.45
+ORD-10031,12/7/2025,CUST-842,Customer Corp 842,PROD-401,Mechanical Keyboard,Electronics,North,6,9576.32,200.75,57257.17
+ORD-10051,10/18/2025,CUST-835,Customer Corp 835,PROD-406,USB-C Hub,Accessories,East,3,2110.6,33.54,6298.26
+ORD-10221,11/22/2025,CUST-845,Customer Corp 845,PROD-403,27-inch 4K Monitor,Electronics,East,2,7616.5,149.0,15084
+ORD-10133,6/24/2025,CUST-802,Customer Corp 802,PROD-403,27-inch 4K Monitor,Electronics,East,6,861.22,1.26,5166.06
+ORD-10147,2/25/2026,CUST-840,Customer Corp 840,PROD-402,Ergonomic Chair,Furniture,East,7,8074.41,223.07,56297.8
+ORD-10166,8/13/2025,CUST-828,Customer Corp 828,PROD-406,USB-C Hub,Accessories,,3,13012.12,220.81,38815.55
+ORD-10032,1/17/2025,CUST-816,Customer Corp 816,PROD-401,Mechanical Keyboard,Electronics,South,5,$6045.71,84.41,30144.14
+ORD-10171,2/18/2026,CUST-812,Customer Corp 812,PROD-405,Standing Desk,Furniture,West,13,1191.46,235.11,15253.87
+ORD-10219,5/28/2025,CUST-849,Customer Corp 849,PROD-401,Mechanical Keyboard,Electronics,North,9,12601.92,9.36,113407.92
+ORD-10297,7/11/2025,CUST-821,Customer Corp 821,PROD-405,Standing Desk,Furniture,North,5,12559.01,209.62,62585.43
+ORD-10028,3/3/2026,CUST-816,Customer Corp 816,PROD-401,Mechanical Keyboard,Electronics,North,10,3068.97,58.45,30631.25
+ORD-10061,1/19/2026,CUST-848,Customer Corp 848,PROD-408,Webcam HD,Electronics,South,8,14400.65,281.95,114923.25
+ORD-10226,9/21/2025,CUST-849,Customer Corp 849,PROD-402,Ergonomic Chair,Furniture,East,5,10260.28,23.22,51278.18
+ORD-10271,6/20/2025,CUST-826,Customer Corp 826,PROD-403,27-inch 4K Monitor,Electronics,East,11,6795.45,203.18,74546.77
+ORD-10187,2026-99-12,CUST-818,Customer Corp 818,PROD-404,Wireless Mouse,Electronics,South,1,$3094.7,180.58,2914.12
+ORD-10054,4/2/2025,CUST-804,Customer Corp 804,PROD-407,Noise Cancelling Headphones,Electronics,East,13,12920.93,68.19,167903.9
+ORD-10133,4/1/2025,CUST-803,Customer Corp 803,PROD-405,Standing Desk,Furniture,South,7,7841.72,140.2,54751.84
+ORD-10082,1/7/2025,CUST-804,Customer Corp 804,PROD-403,27-inch 4K Monitor,Electronics,East,14,14789.09,270.52,
+ORD-10020,3/13/2025,CUST-840,Customer Corp 840,PROD-404,Wireless Mouse,Electronics,West,6,₹2274.9,13.28,13636.12
+ORD-10201,9/26/2025,CUST-847,Customer Corp 847,PROD-406,USB-C Hub,Accessories,North,5,14633.44,288.3,72878.9
+ORD-10281,7/6/2025,CUST-837,Customer Corp 837,PROD-407,Noise Cancelling Headphones,Electronics,South,3,9831.52,14.43,29480.13
+ORD-10053,8/27/2025,CUST-845,Customer Corp 845,PROD-402,Ergonomic Chair,Furniture,East,14,12460.82,194.29,174257.19
+ORD-10251,2/26/2026,CUST-807,Customer Corp 807,PROD-405,Standing Desk,Furniture,North,15,851.69,207.34,12568.01
+ORD-10247,6/23/2025,CUST-823,Customer Corp 823,PROD-404,Wireless Mouse,Electronics,East,5,13264.77,294.41,66029.44
+ORD-10345,2/21/2025,CUST-842,Customer Corp 842,PROD-404,Wireless Mouse,Electronics,East,2,7695.18,219.82,15170.54
+ORD-10345,1/19/2026,CUST-816,Customer Corp 816,PROD-401,Mechanical Keyboard,Electronics,North,2,5392.69,179.86,10605.52
+ORD-10190,11/30/2025,CUST-820,Customer Corp 820,PROD-405,Standing Desk,Furniture,South,8,11577.55,41.46,92578.94
+ORD-10145,3/1/2026,CUST-837,Customer Corp 837,PROD-406,USB-C Hub,Accessories,South,14,5514.92,203.66,77005.22
+ORD-10218,12/24/2025,CUST-812,Customer Corp 812,PROD-406,USB-C Hub,Accessories,West,2,8482.38,74.6,16890.16
+ORD-10326,11/10/2025,CUST-825,Customer Corp 825,PROD-401,Mechanical Keyboard,Electronics,West,2,10841.63,230.25,21453.01
+ORD-10292,3/19/2025,CUST-843,Customer Corp 843,PROD-407,Noise Cancelling Headphones,Electronics,North,4,3990.45,206.55,15755.25
+ORD-10196,4/13/2025,CUST-807,Customer Corp 807,PROD-408,Webcam HD,Electronics,West,2,5173.85,273.25,10074.45
+ORD-10338,9/8/2025,CUST-812,Customer Corp 812,PROD-403,27-inch 4K Monitor,Electronics,West,10,$1312.65,118.61,
+ORD-10116,10/28/2025,CUST-801,Customer Corp 801,PROD-405,Standing Desk,Furniture,East,2,1926.54,100.65,3752.43
+ORD-10149,1/25/2026,CUST-828,Customer Corp 828,PROD-402,Ergonomic Chair,Furniture,East,6,4092.02,111.3,24440.82
+ORD-10062,5/11/2025,CUST-803,Customer Corp 803,PROD-402,Ergonomic Chair,Furniture,East,1,,78.17,
+ORD-10119,11/8/2025,CUST-820,Customer Corp 820,PROD-403,27-inch 4K Monitor,Electronics,South,6,1534.94,248.12,8961.52
+ORD-10240,1/23/2025,CUST-818,Customer Corp 818,PROD-401,Mechanical Keyboard,Electronics,West,10,5617.09,241.38,55929.52
+ORD-10332,2/5/2026,CUST-823,Customer Corp 823,PROD-408,Webcam HD,Electronics,East,2,1343.47,160.96,2525.98
+ORD-10242,1/6/2025,CUST-821,Customer Corp 821,PROD-407,Noise Cancelling Headphones,Electronics,North,6,1682.82,91.6,10005.32
+ORD-10008,7/28/2025,CUST-817,Customer Corp 817,PROD-405,Standing Desk,Furniture,South,14,12921.4,3.51,180896.09
+ORD-10143,4/17/2025,CUST-820,Customer Corp 820,PROD-401,Mechanical Keyboard,Electronics,North,13,14977.2,205.37,194498.23
+ORD-10062,2/21/2025,CUST-804,Customer Corp 804,PROD-401,Mechanical Keyboard,Electronics,South,8,6312.52,220.31,50279.85
+ORD-10323,2026-99-12,CUST-817,Customer Corp 817,PROD-408,Webcam HD,Electronics,North,6,13934.7,3.21,83604.99
+ORD-10213,8/10/2025,CUST-811,Customer Corp 811,PROD-406,USB-C Hub,Accessories,,15,7277.66,298.01,108866.89
+ORD-10348,9/25/2025,CUST-843,Customer Corp 843,PROD-407,Noise Cancelling Headphones,Electronics,West,1,11487.25,260.6,11226.65
+ORD-10051,3/9/2025,CUST-806,Customer Corp 806,PROD-401,Mechanical Keyboard,Electronics,East,5,4760.44,246.23,23555.97
+ORD-10221,9/19/2025,CUST-831,Customer Corp 831,PROD-406,USB-C Hub,Accessories,West,9,4297.46,266.39,38410.75
+ORD-10140,8/20/2025,CUST-814,Customer Corp 814,PROD-408,Webcam HD,Electronics,North,3,10302.68,242.76,30665.28
+ORD-10120,3/30/2025,CUST-803,Customer Corp 803,PROD-403,27-inch 4K Monitor,Electronics,West,4,11344.14,208.56,45168
+ORD-10186,2026-99-12,CUST-827,Customer Corp 827,PROD-403,27-inch 4K Monitor,Electronics,North,5,11337.23,177.17,56508.98
+ORD-10103,4/13/2025,CUST-807,Customer Corp 807,PROD-408,Webcam HD,Electronics,South,5,852.91,271.47,3993.08
+ORD-10128,9/26/2025,CUST-849,Customer Corp 849,PROD-402,Ergonomic Chair,Furniture,South,1,12542.68,235.66,12307.02
+ORD-10020,3/22/2025,CUST-837,Customer Corp 837,PROD-407,Noise Cancelling Headphones,Electronics,East,5,7682.98,13.08,38401.82
+ORD-10067,7/8/2025,CUST-824,Customer Corp 824,PROD-402,Ergonomic Chair,Furniture,West,15,4103.36,74.04,
+ORD-10156,3/25/2026,CUST-838,Customer Corp 838,PROD-401,Mechanical Keyboard,Electronics,South,8,₹13585.62,90.01,108594.95
+ORD-10189,5/25/2025,CUST-837,Customer Corp 837,PROD-407,Noise Cancelling Headphones,Electronics,East,2,753.88,198.85,1308.91
+ORD-10289,2/25/2026,CUST-832,Customer Corp 832,PROD-406,USB-C Hub,,North,11,3039.74,205.93,33231.21
+ORD-10235,12/30/2025,CUST-831,Customer Corp 831,PROD-408,Webcam HD,Electronics,South,10,2321.67,196.71,23019.99
+ORD-10168,6/11/2025,CUST-823,Customer Corp 823,PROD-401,Mechanical Keyboard,Electronics,South,6,8604.28,182.75,
+ORD-10305,,CUST-835,Customer Corp 835,PROD-404,Wireless Mouse,Electronics,South,13,6628.48,19.26,86150.98
+ORD-10295,1/2/2025,CUST-819,Customer Corp 819,PROD-406,USB-C Hub,Accessories,East,5,11612.69,39.29,58024.16
+ORD-10302,3/17/2026,CUST-804,Customer Corp 804,PROD-408,Webcam HD,Electronics,,1,10456.26,274.63,10181.63
+ORD-10253,12/4/2025,CUST-840,Customer Corp 840,PROD-406,USB-C Hub,Accessories,West,10,4985.63,46.93,49809.37
+ORD-10086,3/6/2026,CUST-822,Customer Corp 822,PROD-401,Mechanical Keyboard,Electronics,South,1,9774.61,60.76,9713.85
+ORD-10114,12/24/2025,CUST-834,Customer Corp 834,PROD-404,Wireless Mouse,Electronics,North,15,₹5930.84,240.66,88721.94
+ORD-10308,6/15/2025,CUST-827,Customer Corp 827,PROD-403,27-inch 4K Monitor,Electronics,South,11,10766.79,219.73,
+ORD-10304,6/9/2025,CUST-824,Customer Corp 824,PROD-406,USB-C Hub,Accessories,West,8,1486.26,160.8,11729.28
+ORD-10077,5/25/2025,CUST-806,Customer Corp 806,PROD-402,Ergonomic Chair,Furniture,North,8,12720.23,32.85,101728.99
+ORD-10158,1/26/2026,CUST-827,Customer Corp 827,PROD-405,Standing Desk,Furniture,East,14,10342.63,215.19,144581.63
+ORD-10160,1/24/2025,CUST-839,Customer Corp 839,PROD-402,Ergonomic Chair,Furniture,North,8,3544.95,144.2,28215.4
+ORD-10234,6/6/2025,CUST-833,Customer Corp 833,PROD-403,27-inch 4K Monitor,,East,4,14657.22,25.8,58603.08
+ORD-10232,7/19/2025,CUST-831,Customer Corp 831,PROD-408,Webcam HD,Electronics,North,2,12081.31,72.1,24090.52
+ORD-10299,9/26/2025,CUST-836,Customer Corp 836,PROD-401,Mechanical Keyboard,Electronics,East,6,10979.94,216.77,
+ORD-10254,1/29/2025,CUST-844,Customer Corp 844,PROD-406,USB-C Hub,Accessories,,12,9220.7,96.22,110552.18
+ORD-10001,4/15/2025,CUST-820,Customer Corp 820,PROD-408,Webcam HD,Electronics,East,10,9580.94,158.54,95650.86
+ORD-10341,7/24/2025,CUST-831,Customer Corp 831,PROD-408,Webcam HD,Electronics,East,12,10115.28,118.58,121264.78
+ORD-10251,11/29/2025,CUST-842,Customer Corp 842,PROD-407,Noise Cancelling Headphones,Electronics,South,4,10797.87,3.12,43188.36
+ORD-10095,12/28/2025,CUST-847,Customer Corp 847,PROD-406,USB-C Hub,Accessories,North,7,13007.54,258.63,90794.15
+ORD-10057,2/25/2025,CUST-830,Customer Corp 830,PROD-407,Noise Cancelling Headphones,,East,6,14330.31,240.71,85741.15
+ORD-10235,11/30/2025,CUST-826,Customer Corp 826,PROD-403,27-inch 4K Monitor,Electronics,East,4,11313.42,21.01,45232.67
+ORD-10085,8/12/2025,CUST-831,Customer Corp 831,PROD-402,Ergonomic Chair,Furniture,North,9,9055.18,185.13,81311.49
+ORD-10060,1/2/2026,CUST-806,Customer Corp 806,PROD-407,Noise Cancelling Headphones,Electronics,North,4,4811.74,114.43,19132.53
+ORD-10077,1/1/2025,CUST-804,Customer Corp 804,PROD-404,Wireless Mouse,Electronics,,6,7467.61,36.95,44768.71
+ORD-10270,7/10/2025,CUST-819,Customer Corp 819,PROD-403,27-inch 4K Monitor,Electronics,North,4,6430.25,202.26,25518.74
+ORD-10255,9/24/2025,CUST-845,Customer Corp 845,PROD-407,Noise Cancelling Headphones,Electronics,West,5,5004.13,96.27,24924.38
+ORD-10333,2/26/2025,CUST-838,Customer Corp 838,PROD-408,Webcam HD,Electronics,East,12,14315.51,193.73,171592.39
+ORD-10028,2026-99-12,CUST-838,Customer Corp 838,PROD-403,27-inch 4K Monitor,Electronics,East,11,3665.65,73.3,40248.85
+ORD-10006,3/22/2025,CUST-834,Customer Corp 834,PROD-405,Standing Desk,Furniture,East,12,1278.79,69.68,15275.8
+ORD-10128,1/26/2026,CUST-815,Customer Corp 815,PROD-402,Ergonomic Chair,Furniture,West,1,6232.11,93.28,
+ORD-10169,12/6/2025,CUST-837,Customer Corp 837,PROD-408,Webcam HD,Electronics,West,6,5965.77,192.02,35602.6
+ORD-10145,3/29/2026,CUST-838,Customer Corp 838,PROD-408,Webcam HD,Electronics,East,12,1588.7,43.62,19020.78
+ORD-10070,2/9/2026,CUST-823,Customer Corp 823,PROD-401,Mechanical Keyboard,Electronics,West,5,4723.92,14.4,23605.2
+ORD-10124,7/26/2025,CUST-812,Customer Corp 812,PROD-404,Wireless Mouse,Electronics,North,8,9899.44,24.39,79171.13
+ORD-10285,9/7/2025,CUST-816,Customer Corp 816,PROD-403,27-inch 4K Monitor,Electronics,South,9,6490.73,62.65,58353.92
+ORD-10339,11/12/2025,CUST-809,Customer Corp 809,PROD-403,27-inch 4K Monitor,Electronics,South,7,,108.66,
+ORD-10164,3/30/2025,CUST-834,Customer Corp 834,PROD-408,Webcam HD,Electronics,North,10,7573.07,15.21,75715.49
+ORD-10006,12/21/2025,CUST-807,Customer Corp 807,PROD-407,Noise Cancelling Headphones,Electronics,East,8,$7549.91,291.92,60107.36
+ORD-10067,2/1/2026,CUST-821,Customer Corp 821,PROD-404,Wireless Mouse,Electronics,East,4,12307.09,96.79,
+ORD-10018,12/11/2025,CUST-850,Customer Corp 850,PROD-405,Standing Desk,,East,2,13089.71,243.65,25935.77
+ORD-10190,7/11/2025,CUST-812,Customer Corp 812,PROD-408,Webcam HD,Electronics,South,8,9441.76,23.36,75510.72
+ORD-10234,1/9/2026,CUST-809,Customer Corp 809,PROD-402,Ergonomic Chair,Furniture,North,5,,80.6,
+ORD-10259,,CUST-824,Customer Corp 824,PROD-404,Wireless Mouse,Electronics,North,7,3168.36,242.46,21936.06
+ORD-10058,3/7/2026,CUST-806,Customer Corp 806,PROD-405,Standing Desk,Furniture,North,9,7304.28,245.46,65493.06
+ORD-10081,8/1/2025,CUST-843,Customer Corp 843,PROD-404,Wireless Mouse,Electronics,East,1,5742.77,75.74,5667.03
+ORD-10200,4/20/2025,CUST-843,Customer Corp 843,PROD-407,Noise Cancelling Headphones,Electronics,East,5,4338.14,207.53,
+ORD-10134,1/31/2026,CUST-842,Customer Corp 842,PROD-407,Noise Cancelling Headphones,Electronics,North,5,14009.8,248.72,69800.28
+ORD-10117,12/12/2025,CUST-840,Customer Corp 840,PROD-402,Ergonomic Chair,Furniture,East,10,7253.64,188.2,72348.2
+ORD-10329,3/28/2026,CUST-808,Customer Corp 808,PROD-407,Noise Cancelling Headphones,Electronics,East,2,10814.93,134.87,21494.99
+ORD-10053,12/16/2025,CUST-850,Customer Corp 850,PROD-406,USB-C Hub,Accessories,East,6,8237.15,201.03,49221.87
+ORD-10119,1/3/2026,CUST-814,Customer Corp 814,PROD-408,Webcam HD,Electronics,South,8,12522.79,127.33,100054.99
+ORD-10168,1/4/2026,CUST-849,Customer Corp 849,PROD-408,Webcam HD,,North,6,7939.52,45.89,
+ORD-10143,10/7/2025,CUST-825,Customer Corp 825,PROD-408,Webcam HD,Electronics,North,4,7688.6,228.34,30526.06
+ORD-10173,2/19/2026,CUST-834,Customer Corp 834,PROD-405,Standing Desk,Furniture,North,7,11149.98,272.31,77777.55
+ORD-10197,2/1/2026,CUST-836,Customer Corp 836,PROD-405,Standing Desk,Furniture,North,9,₹5584.61,152.27,50109.22
+ORD-10036,2/5/2026,CUST-815,Customer Corp 815,PROD-405,Standing Desk,Furniture,,11,11617.85,23.94,127772.41
+ORD-10347,1/25/2025,CUST-843,Customer Corp 843,PROD-407,Noise Cancelling Headphones,Electronics,South,8,2141.95,254.73,16880.87
+ORD-10012,3/5/2025,CUST-801,Customer Corp 801,PROD-408,Webcam HD,Electronics,South,5,6801.04,63.05,33942.15
+ORD-10334,11/21/2025,CUST-839,Customer Corp 839,PROD-404,Wireless Mouse,Electronics,South,12,9146.68,48.75,109711.41
+ORD-10068,1/4/2026,CUST-828,Customer Corp 828,PROD-406,USB-C Hub,Accessories,East,15,6212.26,59.01,93124.89
+ORD-10100,4/23/2025,CUST-833,Customer Corp 833,PROD-401,Mechanical Keyboard,Electronics,South,15,$7573.76,198.97,113407.43
+ORD-10301,1/24/2025,CUST-836,Customer Corp 836,PROD-408,Webcam HD,Electronics,West,11,7284.37,255.57,79872.5
+ORD-10342,5/22/2025,CUST-839,Customer Corp 839,PROD-405,Standing Desk,Furniture,North,15,8943.88,7.28,134150.92
+ORD-10346,1/5/2026,CUST-811,Customer Corp 811,PROD-407,Noise Cancelling Headphones,Electronics,East,4,9214.29,32.22,36824.94
+ORD-10007,9/1/2025,CUST-837,Customer Corp 837,PROD-406,USB-C Hub,Accessories,South,9,781.38,112.47,
+ORD-10007,2/11/2025,CUST-833,Customer Corp 833,PROD-407,Noise Cancelling Headphones,Electronics,North,7,12288.77,195.21,85826.18
+ORD-10091,10/11/2025,CUST-817,Customer Corp 817,PROD-406,USB-C Hub,Accessories,North,8,11501.1,38.5,91970.3
+ORD-10309,3/15/2026,CUST-850,Customer Corp 850,PROD-407,Noise Cancelling Headphones,Electronics,West,14,11002.73,222.53,153815.69
+ORD-10162,12/3/2025,CUST-830,Customer Corp 830,PROD-407,Noise Cancelling Headphones,Electronics,West,12,2178.84,66.32,26079.76
+ORD-10028,7/15/2025,CUST-808,Customer Corp 808,PROD-405,Standing Desk,Furniture,West,14,₹10379.06,286.12,145020.72
+ORD-10065,,CUST-832,Customer Corp 832,PROD-406,USB-C Hub,Accessories,South,14,4354.18,116.48,60842.04
+ORD-10273,12/14/2025,CUST-820,Customer Corp 820,PROD-406,USB-C Hub,Accessories,South,8,2908.4,245.04,23022.16
+ORD-10322,,CUST-843,Customer Corp 843,PROD-403,27-inch 4K Monitor,Electronics,North,1,751.42,259.69,491.73
+ORD-10106,8/9/2025,CUST-834,Customer Corp 834,PROD-406,USB-C Hub,Accessories,East,15,8562.52,178.55,128259.25
+ORD-10276,3/12/2025,CUST-836,Customer Corp 836,PROD-405,Standing Desk,Furniture,East,8,13015.65,36.82,104088.38
+ORD-10048,3/24/2025,CUST-801,Customer Corp 801,PROD-402,Ergonomic Chair,Furniture,East,9,9454.12,240.46,84846.62
+ORD-10334,1/15/2026,CUST-805,Customer Corp 805,PROD-405,Standing Desk,Furniture,East,15,13947.31,184.96,209024.69
+ORD-10281,1/29/2026,CUST-810,Customer Corp 810,PROD-406,USB-C Hub,Accessories,North,9,9552.56,142.47,85830.57
+ORD-10189,10/19/2025,CUST-834,Customer Corp 834,PROD-401,Mechanical Keyboard,Electronics,North,3,,238.54,
+ORD-10251,12/24/2025,CUST-848,Customer Corp 848,PROD-407,Noise Cancelling Headphones,Electronics,South,15,3381.61,17.29,50706.86
+ORD-10183,6/20/2025,CUST-840,Customer Corp 840,PROD-402,Ergonomic Chair,Furniture,South,-5,4464.33,86.11,-22407.76
+ORD-10031,12/27/2025,CUST-829,Customer Corp 829,PROD-404,Wireless Mouse,Electronics,West,9,11462.7,104.21,103060.09
+ORD-10222,,CUST-820,Customer Corp 820,PROD-401,Mechanical Keyboard,Electronics,West,12,13544.58,293.06,
+ORD-10058,2/13/2026,CUST-846,Customer Corp 846,PROD-403,27-inch 4K Monitor,Electronics,North,11,14097.64,87.05,154986.99
+ORD-10124,,CUST-827,Customer Corp 827,PROD-402,Ergonomic Chair,Furniture,East,5,14860.21,274.63,74026.42
+ORD-10310,3/10/2025,CUST-838,Customer Corp 838,PROD-402,Ergonomic Chair,Furniture,North,1,3654.45,294.55,3359.9
+ORD-10148,11/16/2025,CUST-809,Customer Corp 809,PROD-408,Webcam HD,Electronics,South,7,14402.19,14.42,100800.91
+ORD-10091,12/12/2025,CUST-841,Customer Corp 841,PROD-408,Webcam HD,Electronics,West,4,3777.25,48.05,15060.95
+ORD-10055,10/13/2025,CUST-845,Customer Corp 845,PROD-406,USB-C Hub,Accessories,East,8,12512.01,262.34,99833.74
+ORD-10336,10/31/2025,CUST-845,Customer Corp 845,PROD-407,Noise Cancelling Headphones,Electronics,West,5,9538.13,124.17,47566.48
+ORD-10048,6/6/2025,CUST-827,Customer Corp 827,PROD-406,USB-C Hub,Accessories,North,9,4455.71,4.2,40097.19
+ORD-10181,5/30/2025,CUST-817,Customer Corp 817,PROD-403,27-inch 4K Monitor,Electronics,West,13,4204.63,135.5,54524.69
+ORD-10025,,CUST-846,Customer Corp 846,PROD-402,Ergonomic Chair,Furniture,North,12,₹13589.57,284.16,162790.68
+ORD-10205,2/7/2025,CUST-819,Customer Corp 819,PROD-404,Wireless Mouse,Electronics,East,5,4186.5,69.84,20862.66
+ORD-10022,2/2/2026,CUST-835,Customer Corp 835,PROD-402,Ergonomic Chair,Furniture,North,7,1143.0,206.96,7794.04
+ORD-10002,1/5/2025,CUST-849,Customer Corp 849,PROD-405,Standing Desk,Furniture,South,10,795.93,200.58,7758.72
+ORD-10053,11/17/2025,CUST-805,Customer Corp 805,PROD-406,USB-C Hub,Accessories,South,-5,10589.57,116.34,-53064.19
+ORD-10303,4/29/2025,CUST-844,Customer Corp 844,PROD-404,Wireless Mouse,Electronics,South,15,8173.69,243.65,122361.7
+ORD-10216,4/23/2025,CUST-840,Customer Corp 840,PROD-402,Ergonomic Chair,Furniture,South,5,7666.79,247.01,
+ORD-10157,5/11/2025,CUST-850,Customer Corp 850,PROD-406,USB-C Hub,Accessories,East,11,6762.09,160.63,74222.36
+ORD-10211,9/7/2025,CUST-847,Customer Corp 847,PROD-401,Mechanical Keyboard,Electronics,South,13,10634.26,233.38,138012
+ORD-10162,1/12/2025,CUST-825,Customer Corp 825,PROD-401,Mechanical Keyboard,Electronics,South,7,1630.92,112.1,11304.34
+ORD-10069,2/26/2026,CUST-849,Customer Corp 849,PROD-405,Standing Desk,Furniture,North,15,10089.33,152.88,151187.07
+ORD-10197,3/8/2025,CUST-827,Customer Corp 827,PROD-408,Webcam HD,Electronics,East,14,9805.02,89.66,137180.62
+ORD-10009,1/27/2025,CUST-837,Customer Corp 837,PROD-403,27-inch 4K Monitor,Electronics,East,5,12701.57,1.12,63506.73
+ORD-10128,8/28/2025,CUST-809,Customer Corp 809,PROD-402,Ergonomic Chair,Furniture,South,2,8246.92,97.81,16396.03
+ORD-10180,1/3/2025,CUST-807,Customer Corp 807,PROD-406,USB-C Hub,Accessories,South,1,5907.91,54.46,5853.45
+ORD-10145,1/23/2025,CUST-824,Customer Corp 824,PROD-406,USB-C Hub,Accessories,East,9,14299.27,45.2,128648.23
+ORD-10245,8/7/2025,CUST-850,Customer Corp 850,PROD-408,Webcam HD,Electronics,East,12,11469.17,213.04,137417
+ORD-10327,,CUST-804,Customer Corp 804,PROD-402,Ergonomic Chair,Furniture,North,14,14959.5,55.63,209377.37
+ORD-10324,1/12/2026,CUST-850,Customer Corp 850,PROD-405,Standing Desk,,North,9,2048.04,75.44,18356.92
+ORD-10235,,CUST-830,Customer Corp 830,PROD-401,Mechanical Keyboard,Electronics,North,1,₹10945.09,192.4,10752.69
+ORD-10222,5/19/2025,CUST-803,Customer Corp 803,PROD-405,Standing Desk,Furniture,North,15,₹13478.61,247.77,201931.38
+ORD-10216,6/26/2025,CUST-813,Customer Corp 813,PROD-403,27-inch 4K Monitor,Electronics,North,13,13549.57,278.25,175866.16
+ORD-10151,2/21/2025,CUST-838,Customer Corp 838,PROD-406,USB-C Hub,Accessories,North,3,2675.26,229.63,7796.15
+ORD-10051,2/2/2025,CUST-834,Customer Corp 834,PROD-401,Mechanical Keyboard,Electronics,North,12,10301.21,101.58,123512.94
+ORD-10339,3/25/2025,CUST-832,Customer Corp 832,PROD-408,Webcam HD,Electronics,West,8,8079.86,246.63,64392.25
+ORD-10268,2/3/2026,CUST-843,Customer Corp 843,PROD-401,Mechanical Keyboard,Electronics,South,9,10159.57,259.8,91176.33
+ORD-10293,1/28/2026,CUST-826,Customer Corp 826,PROD-402,Ergonomic Chair,Furniture,East,5,3666.42,0.57,18331.53
+ORD-10134,2/16/2025,CUST-802,Customer Corp 802,PROD-408,Webcam HD,,East,-5,,268.92,
+ORD-10295,1/6/2025,CUST-825,Customer Corp 825,PROD-405,Standing Desk,Furniture,North,6,$11355.97,80.81,68055.01
+ORD-10065,2026-99-12,CUST-809,Customer Corp 809,PROD-403,27-inch 4K Monitor,Electronics,West,2,6447.83,14.36,12881.3
+ORD-10297,3/20/2026,CUST-816,Customer Corp 816,PROD-401,Mechanical Keyboard,Electronics,North,15,7129.56,27.09,
+ORD-10225,5/20/2025,CUST-811,Customer Corp 811,PROD-403,27-inch 4K Monitor,Electronics,East,1,1393.98,219.48,1174.5
+ORD-10317,12/21/2025,CUST-836,Customer Corp 836,PROD-401,Mechanical Keyboard,Electronics,South,8,6147.61,158.11,49022.77
+ORD-10258,8/31/2025,CUST-845,Customer Corp 845,PROD-403,27-inch 4K Monitor,Electronics,West,5,10851.8,19.32,54239.68
+ORD-10234,4/29/2025,CUST-828,Customer Corp 828,PROD-405,Standing Desk,Furniture,West,9,,272.32,
+ORD-10059,10/14/2025,CUST-834,Customer Corp 834,PROD-401,Mechanical Keyboard,Electronics,North,3,11878.61,109.75,
+ORD-10109,3/2/2026,CUST-813,Customer Corp 813,PROD-403,27-inch 4K Monitor,Electronics,South,15,13501.4,129.55,202391.45
+ORD-10118,8/1/2025,CUST-819,Customer Corp 819,PROD-402,Ergonomic Chair,Furniture,East,3,823.42,177.5,2292.76
+ORD-10055,2/22/2025,CUST-831,Customer Corp 831,PROD-405,Standing Desk,Furniture,West,12,1213.68,83.39,14480.77
+ORD-10266,11/13/2025,CUST-824,Customer Corp 824,PROD-408,Webcam HD,Electronics,South,6,10145.98,294.22,60581.66
+ORD-10218,3/19/2025,CUST-835,Customer Corp 835,PROD-402,Ergonomic Chair,Furniture,South,3,8972.82,248.99,26669.47
+ORD-10226,11/4/2025,CUST-804,Customer Corp 804,PROD-407,Noise Cancelling Headphones,Electronics,West,15,7606.37,260.89,113834.66
+ORD-10195,9/29/2025,CUST-846,Customer Corp 846,PROD-403,27-inch 4K Monitor,Electronics,North,8,8617.79,192.18,68750.14
+ORD-10001,4/20/2025,CUST-840,Customer Corp 840,PROD-405,Standing Desk,Furniture,North,1,$8419.32,161.87,8257.45
+ORD-10225,1/21/2026,CUST-841,Customer Corp 841,PROD-406,USB-C Hub,Accessories,West,5,14653.43,183.31,73083.84
+ORD-10069,9/30/2025,CUST-805,Customer Corp 805,PROD-401,Mechanical Keyboard,Electronics,East,10,13346.07,78.61,133382.09
+ORD-10329,10/23/2025,CUST-844,Customer Corp 844,PROD-405,Standing Desk,Furniture,West,14,2276.58,98.08,31774.04
+ORD-10312,2/19/2025,CUST-805,Customer Corp 805,PROD-406,USB-C Hub,Accessories,South,11,10460.8,102.42,
+ORD-10213,12/26/2025,CUST-848,Customer Corp 848,PROD-402,Ergonomic Chair,Furniture,South,13,5953.4,203.09,77191.11
+ORD-10183,12/29/2025,CUST-846,Customer Corp 846,PROD-408,Webcam HD,Electronics,East,5,5949.01,31.64,29713.41
+ORD-10166,4/2/2025,CUST-810,Customer Corp 810,PROD-402,Ergonomic Chair,Furniture,South,15,11453.74,224.94,171581.16
+ORD-10338,3/11/2026,CUST-822,Customer Corp 822,PROD-405,Standing Desk,Furniture,South,14,1361.65,270.25,18792.85
+ORD-10100,8/7/2025,CUST-817,Customer Corp 817,PROD-408,Webcam HD,Electronics,East,10,11078.6,28.08,
+ORD-10084,11/16/2025,CUST-838,Customer Corp 838,PROD-406,USB-C Hub,Accessories,South,2,14804.37,127.26,29481.48
+ORD-10052,6/17/2025,CUST-814,Customer Corp 814,PROD-408,Webcam HD,Electronics,South,12,2471.21,235.08,29419.44
+ORD-10013,4/20/2025,CUST-848,Customer Corp 848,PROD-401,Mechanical Keyboard,Electronics,West,7,9392.91,243.56,65506.81
+ORD-10083,6/20/2025,CUST-818,Customer Corp 818,PROD-404,Wireless Mouse,Electronics,West,-5,8848.39,105.93,-44347.88
+ORD-10006,7/3/2025,CUST-834,Customer Corp 834,PROD-402,Ergonomic Chair,Furniture,East,4,9512.44,49.06,38000.7
+ORD-10164,12/9/2025,CUST-815,Customer Corp 815,PROD-408,Webcam HD,Electronics,West,3,12053.6,256.55,35904.25
+ORD-10209,7/20/2025,CUST-838,Customer Corp 838,PROD-401,Mechanical Keyboard,Electronics,South,13,12509.86,38.11,
+ORD-10175,12/7/2025,CUST-822,Customer Corp 822,PROD-406,USB-C Hub,Accessories,North,10,9887.26,101.72,98770.88
+ORD-10220,1/29/2025,CUST-801,Customer Corp 801,PROD-408,Webcam HD,Electronics,North,5,10779.75,139.2,
+ORD-10304,7/22/2025,CUST-816,Customer Corp 816,PROD-401,Mechanical Keyboard,Electronics,South,13,10453.41,24.67,135869.66
+ORD-10139,1/7/2026,CUST-821,Customer Corp 821,PROD-405,Standing Desk,,South,1,10345.82,99.89,10245.93
+ORD-10033,1/10/2025,CUST-820,Customer Corp 820,PROD-402,Ergonomic Chair,Furniture,South,9,2171.22,14.61,19526.37
+ORD-10166,10/31/2025,CUST-830,Customer Corp 830,PROD-405,Standing Desk,Furniture,West,7,12722.52,50.41,89007.23

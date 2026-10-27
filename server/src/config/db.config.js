@@ -4,7 +4,8 @@ import mongoose from 'mongoose';
  * Opens the MongoDB connection pool used by the API and the upload worker.
  */
 export async function connectDB() {
-  const uri = process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/sales_analytics';
+  const uri = process.env.MONGODB_URI;
+  console.log()
 
   mongoose.connection.on('error', (err) => {
     console.error('[mongo] connection error:', err.message);

@@ -1,5 +1,21 @@
 {
+  "name": "sales-analytics-server",
+  "version": "1.0.0",
+  "description": "Sales Analytics Dashboard backend: Express MVC API, BullMQ upload worker, Socket.io progress events, KPI aggregation and sales forecasting.",
+  "private": true,
+  "type": "module",
+  "main": "src/server.js",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js",
+    "worker": "node src/workers/upload.worker.js",
+    "dev:worker": "node --watch src/workers/upload.worker.js"
+  },
   "dependencies": {
+    "bullmq": "^6.5.0",
     "compression": "^1.8.2",
     "cors": "^2.8.6",
     "csv-parser": "^3.2.1",
@@ -8,13 +24,12 @@
     "express": "^5.3.0",
     "express-rate-limit": "^8.7.1",
     "helmet": "^8.3.0",
+    "ioredis": "^6.0.0",
     "mongoose": "^9.11.4",
     "multer": "^2.5.0",
     "read-excel-file": "^9.3.12",
     "simple-statistics": "^7.12.1",
+    "socket.io": "^4.8.4",
     "zod": "^4.6.7"
-  },
-  "devDependencies": {
-    "@types/node": "^26.6.5"
   }
 }
