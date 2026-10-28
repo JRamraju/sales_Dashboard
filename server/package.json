@@ -12,7 +12,8 @@
     "start": "node src/server.js",
     "dev": "node --watch src/server.js",
     "worker": "node src/workers/upload.worker.js",
-    "dev:worker": "node --watch src/workers/upload.worker.js"
+    "dev:worker": "node --watch src/workers/upload.worker.js",
+    "test": "node --test"
   },
   "dependencies": {
     "bullmq": "^6.5.0",

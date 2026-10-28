@@ -1,11 +1,10 @@
 import { z } from 'zod';
 import dayjs from 'dayjs';
 import utc from 'dayjs/plugin/utc.js';
-import customParseFormat from 'dayjs/plugin/customParseFormat.js';
 import { CANONICAL_FIELDS } from '../utils/headerMapper.util.js';
+import { DATE_ORDER_LABELS, SLASH_DATE, defaultDateOrder } from '../utils/dateOrder.util.js';
 
 dayjs.extend(utc);
-dayjs.extend(customParseFormat);
 
 /* -------------------------------------------------------------------------- */
 /* Sanitizing helpers                                                         */
@@ -13,21 +12,28 @@ dayjs.extend(customParseFormat);
 
 const round2 = (n) => Math.round((n + Number.EPSILON) * 100) / 100;
 
-// Day-first on purpose: "03/04/2026" is read as 3 April 2026 (DD/MM/YYYY).
-const DATE_FORMATS = [
-  'YYYY-MM-DD',
-  'YYYY/MM/DD',
-  'DD/MM/YYYY',
-  'D/M/YYYY',
-  'DD-MM-YYYY',
-  'D-M-YYYY',
-  'DD.MM.YYYY',
-];
+const YMD_DATE = /^(\d{4})[/.-](\d{1,2})[/.-](\d{1,2})(?:[ T].*)?$/;
 const ISO_DATETIME = /^\d{4}-\d{2}-\d{2}[T ]\d{2}:\d{2}/;
 const MIN_YEAR = 1900;
 const MAX_YEAR = 2100;
 
 const isBlank = (v) => v === null || v === undefined || (typeof v === 'string' && v.trim() === '');
+
+/** Column names as shown to the user (snake_case, same as the sample files). */
+export const FIELD_LABELS = {
+  orderId: 'order_id',
+  orderDate: 'order_date',
+  customerId: 'customer_id',
+  customerName: 'customer_name',
+  productId: 'product_id',
+  productName: 'product_name',
+  category: 'category',
+  region: 'region',
+  quantity: 'quantity',
+  unitPrice: 'unit_price',
+  discount: 'discount',
+  totalAmount: 'total_amount',
+};
 
 /**
  * Trims strings and turns blanks into null so the schema only has to reason
@@ -56,38 +62,64 @@ function parseNumeric(value) {
   return Number.isFinite(n) ? n : NaN;
 }
 
+/** A real calendar date at UTC midnight, or null (rejects 31 Feb, year 0099, ...). */
+function utcDate(year, month, day) {
+  if (year < MIN_YEAR || year > MAX_YEAR) return null;
+  const date = new Date(Date.UTC(year, month - 1, day));
+  const valid =
+    date.getUTCFullYear() === year && date.getUTCMonth() === month - 1 && date.getUTCDate() === day;
+  return valid ? date : null;
+}
+
 /**
  * Normalises many date representations to a UTC Date:
  * Date objects (Excel date cells), Excel serial numbers, ISO strings,
- * YYYY-MM-DD and DD/MM/YYYY style strings. Returns null when unparseable.
+ * YYYY-MM-DD, and a/b/YYYY strings (day-first or month-first, see `order`).
+ * Returns null when unparseable.
+ *
+ * Plain dates are parsed with regular expressions instead of dayjs: this runs
+ * once per row, and trying seven dayjs strict formats per cell was the slowest
+ * step of ingesting a large file.
+ *
+ * @param {unknown} value
+ * @param {'dmy'|'mdy'} [order]  how to read an ambiguous a/b/YYYY date
  */
-export function parseOrderDate(value) {
-  let parsed;
-
+export function parseOrderDate(value, order = defaultDateOrder()) {
   if (value instanceof Date) {
-    parsed = dayjs.utc(value);
-  } else if (typeof value === 'number') {
-    // Excel stores dates as days since 1899-12-30; accept a sane serial range.
-    if (value < 20000 || value > 80000) return null;
-    parsed = dayjs.utc('1899-12-30').add(Math.floor(value), 'day');
-  } else if (typeof value === 'string') {
-    const text = value.trim();
-    if (ISO_DATETIME.test(text)) {
-      parsed = dayjs.utc(text);
-    } else {
-      // Try each format on its own in strict mode. (dayjs ignores UTC mode when
-      // given an array of formats, which shifts dates by the server's offset.)
-      parsed = DATE_FORMATS.map((format) => dayjs.utc(text, format, true)).find((d) => d.isValid());
-      if (!parsed) return null;
-    }
-  } else {
-    return null;
+    if (Number.isNaN(value.getTime())) return null;
+    const year = value.getUTCFullYear();
+    return year < MIN_YEAR || year > MAX_YEAR ? null : new Date(value.getTime());
   }
 
-  if (!parsed.isValid()) return null;
-  const year = parsed.year();
-  if (year < MIN_YEAR || year > MAX_YEAR) return null;
-  return parsed.toDate();
+  if (typeof value === 'number') {
+    // Excel stores dates as days since 1899-12-30; accept a sane serial range.
+    if (value < 20000 || value > 80000) return null;
+    const parsed = dayjs.utc('1899-12-30').add(Math.floor(value), 'day');
+    return utcDate(parsed.year(), parsed.month() + 1, parsed.date());
+  }
+
+  if (typeof value !== 'string') return null;
+  const text = value.trim();
+
+  if (ISO_DATETIME.test(text)) {
+    const parsed = dayjs.utc(text);
+    if (!parsed.isValid()) return null;
+    const year = parsed.year();
+    return year < MIN_YEAR || year > MAX_YEAR ? null : parsed.toDate();
+  }
+
+  let match = YMD_DATE.exec(text);
+  if (match) return utcDate(Number(match[1]), Number(match[2]), Number(match[3]));
+
+  match = SLASH_DATE.exec(text);
+  if (match) {
+    const first = Number(match[1]);
+    const second = Number(match[2]);
+    const year = Number(match[3]);
+    return order === 'mdy' ? utcDate(year, first, second) : utcDate(year, second, first);
+  }
+
+  return null;
 }
 
 /* -------------------------------------------------------------------------- */
@@ -127,12 +159,6 @@ const numeric = (label, check, { required = false } = {}) =>
     return error ? { error } : { value: n };
   });
 
-const orderDateField = field((v) => {
-  if (v === undefined) return { error: 'Missing order_date' };
-  const date = parseOrderDate(v);
-  return date ? { value: date } : { error: `Invalid order_date format '${v instanceof Date ? 'invalid date' : v}'` };
-});
-
 const quantityField = numeric(
   'quantity',
   (n) => {
@@ -151,7 +177,8 @@ const nonNegative = (label) => (n) => (n < 0 ? `Negative ${label} (${n}) not all
 /* -------------------------------------------------------------------------- */
 
 /**
- * Validates one sanitized row and coerces it into the SalesRecord shape.
+ * Builds the row schema for one date order. Two instances are created once at
+ * start-up (day-first and month-first); the order is chosen per uploaded file.
  *
  * Hard rejects (row is quarantined): unparseable/missing order_date,
  * quantity <= 0, both unit_price and total_amount missing, plus missing
@@ -161,69 +188,96 @@ const nonNegative = (label) => (n) => (n < 0 ? `Negative ${label} (${n}) not all
  * (quantity * unit_price) - discount; blank category -> "Uncategorized";
  * blank region -> "Unknown"; blank discount -> 0.
  */
-export const salesRowSchema = z
-  .object({
-    orderId: text('order_id', { required: true }),
-    orderDate: orderDateField,
-    customerId: text('customer_id', { required: true }),
-    customerName: text('customer_name'),
-    productId: text('product_id'),
-    productName: text('product_name'),
-    category: text('category'),
-    region: text('region'),
-    quantity: quantityField,
-    unitPrice: numeric('unit_price', nonNegative('unit_price')),
-    discount: numeric('discount', nonNegative('discount')),
-    totalAmount: numeric('total_amount', nonNegative('total_amount')),
-  })
-  .transform((row, ctx) => {
-    const fail = (message) => {
-      ctx.addIssue({ code: 'custom', message });
-      return z.NEVER;
-    };
+function buildSalesRowSchema(order) {
+  const dateHint = `${DATE_ORDER_LABELS[order]} or YYYY-MM-DD`;
 
-    if (!row.productId && !row.productName) return fail('Missing product_id and product_name');
-    if (row.unitPrice === undefined && row.totalAmount === undefined) {
-      return fail('Both unit_price and total_amount are missing');
-    }
-
-    const discount = row.discount ?? 0;
-    const totalRevenue =
-      row.totalAmount !== undefined
-        ? round2(row.totalAmount)
-        : round2(row.quantity * row.unitPrice - discount);
-
-    if (totalRevenue < 0) return fail(`Discount (${discount}) exceeds the line total`);
-
-    const unitPrice =
-      row.unitPrice !== undefined
-        ? round2(row.unitPrice)
-        : round2((row.totalAmount + discount) / row.quantity);
-
-    return {
-      orderId: row.orderId,
-      orderDate: row.orderDate,
-      customerId: row.customerId,
-      customerName: row.customerName || row.customerId,
-      productId: row.productId || row.productName,
-      productName: row.productName || row.productId,
-      category: row.category || 'Uncategorized',
-      region: row.region || 'Unknown',
-      quantity: row.quantity,
-      unitPrice,
-      discount: round2(discount),
-      totalRevenue,
-    };
+  const orderDateField = field((v) => {
+    if (v === undefined) return { error: 'Missing order_date' };
+    const date = parseOrderDate(v, order);
+    if (date) return { value: date };
+    const shown = v instanceof Date ? 'invalid date' : v;
+    return { error: `Invalid order_date format '${shown}' (expected ${dateHint})` };
   });
+
+  return z
+    .object({
+      orderId: text('order_id', { required: true }),
+      orderDate: orderDateField,
+      customerId: text('customer_id', { required: true }),
+      customerName: text('customer_name'),
+      productId: text('product_id'),
+      productName: text('product_name'),
+      category: text('category'),
+      region: text('region'),
+      quantity: quantityField,
+      unitPrice: numeric('unit_price', nonNegative('unit_price')),
+      discount: numeric('discount', nonNegative('discount')),
+      totalAmount: numeric('total_amount', nonNegative('total_amount')),
+    })
+    .transform((row, ctx) => {
+      const fail = (message, path) => {
+        ctx.addIssue({ code: 'custom', message, path: [path] });
+        return z.NEVER;
+      };
+
+      if (!row.productId && !row.productName) {
+        return fail('Missing product_id and product_name', 'productId');
+      }
+      if (row.unitPrice === undefined && row.totalAmount === undefined) {
+        return fail('Both unit_price and total_amount are missing', 'unitPrice');
+      }
+
+      const discount = row.discount ?? 0;
+      const totalRevenue =
+        row.totalAmount !== undefined
+          ? round2(row.totalAmount)
+          : round2(row.quantity * row.unitPrice - discount);
+
+      if (totalRevenue < 0) return fail(`Discount (${discount}) exceeds the line total`, 'discount');
+
+      const unitPrice =
+        row.unitPrice !== undefined
+          ? round2(row.unitPrice)
+          : round2((row.totalAmount + discount) / row.quantity);
+
+      return {
+        orderId: row.orderId,
+        orderDate: row.orderDate,
+        customerId: row.customerId,
+        customerName: row.customerName || row.customerId,
+        productId: row.productId || row.productName,
+        productName: row.productName || row.productId,
+        category: row.category || 'Uncategorized',
+        region: row.region || 'Unknown',
+        quantity: row.quantity,
+        unitPrice,
+        discount: round2(discount),
+        totalRevenue,
+      };
+    });
+}
+
+const SCHEMAS = { dmy: buildSalesRowSchema('dmy'), mdy: buildSalesRowSchema('mdy') };
+
+/** Day-first schema (the historical default); prefer getSalesRowSchema(order). */
+export const salesRowSchema = SCHEMAS.dmy;
+
+export function getSalesRowSchema(order) {
+  return SCHEMAS[order] ?? SCHEMAS[defaultDateOrder()];
+}
 
 /**
  * Sanitizes + validates one raw row.
- * @returns {{ ok: true, data: object } | { ok: false, reason: string }}
+ * @param {object} raw
+ * @param {{ dateOrder?: 'dmy'|'mdy' }} [options]  how to read a/b/YYYY dates
+ * @returns {{ ok: true, data: object } | { ok: false, reason: string, field: string }}
  */
-export function validateSalesRow(raw) {
-  const result = salesRowSchema.safeParse(sanitizeRow(raw));
+export function validateSalesRow(raw, { dateOrder } = {}) {
+  const result = getSalesRowSchema(dateOrder).safeParse(sanitizeRow(raw));
   if (result.success) return { ok: true, data: result.data };
 
-  const reason = [...new Set(result.error.issues.map((issue) => issue.message))].join('; ');
-  return { ok: false, reason };
+  const issues = result.error.issues;
+  const reason = [...new Set(issues.map((issue) => issue.message))].join('; ');
+  const fields = [...new Set(issues.map((issue) => FIELD_LABELS[issue.path?.[0]] ?? 'row'))];
+  return { ok: false, reason, field: fields.join(', ') };
 }

@@ -3,12 +3,23 @@ import UploadBatch from '../models/UploadBatch.model.js';
 import SalesRecord from '../models/SalesRecord.model.js';
 import { enqueueUploadJob } from '../queues/upload.queue.js';
 import { ApiError } from '../middlewares/error.middleware.js';
+import { clearBatchCache } from './analytics.controller.js';
+import { toClientBatch } from '../utils/uploadMappers.util.js';
 
 const OBJECT_ID = /^[a-f\d]{24}$/i;
+
+/**
+ * A batch still "queued" or "processing" after this long lost its worker
+ * (the process was killed mid-job), so it may be deleted anyway instead of
+ * being stuck in the list forever.
+ */
+const STALE_UPLOAD_MS = (Number(process.env.STALE_UPLOAD_MINUTES) || 60) * 60 * 1000;
 
 function assertBatchId(id) {
   if (!OBJECT_ID.test(String(id))) throw new ApiError(400, 'Invalid batchId.');
 }
+
+const removeFile = (filePath) => fs.promises.rm(filePath, { force: true }).catch(() => {});
 
 /**
  * POST /api/v1/uploads
@@ -21,22 +32,29 @@ export async function uploadFile(req, res) {
     throw new ApiError(400, 'No file uploaded. Send the CSV/Excel file in the "file" form field.');
   }
 
-  const batch = await UploadBatch.create({ fileName: req.file.originalname, status: 'queued' });
-
+  let batch;
   let job;
   try {
+    batch = await UploadBatch.create({ fileName: req.file.originalname, status: 'queued' });
+
     job = await enqueueUploadJob({
       batchId: batch._id,
       filePath: req.file.path,
       originalName: req.file.originalname,
     });
   } catch (err) {
-    console.error('[upload] could not enqueue job:', err);
-    await UploadBatch.findByIdAndUpdate(batch._id, {
-      status: 'failed',
-      failureReason: 'Could not queue the file for processing.',
-    });
-    await fs.promises.rm(req.file.path, { force: true }).catch(() => {});
+    console.error('[upload] could not start processing:', err);
+
+    // Whatever failed, the temp file will never be picked up by a worker.
+    await removeFile(req.file.path);
+    if (batch) {
+      await UploadBatch.findByIdAndUpdate(batch._id, {
+        status: 'failed',
+        failureReason: 'Could not queue the file for processing.',
+        finishedAt: new Date(),
+      }).catch(() => {});
+    }
+
     throw new ApiError(503, 'The upload queue is unavailable. Please try again shortly.');
   }
 
@@ -45,6 +63,7 @@ export async function uploadFile(req, res) {
     jobId: job.id,
     fileName: batch.fileName,
     status: batch.status,
+    message: 'File received and queued for processing.',
   });
 }
 
@@ -56,7 +75,7 @@ export async function uploadFile(req, res) {
  */
 export async function listUploads(req, res) {
   const batches = await UploadBatch.find().select('-errorLogs').sort({ uploadedAt: -1 }).limit(200).lean();
-  res.json(batches);
+  res.json(batches.map(toClientBatch));
 }
 
 /**
@@ -69,7 +88,7 @@ export async function getUpload(req, res) {
   const batch = await UploadBatch.findById(req.params.batchId).lean();
   if (!batch) throw new ApiError(404, 'Upload batch not found.');
 
-  res.json(batch);
+  res.json(toClientBatch(batch));
 }
 
 /**
@@ -82,12 +101,19 @@ export async function deleteUpload(req, res) {
   const batch = await UploadBatch.findById(req.params.batchId);
   if (!batch) throw new ApiError(404, 'Upload batch not found.');
 
-  if (batch.status === 'queued' || batch.status === 'processing') {
+  const inFlight = batch.status === 'queued' || batch.status === 'processing';
+  const isStale = Date.now() - new Date(batch.uploadedAt).getTime() > STALE_UPLOAD_MS;
+  if (inFlight && !isStale) {
     throw new ApiError(409, 'This upload is still being processed. Try again once it has finished.');
   }
 
   const { deletedCount } = await SalesRecord.deleteMany({ batchId: batch._id });
   await batch.deleteOne();
+  clearBatchCache(batch._id);
 
-  res.json({ batchId: batch._id, deletedRecords: deletedCount });
+  res.json({
+    batchId: batch._id,
+    deletedRecords: deletedCount,
+    message: 'Upload deleted.',
+  });
 }

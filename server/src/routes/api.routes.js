@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import rateLimit from 'express-rate-limit';
-import { uploadSingleFile } from '../middlewares/upload.middleware.js';
+import { uploadSingleFile, verifyUploadedFile } from '../middlewares/upload.middleware.js';
 import {
   uploadFile,
   listUploads,
@@ -26,7 +26,7 @@ const uploadLimiter = rateLimit({
 });
 
 /* ------------------------------- Uploads --------------------------------- */
-router.post('/uploads', uploadLimiter, uploadSingleFile, uploadFile);
+router.post('/uploads', uploadLimiter, uploadSingleFile, verifyUploadedFile, uploadFile);
 router.get('/uploads', listUploads);
 router.get('/uploads/:batchId', getUpload);
 router.delete('/uploads/:batchId', deleteUpload);
