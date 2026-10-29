@@ -15,17 +15,12 @@ import {
 } from 'recharts';
 import { Sparkles, TrendingDown, TrendingUp } from 'lucide-react';
 import { ForecastResponse } from '@/types/dashboard.types';
+import { formatAxisDate, formatCompactINR, formatINR } from '@/lib/format';
 
 interface ForecastChartProps {
   forecastData: ForecastResponse | null;
   loading?: boolean;
 }
-
-const formatCompactCurrency = (val: number): string => {
-  if (val >= 1_000_000) return `$${(val / 1_000_000).toFixed(1)}M`;
-  if (val >= 1_000) return `$${(val / 1_000).toFixed(1)}K`;
-  return `$${val.toFixed(0)}`;
-};
 
 export const ForecastChart: React.FC<ForecastChartProps> = ({
   forecastData,
@@ -39,7 +34,7 @@ export const ForecastChart: React.FC<ForecastChartProps> = ({
   return (
     <div
       id="sales-forecast"
-      className="flex flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 shadow-2xs scroll-mt-28"
+      className="flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-2xs scroll-target"
     >
       {/* Header & R² Confidence Metadata Badge */}
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-4">
@@ -88,14 +83,14 @@ export const ForecastChart: React.FC<ForecastChartProps> = ({
 
       {/* Chart Area */}
       {loading ? (
-        <div className="h-72 w-full animate-pulse rounded-xl bg-slate-100" />
+        <div className="min-h-72 w-full flex-1 animate-pulse rounded-xl bg-slate-100" />
       ) : series.length === 0 ? (
-        <div className="flex h-72 items-center justify-center rounded-xl border border-dashed border-slate-200 text-xs text-slate-400">
+        <div className="flex min-h-72 flex-1 items-center justify-center rounded-xl border border-dashed border-slate-200 text-xs text-slate-400">
           Minimum 3 historical months required to generate a statistical forecast.
         </div>
       ) : (
         <>
-          <div className="h-72 w-full">
+          <div className="relative min-h-72 w-full flex-1">
             <ResponsiveContainer width="100%" height="100%">
               <ComposedChart
                 data={series}
@@ -124,9 +119,13 @@ export const ForecastChart: React.FC<ForecastChartProps> = ({
                   tick={{ fontSize: 11, fill: '#64748b' }}
                   tickLine={false}
                   axisLine={{ stroke: '#cbd5e1' }}
+                  tickFormatter={formatAxisDate}
+                  interval="preserveStartEnd"
+                  minTickGap={28}
                 />
                 <YAxis
-                  tickFormatter={formatCompactCurrency}
+                  width={64}
+                  tickFormatter={formatCompactINR}
                   tick={{ fontSize: 11, fill: '#64748b' }}
                   tickLine={false}
                   axisLine={false}
@@ -140,13 +139,7 @@ export const ForecastChart: React.FC<ForecastChartProps> = ({
                     color: '#f8fafc',
                     fontSize: '12px',
                   }}
-                  formatter={(value: any, name: any) => [
-                    new Intl.NumberFormat('en-US', {
-                      style: 'currency',
-                      currency: 'USD',
-                    }).format(Number(value)),
-                    name,
-                  ]}
+                  formatter={(value, name) => [formatINR(value), name]}
                 />
                 <Legend
                   wrapperStyle={{ fontSize: '12px', paddingTop: '8px' }}
@@ -185,17 +178,15 @@ export const ForecastChart: React.FC<ForecastChartProps> = ({
               {forecastData.forecast.map((item) => (
                 <div
                   key={item.date}
-                  className="flex items-center justify-between rounded-xl bg-purple-50/60 border border-purple-100 px-3.5 py-2"
+                  className="flex flex-wrap items-center justify-between gap-x-3 gap-y-0.5 rounded-xl bg-purple-50/60 border border-purple-100 px-3.5 py-2"
                 >
-                  <span className="text-xs font-semibold text-purple-900">
+                  <span className="whitespace-nowrap text-xs font-semibold text-purple-900">
                     {item.date} (Projected)
                   </span>
-                  <span className="text-xs font-bold text-purple-700">
-                    {new Intl.NumberFormat('en-US', {
-                      style: 'currency',
-                      currency: 'USD',
+                  <span className="whitespace-nowrap text-xs font-bold text-purple-700">
+                    {formatINR(item.predictedRevenue, {
                       maximumFractionDigits: 0,
-                    }).format(item.predictedRevenue)}
+                    })}
                   </span>
                 </div>
               ))}

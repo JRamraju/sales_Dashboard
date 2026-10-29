@@ -10,6 +10,7 @@ import {
   Users,
 } from 'lucide-react';
 import { CustomerLeaderboardItem } from '@/types/dashboard.types';
+import { formatINR } from '@/lib/format';
 
 interface CustomerSalesTableProps {
   customers: CustomerLeaderboardItem[];
@@ -31,7 +32,8 @@ export const CustomerSalesTable: React.FC<CustomerSalesTableProps> = ({
   const [sortKey, setSortKey] = useState<SortKey>('totalSpend');
   const [sortAsc, setSortAsc] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1);
-  const pageSize = 6;
+  // 8 rows lines the card up with the Products card next to it (chart + table).
+  const pageSize = 8;
 
   const handleSort = (key: SortKey) => {
     if (sortKey === key) {
@@ -89,7 +91,7 @@ export const CustomerSalesTable: React.FC<CustomerSalesTableProps> = ({
   };
 
   return (
-    <div className="flex flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 shadow-2xs">
+    <div className="flex h-full flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 shadow-2xs">
       {/* Header & Search Input */}
       <div>
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-4">
@@ -206,18 +208,12 @@ export const CustomerSalesTable: React.FC<CustomerSalesTableProps> = ({
                       {cust.totalOrders.toLocaleString()}
                     </td>
                     <td className="py-3 px-3 text-right font-bold text-emerald-700">
-                      {new Intl.NumberFormat('en-US', {
-                        style: 'currency',
-                        currency: 'USD',
-                        maximumFractionDigits: 0,
-                      }).format(cust.totalSpend)}
+                      {formatINR(cust.totalSpend, { maximumFractionDigits: 0 })}
                     </td>
                     <td className="py-3 px-3 text-right font-medium text-slate-700">
-                      {new Intl.NumberFormat('en-US', {
-                        style: 'currency',
-                        currency: 'USD',
+                      {formatINR(cust.averageOrderValue, {
                         maximumFractionDigits: 0,
-                      }).format(cust.averageOrderValue)}
+                      })}
                     </td>
                     <td className="py-3 pl-3 text-right text-slate-500">
                       {formatDate(cust.lastPurchaseDate)}

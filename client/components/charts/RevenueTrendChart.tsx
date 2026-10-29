@@ -15,17 +15,12 @@ import {
 import { Calendar, TrendingUp } from 'lucide-react';
 import { Granularity, RevenueTrendPoint } from '@/types/dashboard.types';
 import { useFilterContext } from '@/context/FilterContext';
+import { formatAxisDate, formatCompactINR, formatINR } from '@/lib/format';
 
 interface RevenueTrendChartProps {
   data: RevenueTrendPoint[];
   loading?: boolean;
 }
-
-const formatCompactCurrency = (val: number): string => {
-  if (val >= 1_000_000) return `$${(val / 1_000_000).toFixed(1)}M`;
-  if (val >= 1_000) return `$${(val / 1_000).toFixed(1)}K`;
-  return `$${val.toFixed(0)}`;
-};
 
 export const RevenueTrendChart: React.FC<RevenueTrendChartProps> = ({
   data,
@@ -42,7 +37,7 @@ export const RevenueTrendChart: React.FC<RevenueTrendChartProps> = ({
   return (
     <div
       id="revenue-trends"
-      className="flex flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 shadow-2xs scroll-mt-28"
+      className="flex flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 shadow-2xs scroll-target"
     >
       {/* Header & Granularity Toggle */}
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between mb-5">
@@ -108,10 +103,14 @@ export const RevenueTrendChart: React.FC<RevenueTrendChartProps> = ({
                 tick={{ fontSize: 11, fill: '#64748b' }}
                 tickLine={false}
                 axisLine={{ stroke: '#cbd5e1' }}
+                tickFormatter={formatAxisDate}
+                interval="preserveStartEnd"
+                minTickGap={36}
               />
               <YAxis
                 yAxisId="left"
-                tickFormatter={formatCompactCurrency}
+                tickFormatter={formatCompactINR}
+                width={64}
                 tick={{ fontSize: 11, fill: '#64748b' }}
                 tickLine={false}
                 axisLine={false}
@@ -132,15 +131,9 @@ export const RevenueTrendChart: React.FC<RevenueTrendChartProps> = ({
                   color: '#f8fafc',
                   fontSize: '12px',
                 }}
-                formatter={(value: any, name: any) => {
+                formatter={(value, name) => {
                   if (name === 'Revenue') {
-                    return [
-                      new Intl.NumberFormat('en-US', {
-                        style: 'currency',
-                        currency: 'USD',
-                      }).format(Number(value)),
-                      'Revenue',
-                    ];
+                    return [formatINR(value), 'Revenue'];
                   }
                   return [Number(value).toLocaleString(), 'Orders'];
                 }}

@@ -1,8 +1,9 @@
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #f8fafc;
+  --foreground: #0f172a;
+  color-scheme: light;
 }
 
 @theme inline {
@@ -12,15 +13,110 @@
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* The dashboard UI is light-only, so there is intentionally no
+   prefers-color-scheme: dark override here (it used to flip the default
+   text colour to near-white on white cards). */
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
+}
+
+/* Anchor-scroll offset that tracks the real sticky header height
+   (TopFilterBar publishes it as --app-header-h). */
+.scroll-target {
+  scroll-margin-top: calc(var(--app-header-h, 7rem) + 1rem);
+}
+
+/* ------------------------------------------------------------------ */
+/* Entrance animations                                                 */
+/* Plays once on mount. fill-mode `backwards` + end state `none` means  */
+/* no transform lingers afterwards (keeps fixed / sticky children OK).  */
+/* ------------------------------------------------------------------ */
+@keyframes enter-from-left {
+  from {
+    opacity: 0;
+    transform: translateX(-48px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes enter-from-right {
+  from {
+    opacity: 0;
+    transform: translateX(48px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.enter-from-left {
+  animation: enter-from-left 600ms cubic-bezier(0.22, 1, 0.36, 1)
+    var(--enter-delay, 0ms) backwards;
+}
+
+.enter-from-right {
+  animation: enter-from-right 600ms cubic-bezier(0.22, 1, 0.36, 1)
+    var(--enter-delay, 0ms) backwards;
+}
+
+/* ------------------------------------------------------------------ */
+/* Welcome splash                                                      */
+/* ------------------------------------------------------------------ */
+.welcome-splash {
+  opacity: 1;
+  transition: opacity 450ms ease;
+}
+
+.welcome-splash[data-leaving="true"] {
+  opacity: 0;
+  pointer-events: none;
+}
+
+@keyframes welcome-rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.welcome-rise {
+  animation: welcome-rise 650ms cubic-bezier(0.22, 1, 0.36, 1)
+    var(--rise-delay, 0ms) backwards;
+}
+
+@keyframes welcome-bar {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(300%);
+  }
+}
+
+.welcome-bar {
+  animation: welcome-bar 1.4s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .enter-from-left,
+  .enter-from-right,
+  .welcome-rise,
+  .welcome-bar {
+    animation: none;
+  }
+
+  .welcome-splash {
+    transition: none;
+  }
 }

@@ -13,11 +13,46 @@ import {
 } from 'recharts';
 import { BarChart2, Package, Table as TableIcon } from 'lucide-react';
 import { ProductPerformanceItem } from '@/types/dashboard.types';
+import { formatCompactINR, formatINR } from '@/lib/format';
 
 interface TopProductsBarChartProps {
   products: ProductPerformanceItem[];
   loading?: boolean;
 }
+
+const MAX_BARS = 8;
+const BAR_ROW_HEIGHT = 30;
+
+const ellipsize = (text: string, max = 20): string =>
+  text.length > max ? `${text.slice(0, max - 1)}…` : text;
+
+interface ProductTickProps {
+  x?: number | string;
+  y?: number | string;
+  payload?: { value?: string | number };
+}
+
+/**
+ * Y-axis label that always stays on ONE line (Recharts' default tick wraps long
+ * names onto two lines). Long names are ellipsized; the full name is in the
+ * native hover tooltip.
+ */
+const ProductTick: React.FC<ProductTickProps> = ({ x, y, payload }) => {
+  const name = String(payload?.value ?? '');
+  return (
+    <text
+      x={x}
+      y={y}
+      dy={4}
+      textAnchor="end"
+      fontSize={11}
+      fill="#334155"
+    >
+      <title>{name}</title>
+      {ellipsize(name, 24)}
+    </text>
+  );
+};
 
 export const TopProductsBarChart: React.FC<TopProductsBarChartProps> = ({
   products,
@@ -25,8 +60,15 @@ export const TopProductsBarChart: React.FC<TopProductsBarChartProps> = ({
 }) => {
   const [viewMode, setViewMode] = useState<'split' | 'chart' | 'table'>('split');
 
+  // Give every bar its own row so Recharts never skips Y-axis labels.
+  const barCount = Math.min(products.length, MAX_BARS);
+  const chartHeight = Math.max(
+    barCount * BAR_ROW_HEIGHT + 24,
+    viewMode === 'chart' ? 320 : 208
+  );
+
   return (
-    <div className="flex flex-col justify-between rounded-2xl border border-slate-200 bg-white p-5 shadow-2xs">
+    <div className="flex h-full flex-col rounded-2xl border border-slate-200 bg-white p-5 shadow-2xs">
       {/* Header */}
       <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between mb-4">
         <div className="flex items-center gap-2">
@@ -83,19 +125,19 @@ export const TopProductsBarChart: React.FC<TopProductsBarChartProps> = ({
       </div>
 
       {loading ? (
-        <div className="h-80 w-full animate-pulse rounded-xl bg-slate-100" />
+        <div className="min-h-80 w-full flex-1 animate-pulse rounded-xl bg-slate-100" />
       ) : products.length === 0 ? (
-        <div className="flex h-80 items-center justify-center rounded-xl border border-dashed border-slate-200 text-xs text-slate-400">
+        <div className="flex min-h-80 flex-1 items-center justify-center rounded-xl border border-dashed border-slate-200 text-xs text-slate-400">
           No product performance records found.
         </div>
       ) : (
-        <div className="space-y-4">
+        <div className="flex-1 space-y-4">
           {/* Horizontal Bar Chart */}
           {(viewMode === 'split' || viewMode === 'chart') && (
-            <div className={viewMode === 'chart' ? 'h-80 w-full' : 'h-52 w-full'}>
+            <div className="w-full" style={{ height: chartHeight }}>
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart
-                  data={products.slice(0, 8)}
+                  data={products.slice(0, MAX_BARS)}
                   layout="vertical"
                   margin={{ top: 4, right: 20, left: 10, bottom: 4 }}
                 >
@@ -107,15 +149,17 @@ export const TopProductsBarChart: React.FC<TopProductsBarChartProps> = ({
                   <XAxis
                     type="number"
                     tick={{ fontSize: 11, fill: '#64748b' }}
-                    tickFormatter={(v) =>
-                      v >= 1000 ? `$${(v / 1000).toFixed(0)}k` : `$${v}`
-                    }
+                    tickFormatter={formatCompactINR}
+                    tickCount={5}
+                    interval="preserveStartEnd"
                   />
                   <YAxis
                     type="category"
                     dataKey="productName"
-                    width={125}
-                    tick={{ fontSize: 11, fill: '#334155' }}
+                    width={150}
+                    interval={0}
+                    tickLine={false}
+                    tick={<ProductTick />}
                   />
                   <Tooltip
                     contentStyle={{
@@ -125,13 +169,7 @@ export const TopProductsBarChart: React.FC<TopProductsBarChartProps> = ({
                       color: '#fff',
                       fontSize: '12px',
                     }}
-                    formatter={(value: any) => [
-                      new Intl.NumberFormat('en-US', {
-                        style: 'currency',
-                        currency: 'USD',
-                      }).format(Number(value)),
-                      'Revenue',
-                    ]}
+                    formatter={(value) => [formatINR(value), 'Revenue']}
                   />
                   <Bar
                     dataKey="totalRevenue"
@@ -174,11 +212,9 @@ export const TopProductsBarChart: React.FC<TopProductsBarChartProps> = ({
                         {prod.unitsSold.toLocaleString()}
                       </td>
                       <td className="py-2.5 px-3 text-right font-bold text-slate-900">
-                        {new Intl.NumberFormat('en-US', {
-                          style: 'currency',
-                          currency: 'USD',
+                        {formatINR(prod.totalRevenue, {
                           maximumFractionDigits: 0,
-                        }).format(prod.totalRevenue)}
+                        })}
                       </td>
                       <td className="py-2.5 pl-3 text-right">
                         <span className="inline-flex items-center rounded-full bg-indigo-50 px-2 py-0.5 text-[11px] font-semibold text-indigo-700">

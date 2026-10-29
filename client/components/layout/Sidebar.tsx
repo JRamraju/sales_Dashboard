@@ -1,14 +1,13 @@
 // client/components/layout/Sidebar.tsx
 'use client';
 
-import React, { useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import {
   BarChart3,
   CheckCircle2,
   Database,
   FileSpreadsheet,
   LayoutDashboard,
-  Menu,
   PieChart,
   ShieldAlert,
   TrendingUp,
@@ -17,6 +16,8 @@ import {
   X,
 } from 'lucide-react';
 import { useFilterContext } from '@/context/FilterContext';
+import { useScrollSpy } from '@/hooks/useScrollSpy';
+import { enterClass } from '@/components/layout/AnimateIn';
 
 interface NavItem {
   id: string;
@@ -58,7 +59,19 @@ const NAV_ITEMS: NavItem[] = [
   },
 ];
 
-export const Sidebar: React.FC = () => {
+/** Section element ids, in page order (top to bottom, left to right). */
+const SECTION_IDS = NAV_ITEMS.map((item) => item.href.slice(1));
+
+/** DOM id of the mobile drawer (referenced by the header hamburger's aria-controls). */
+export const MOBILE_NAV_ID = 'mobile-nav-drawer';
+
+interface SidebarProps {
+  /** Mobile drawer open state (owned by the page so the header can toggle it). */
+  open: boolean;
+  onClose: () => void;
+}
+
+export const Sidebar: React.FC<SidebarProps> = ({ open, onClose }) => {
   const {
     activeBatch,
     batches,
@@ -66,23 +79,75 @@ export const Sidebar: React.FC = () => {
     openValidationModal,
   } = useFilterContext();
 
-  const [activeNav, setActiveNav] = useState<string>('overview');
-  const [mobileOpen, setMobileOpen] = useState<boolean>(false);
+  const { activeId, scrollToSection } = useScrollSpy(SECTION_IDS);
+  const closeButtonRef = useRef<HTMLButtonElement>(null);
 
-  const handleNavClick = (id: string, href: string) => {
-    setActiveNav(id);
-    setMobileOpen(false);
-    const element = document.querySelector(href);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }
+  const handleNavClick = (href: string) => {
+    onClose();
+    scrollToSection(href.slice(1));
   };
 
-  const sidebarContent = (
-    <div className="flex h-full flex-col justify-between bg-slate-900 text-slate-100 w-64 select-none">
+  // Drawer behaviour: lock page scroll, close on Escape, move focus inside.
+  useEffect(() => {
+    if (!open) return;
+
+    const { body } = document;
+    const previousOverflow = body.style.overflow;
+    const previousPaddingRight = body.style.paddingRight;
+    const scrollbarWidth =
+      window.innerWidth - document.documentElement.clientWidth;
+    body.style.overflow = 'hidden';
+    if (scrollbarWidth > 0) body.style.paddingRight = `${scrollbarWidth}px`;
+
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        onClose();
+        return;
+      }
+      if (event.key !== 'Tab') return;
+
+      // Keep keyboard focus inside the open drawer (aria-modal).
+      const dialog = document.getElementById(MOBILE_NAV_ID);
+      if (!dialog) return;
+      const focusable = Array.from(
+        dialog.querySelectorAll<HTMLElement>(
+          'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), [tabindex]:not([tabindex="-1"])'
+        )
+      );
+      if (focusable.length === 0) return;
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const current = document.activeElement;
+      const outside = !current || !dialog.contains(current);
+      if (event.shiftKey && (current === first || outside)) {
+        event.preventDefault();
+        last.focus();
+      } else if (!event.shiftKey && (current === last || outside)) {
+        event.preventDefault();
+        first.focus();
+      }
+    };
+    document.addEventListener('keydown', onKeyDown);
+    closeButtonRef.current?.focus({ preventScroll: true });
+
+    return () => {
+      body.style.overflow = previousOverflow;
+      body.style.paddingRight = previousPaddingRight;
+      document.removeEventListener('keydown', onKeyDown);
+    };
+  }, [open, onClose]);
+
+  // Rendered twice (mobile drawer + desktop aside). Only the drawer copy gets
+  // the close button and its ref, so focus never lands on a hidden element.
+  const renderSidebar = (isDrawer: boolean) => (
+    <div className="flex h-full w-full flex-col justify-between bg-slate-900 text-slate-100 select-none">
       {/* Top Brand Header */}
       <div>
-        <div className="flex items-center justify-between px-6 py-5 border-b border-slate-800">
+        <div
+          className={`flex items-center justify-between gap-2 py-5 border-b border-slate-800 ${
+            isDrawer ? 'px-4' : 'px-6'
+          }`}
+        >
           <div className="flex items-center gap-3">
             <div className="flex h-9 w-9 items-center justify-center rounded-lg bg-indigo-600 text-white shadow-md shadow-indigo-600/30">
               <BarChart3 className="h-5 w-5" />
@@ -91,20 +156,23 @@ export const Sidebar: React.FC = () => {
               <span className="text-base font-bold tracking-tight text-white block leading-none">
                 SalesPulse BI
               </span>
-              <span className="text-[11px] text-slate-400 font-medium">
+              <span className="whitespace-nowrap text-[11px] text-slate-400 font-medium">
                 ETL & Forecasting Engine
               </span>
             </div>
           </div>
 
-          <button
-            type="button"
-            onClick={() => setMobileOpen(false)}
-            className="lg:hidden rounded-lg p-1 text-slate-400 hover:bg-slate-800 hover:text-white"
-            aria-label="Close sidebar"
-          >
-            <X className="h-5 w-5" />
-          </button>
+          {isDrawer && (
+            <button
+              ref={closeButtonRef}
+              type="button"
+              onClick={onClose}
+              className="rounded-lg p-1 text-slate-400 hover:bg-slate-800 hover:text-white"
+              aria-label="Close navigation menu"
+            >
+              <X className="h-5 w-5" />
+            </button>
+          )}
         </div>
 
         {/* Quick Upload CTA */}
@@ -112,7 +180,7 @@ export const Sidebar: React.FC = () => {
           <button
             type="button"
             onClick={() => {
-              setMobileOpen(false);
+              onClose();
               openUploadModal();
             }}
             className="flex w-full items-center justify-center gap-2 rounded-xl bg-indigo-600 px-4 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 active:bg-indigo-700 transition-all cursor-pointer"
@@ -130,12 +198,13 @@ export const Sidebar: React.FC = () => {
           <nav className="space-y-1">
             {NAV_ITEMS.map((item) => {
               const Icon = item.icon;
-              const isActive = activeNav === item.id;
+              const isActive = activeId === item.href.slice(1);
               return (
                 <button
                   key={item.id}
                   type="button"
-                  onClick={() => handleNavClick(item.id, item.href)}
+                  aria-current={isActive ? 'true' : undefined}
+                  onClick={() => handleNavClick(item.href)}
                   className={`flex w-full items-center gap-3 rounded-lg px-3 py-2.5 text-sm font-medium transition-colors cursor-pointer ${
                     isActive
                       ? 'bg-slate-800 text-white border-l-4 border-indigo-500 pl-2'
@@ -191,7 +260,7 @@ export const Sidebar: React.FC = () => {
               <button
                 type="button"
                 onClick={() => {
-                  setMobileOpen(false);
+                  onClose();
                   openValidationModal();
                 }}
                 className="mt-2.5 flex w-full items-center justify-center gap-1.5 rounded-lg bg-amber-500/15 border border-amber-500/30 px-2.5 py-1.5 text-xs font-medium text-amber-300 hover:bg-amber-500/25 transition-colors cursor-pointer"
@@ -226,30 +295,41 @@ export const Sidebar: React.FC = () => {
 
   return (
     <>
-      {/* Mobile Hamburger Trigger */}
-      <button
-        type="button"
-        onClick={() => setMobileOpen(true)}
-        className="fixed bottom-5 right-5 z-40 flex h-12 w-12 items-center justify-center rounded-full bg-indigo-600 text-white shadow-lg lg:hidden hover:bg-indigo-500"
-        aria-label="Open navigation menu"
+      {/* Mobile drawer: stays mounted so it can slide in from the LEFT.
+          The trigger button lives in TopFilterBar (top-right corner). */}
+      <div
+        className={`fixed inset-0 z-50 lg:hidden ${
+          open ? '' : 'pointer-events-none'
+        }`}
+        aria-hidden={!open}
+        inert={!open}
       >
-        <Menu className="h-6 w-6" />
-      </button>
-
-      {/* Mobile Backdrop Drawer */}
-      {mobileOpen && (
-        <div className="fixed inset-0 z-50 flex lg:hidden">
-          <div
-            className="fixed inset-0 bg-slate-950/60 backdrop-blur-xs"
-            onClick={() => setMobileOpen(false)}
-          />
-          <div className="relative z-10 flex h-full">{sidebarContent}</div>
+        <div
+          className={`absolute inset-0 bg-slate-950/60 backdrop-blur-xs transition-opacity duration-300 ${
+            open ? 'opacity-100' : 'opacity-0'
+          }`}
+          onClick={onClose}
+        />
+        <div
+          id={MOBILE_NAV_ID}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Navigation menu"
+          className={`fixed inset-y-0 right-0 z-50 w-64 max-w-[85vw] transform-gpu transition-transform duration-300 ease-[cubic-bezier(0.32,0.72,0,1)] ${
+            open ? 'translate-x-0 shadow-2xl' : 'translate-x-full pointer-events-none'
+          }`}
+        >
+          {renderSidebar(true)}
         </div>
-      )}
+      </div>
 
       {/* Desktop Fixed Sidebar */}
-      <aside className="hidden lg:fixed lg:inset-y-0 lg:left-0 lg:z-30 lg:block lg:w-64">
-        {sidebarContent}
+      <aside
+        className={`hidden lg:fixed lg:inset-y-0 lg:left-0 lg:z-30 lg:block lg:w-64 ${enterClass(
+          'left'
+        )}`}
+      >
+        {renderSidebar(false)}
       </aside>
     </>
   );
