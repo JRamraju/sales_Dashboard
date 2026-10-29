@@ -7,7 +7,7 @@ import axios, {
 } from 'axios';
 
 const BASE_URL =
-  process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000/api/v1';
+  process.env.NEXT_PUBLIC_API_URL || 'https://sales-dashboard-ee4e.onrender.com/api/v1';
 
 /**
  * Normalized API Error class for consistent frontend error handling
