@@ -1,4 +1,3 @@
-// client/api/socket.ts
 import { io, Socket } from 'socket.io-client';
 import {
   UploadCompletedEvent,
@@ -11,6 +10,8 @@ const SOCKET_URL =
 
 /**
  * Server-to-Client & Client-to-Server Event Maps
+ * Uses the extended UploadCompletedEvent (fileNumber, customers, products,
+ * duplicates, notes, and errorLogs including duplicate order_id rows).
  */
 export interface ServerToClientEvents {
   'upload:progress': (payload: UploadProgressEvent) => void;
@@ -85,8 +86,12 @@ export interface BatchSubscriptionCallbacks {
 }
 
 /**
- * Subscribes to real-time BullMQ worker events (`upload:progress`, `upload:completed`)
- * scoped to a specific `batchId`. Returns a cleanup function for React `useEffect`.
+ * Subscribes to real-time BullMQ worker events (`upload:progress`, `upload:completed`, `upload:failed`)
+ * scoped to a specific `batchId`. Forwards the full `UploadCompletedEvent` payload
+ * (including `fileNumber`, `customers`, `products`, `duplicates`, `notes`, and `errorLogs`)
+ * untouched to `callbacks.onCompleted`.
+ *
+ * Returns a cleanup function for React `useEffect`.
  */
 export const subscribeToBatchEvents = (
   batchId: string,
@@ -97,7 +102,7 @@ export const subscribeToBatchEvents = (
     return () => {};
   }
 
-  // Notify backend room if room-based broadcasting is supported
+  // Join the batch room so the server can replay state or scope events
   socket.emit('join:batch', batchId);
 
   const handleProgress = (payload: UploadProgressEvent) => {
@@ -122,7 +127,7 @@ export const subscribeToBatchEvents = (
   socket.on('upload:completed', handleCompleted);
   socket.on('upload:failed', handleFailed);
 
-  // Cleanup function to remove listeners on unmount or batch change
+  // Cleanup function to remove listeners on unmount or batch completion
   return () => {
     socket.emit('leave:batch', batchId);
     socket.off('upload:progress', handleProgress);
