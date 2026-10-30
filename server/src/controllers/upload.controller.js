@@ -4,7 +4,8 @@ import SalesRecord from '../models/SalesRecord.model.js';
 import { enqueueUploadJob } from '../queues/upload.queue.js';
 import { ApiError } from '../middlewares/error.middleware.js';
 import { clearBatchCache } from './analytics.controller.js';
-import { toClientBatch } from '../utils/uploadMappers.util.js';
+import { toClientBatch, withFileNumbers } from '../utils/uploadMappers.util.js';
+import { removeUnreferencedMasters } from '../services/masterData.service.js';
 
 const OBJECT_ID = /^[a-f\d]{24}$/i;
 
@@ -69,13 +70,13 @@ export async function uploadFile(req, res) {
 
 /**
  * GET /api/v1/uploads
- * Previously uploaded batches (newest first) so the user can switch datasets
- * without re-uploading. errorLogs are left out of the list; fetch one batch
- * to see them.
+ * Uploaded files (newest first), which feed the dashboard's "view by file"
+ * filter. Each finished file carries `fileNumber` (oldest = 1); the others have
+ * null. errorLogs are left out of the list; fetch one batch to see them.
  */
 export async function listUploads(req, res) {
   const batches = await UploadBatch.find().select('-errorLogs').sort({ uploadedAt: -1 }).limit(200).lean();
-  res.json(batches.map(toClientBatch));
+  res.json(withFileNumbers(batches.map(toClientBatch)));
 }
 
 /**
@@ -93,7 +94,9 @@ export async function getUpload(req, res) {
 
 /**
  * DELETE /api/v1/uploads/:batchId
- * Removes an old upload and all of its sales records.
+ * Removes one file and its sales records. The other files stay as they are,
+ * and customers / products that only this file had are removed too, while
+ * the ones other files still use are kept.
  */
 export async function deleteUpload(req, res) {
   assertBatchId(req.params.batchId);
@@ -107,13 +110,31 @@ export async function deleteUpload(req, res) {
     throw new ApiError(409, 'This upload is still being processed. Try again once it has finished.');
   }
 
+  // Which customer / product records this file's rows pointed to, read before the rows go.
+  const [customerRefs, productRefs] = await Promise.all([
+    SalesRecord.distinct('customerRef', { batchId: batch._id }),
+    SalesRecord.distinct('productRef', { batchId: batch._id }),
+  ]);
+
   const { deletedCount } = await SalesRecord.deleteMany({ batchId: batch._id });
   await batch.deleteOne();
   clearBatchCache(batch._id);
 
+  // The file is already gone, so a failure here must not turn the delete into an error.
+  let removed = { removedCustomers: 0, removedProducts: 0 };
+  try {
+    removed = await removeUnreferencedMasters({
+      customerRefs: customerRefs.filter(Boolean),
+      productRefs: productRefs.filter(Boolean),
+    });
+  } catch (err) {
+    console.error('[upload] could not clean up customer/product records:', err.message);
+  }
+
   res.json({
     batchId: batch._id,
     deletedRecords: deletedCount,
+    ...removed,
     message: 'Upload deleted.',
   });
 }

@@ -31,6 +31,17 @@ const uploadBatchSchema = new Schema({
   // Capped at MAX_ERROR_LOGS entries by the worker (Mongo's 16MB document
   // limit); invalidRowsCount always holds the true number of skipped rows.
   errorLogs: { type: [errorLogSchema], default: [] },
+  // Customer / product master records this upload created automatically, and
+  // the ones that already existed and were only linked to the new sales rows.
+  newCustomersCreated: { type: Number, default: 0 },
+  existingCustomersLinked: { type: Number, default: 0 },
+  newProductsCreated: { type: Number, default: 0 },
+  existingProductsLinked: { type: Number, default: 0 },
+  // Rows (and the distinct orders in them) skipped because the order was already
+  // in an earlier file. They are also counted in invalidRowsCount and listed in
+  // errorLogs, so inserted + skipped always adds up to the rows read.
+  duplicateRowsSkipped: { type: Number, default: 0 },
+  duplicateOrdersSkipped: { type: Number, default: 0 },
   // How a/b/YYYY dates were read for this file ('dmy' = DD/MM/YYYY, 'mdy' = MM/DD/YYYY),
   // plus human-readable notes about it (see upload.worker.js).
   dateOrder: { type: String, enum: ['dmy', 'mdy'] },

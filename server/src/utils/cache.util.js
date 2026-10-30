@@ -81,6 +81,18 @@ export class TtlCache {
     }
   }
 
+  /**
+   * Drops every entry whose key satisfies `predicate` (used when a file is
+   * deleted: any cached result that includes that file, whatever else it
+   * combines it with, is now wrong).
+   */
+  invalidateWhere(predicate) {
+    this.#generation += 1;
+    for (const key of [...this.#store.keys()]) {
+      if (predicate(key)) this.#store.delete(key);
+    }
+  }
+
   clear() {
     this.#generation += 1;
     this.#store.clear();

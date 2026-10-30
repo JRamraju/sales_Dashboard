@@ -18,16 +18,29 @@ export const MAX_TREND_POINTS = 2000;
 const TOP_N = 10;
 
 /**
+ * The `batchId` part of a $match for one file (a string) or several files (an
+ * array). One file stays a plain equality so it behaves exactly as before; no
+ * files at all matches nothing, so an empty dataset gives empty results.
+ */
+export function batchClause(input) {
+  const ids = [].concat(input ?? []).filter(Boolean).map((id) => new ObjectId(id));
+  return ids.length === 1 ? ids[0] : { $in: ids };
+}
+
+/**
  * Filters shape (built and validated by analytics.controller.js):
- *   { batchId: string, startDate?: Date, endDate?: Date,
+ *   { batchIds: string[], startDate?: Date, endDate?: Date,
  *     categories?: string[], regions?: string[] }
  *
- * Aggregation pipelines do not auto-cast, so batchId is converted to an
- * ObjectId here. The match keys line up with the compound index
+ * `batchId` (a single string) is still accepted. Each uploaded file is one
+ * batch, and the dashboard can look at any set of them together.
+ *
+ * Aggregation pipelines do not auto-cast, so the ids are converted to
+ * ObjectIds here. The match keys line up with the compound index
  * { batchId, orderDate, category, region }.
  */
-export function buildMatch({ batchId, startDate, endDate, categories, regions }) {
-  const match = { batchId: new ObjectId(batchId) };
+export function buildMatch({ batchIds, batchId, startDate, endDate, categories, regions }) {
+  const match = { batchId: batchClause(batchIds ?? batchId) };
 
   if (startDate || endDate) {
     match.orderDate = {};
@@ -49,8 +62,8 @@ const dateOnly = (date) => (date ? dayjs.utc(date).format('YYYY-MM-DD') : null);
 /* Filter dropdown options (whole batch, independent of the active filters)    */
 /* -------------------------------------------------------------------------- */
 
-export const optionsPipeline = (batchId) => [
-  { $match: { batchId: new ObjectId(batchId) } },
+export const optionsPipeline = (batchIds) => [
+  { $match: { batchId: batchClause(batchIds) } },
   {
     $group: {
       _id: null,
@@ -63,14 +76,16 @@ export const optionsPipeline = (batchId) => [
 ];
 
 /**
- * Dropdown options come from the whole batch so they do not shrink as filters
- * apply, and the date bounds feed the date pickers' min/max. One pass over the
- * index replaces the two separate `distinct` calls the first version made.
+ * Dropdown options come from all the selected files so they do not shrink as
+ * filters apply, and the date bounds feed the date pickers' min/max. One pass
+ * over the index replaces the two separate `distinct` calls the first version
+ * made.
  *
+ * @param {string | string[]} batchIds  one file or several
  * @returns {Promise<{categories: string[], regions: string[], minDate: string|null, maxDate: string|null}>}
  */
-export async function getFilterOptions(batchId) {
-  const [doc] = await run(optionsPipeline(batchId));
+export async function getFilterOptions(batchIds) {
+  const [doc] = await run(optionsPipeline(batchIds));
   return {
     categories: (doc?.categories ?? []).filter(Boolean).sort(),
     regions: (doc?.regions ?? []).filter(Boolean).sort(),
@@ -191,7 +206,7 @@ export async function getOverview(filters, filterOptions) {
 
   const [facetDocs, options, previousPeriodRevenue] = await Promise.all([
     run(overviewPipeline(match, { withMonthly: !hasRange })),
-    filterOptions ?? getFilterOptions(filters.batchId),
+    filterOptions ?? getFilterOptions(filters.batchIds ?? filters.batchId),
     hasRange ? getPreviousPeriodRevenue(filters) : Promise.resolve(0),
   ]);
 
@@ -422,19 +437,21 @@ export async function getBreakdowns(filters) {
 /* -------------------------------------------------------------------------- */
 
 /**
- * Historical monthly revenue for the batch, ascending. Feeds forecast.service.js.
- * The forecast looks at the whole history, so date filters are ignored, but
- * category / region filters are honoured (the dashboard sends them, so the
- * forecast describes the same slice of the business as the KPI cards).
+ * Historical monthly revenue for the selected file(s), ascending. Feeds
+ * forecast.service.js. The forecast looks at the whole history, so date filters
+ * are ignored, but category / region filters are honoured (the dashboard sends
+ * them, so the forecast describes the same slice of the business as the KPI
+ * cards).
  *
- * @param {string | { batchId: string, categories?: string[], regions?: string[] }} input
+ * @param {string | { batchIds?: string[], batchId?: string, categories?: string[], regions?: string[] }} input
  * @returns {Promise<{month: string, revenue: number}[]>}
  */
 export async function getMonthlyRevenue(input) {
-  const { batchId, categories, regions } = typeof input === 'string' ? { batchId: input } : input;
+  const { batchIds, batchId, categories, regions } =
+    typeof input === 'string' ? { batchId: input } : input;
 
   const rows = await run([
-    { $match: buildMatch({ batchId, categories, regions }) },
+    { $match: buildMatch({ batchIds, batchId, categories, regions }) },
     {
       $group: {
         _id: { $dateToString: { format: '%Y-%m', date: '$orderDate' } },

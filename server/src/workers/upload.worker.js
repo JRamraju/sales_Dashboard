@@ -11,6 +11,8 @@ import UploadBatch from '../models/UploadBatch.model.js';
 import SalesRecord from '../models/SalesRecord.model.js';
 import { openRowSource, FileParseError } from '../services/fileParser.service.js';
 import { validateSalesRow } from '../validators/salesRow.schema.js';
+import { createMasterDataLinker, describeMasterData } from '../services/masterData.service.js';
+import { createOrderDeduper, describeDuplicates } from '../services/duplicateOrders.service.js';
 import { DATE_ORDER_LABELS, defaultDateOrder, detectDateOrder } from '../utils/dateOrder.util.js';
 import { toClientErrorLogs } from '../utils/uploadMappers.util.js';
 
@@ -88,9 +90,13 @@ function describeDateOrder({ order, detected, dmy, mdy, ambiguous }) {
 }
 
 /**
- * BullMQ processor: stream rows -> sanitize -> validate (Zod) -> chunked bulk
- * insert, reporting progress after every chunk. Runs off the Express request
- * cycle.
+ * BullMQ processor: stream rows -> sanitize -> validate (Zod) -> skip orders
+ * already loaded from an earlier file -> link to customer / product records
+ * (creating the missing ones) -> chunked bulk insert, reporting progress after
+ * every chunk. Runs off the Express request cycle.
+ *
+ * Every upload ADDS to the running dataset; it never replaces what earlier
+ * files loaded.
  *
  * Returns the validation summary, which the queue-events bridge broadcasts as
  * `upload:completed`.
@@ -134,6 +140,11 @@ export async function processUploadJob(job) {
     const dateOrder = dateInfo.order;
     const notes = describeDateOrder(dateInfo);
 
+    // Finds or creates the Customer / Product record for each row's ids.
+    const masterData = createMasterDataLinker(batchObjectId);
+    // Spots orders that an earlier file already loaded.
+    const orderDeduper = await createOrderDeduper(batchObjectId);
+
     let processedRows = 0;
     let inserted = 0;
     let skipped = 0;
@@ -144,6 +155,35 @@ export async function processUploadJob(job) {
       if (errorLogs.length < errorCap) {
         errorLogs.push({ rowNumber, reason, ...(field && { field }) });
       }
+    };
+
+    let duplicateRows = 0;
+    const duplicateOrderIds = new Set();
+
+    /**
+     * Drops the rows whose order is already in an earlier file and logs each
+     * one as skipped. Returns the rows that remain, still paired with their
+     * spreadsheet row numbers.
+     */
+    const skipEarlierOrders = async (docs, rowNumbers) => {
+      if (docs.length === 0 || !orderDeduper.hasEarlierFiles) return { docs, rowNumbers };
+
+      const earlierFileOf = await orderDeduper.findExisting(docs.map((doc) => doc.orderId));
+      if (earlierFileOf.size === 0) return { docs, rowNumbers };
+
+      const kept = { docs: [], rowNumbers: [] };
+      docs.forEach((doc, i) => {
+        const earlierFile = earlierFileOf.get(doc.orderId);
+        if (earlierFile === undefined) {
+          kept.docs.push(doc);
+          kept.rowNumbers.push(rowNumbers[i]);
+          return;
+        }
+        duplicateRows += 1;
+        duplicateOrderIds.add(doc.orderId);
+        reject(rowNumbers[i], `Order '${doc.orderId}' is already in '${earlierFile}'`, 'order_id');
+      });
+      return kept;
     };
 
     let lastSaved = 0;
@@ -179,8 +219,15 @@ export async function processUploadJob(job) {
         }
       }
 
-      if (validDocs.length > 0) {
-        inserted += await insertChunk(validDocs, validRowNumbers, reject);
+      // Orders an earlier file already loaded are skipped first, so they do not
+      // create customers or products either.
+      const fresh = await skipEarlierOrders(validDocs, validRowNumbers);
+
+      if (fresh.docs.length > 0) {
+        // Existing customers / products are mapped by id; new ones are created
+        // first, so every row below carries a customerRef and a productRef.
+        await masterData.attach(fresh.docs);
+        inserted += await insertChunk(fresh.docs, fresh.rowNumbers, reject);
       }
 
       processedRows += chunk.length;
@@ -201,6 +248,23 @@ export async function processUploadJob(job) {
     const totalRows = processedRows;
     await job.updateProgress({ batchId, progress: 100, processedRows, totalRows });
 
+    const duplicates = { rows: duplicateRows, orders: duplicateOrderIds.size };
+    const duplicateNote = describeDuplicates(duplicates);
+    if (duplicateNote) notes.push(duplicateNote);
+
+    const masterSummary = await masterData.summary();
+    const masterNote = describeMasterData(masterSummary);
+    if (masterNote) notes.push(masterNote);
+
+    const customers = {
+      created: masterSummary.newCustomers,
+      existing: masterSummary.existingCustomers,
+    };
+    const products = {
+      created: masterSummary.newProducts,
+      existing: masterSummary.existingProducts,
+    };
+
     await UploadBatch.findByIdAndUpdate(batchId, {
       status: 'completed',
       totalRowsRead: totalRows,
@@ -211,6 +275,12 @@ export async function processUploadJob(job) {
       errorLogs,
       dateOrder,
       notes,
+      newCustomersCreated: customers.created,
+      existingCustomersLinked: customers.existing,
+      newProductsCreated: products.created,
+      existingProductsLinked: products.existing,
+      duplicateRowsSkipped: duplicates.rows,
+      duplicateOrdersSkipped: duplicates.orders,
       finishedAt: new Date(),
     });
 
@@ -224,6 +294,9 @@ export async function processUploadJob(job) {
       errorLogsTruncated: skipped > errorLogs.length,
       dateOrder,
       notes,
+      customers,
+      products,
+      duplicates,
     };
   } catch (err) {
     if (err instanceof FileParseError) {

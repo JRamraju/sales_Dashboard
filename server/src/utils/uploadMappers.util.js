@@ -36,6 +36,26 @@ export function toClientBatch(batch) {
   };
 }
 
+/**
+ * Adds `fileNumber` to a list of batches: the position of each FINISHED file in
+ * upload order (oldest = 1), which is how the dashboard labels "File 1",
+ * "File 2". Files that are queued, processing or failed get null, and deleting
+ * a file renumbers the ones after it.
+ *
+ * @param {object[]} batches  already shaped by toClientBatch (any order)
+ */
+export function withFileNumbers(batches) {
+  const finished = batches
+    .filter((b) => b.status === 'completed')
+    .sort(
+      (a, b) =>
+        new Date(a.uploadedAt) - new Date(b.uploadedAt) || (String(a._id) < String(b._id) ? -1 : 1)
+    );
+  const numberOf = new Map(finished.map((b, i) => [String(b._id), i + 1]));
+
+  return batches.map((b) => ({ ...b, fileNumber: numberOf.get(String(b._id)) ?? null }));
+}
+
 export const MAX_ERROR_LOGS_IN_EVENT = 1000;
 
 /**
@@ -62,6 +82,18 @@ export function buildBatchSnapshot(batch) {
         errorLogsTruncated: (batch.invalidRowsCount ?? 0) > (batch.errorLogs?.length ?? 0),
         dateOrder: batch.dateOrder,
         notes: batch.notes ?? [],
+        customers: {
+          created: batch.newCustomersCreated ?? 0,
+          existing: batch.existingCustomersLinked ?? 0,
+        },
+        products: {
+          created: batch.newProductsCreated ?? 0,
+          existing: batch.existingProductsLinked ?? 0,
+        },
+        duplicates: {
+          rows: batch.duplicateRowsSkipped ?? 0,
+          orders: batch.duplicateOrdersSkipped ?? 0,
+        },
       },
     };
   }
