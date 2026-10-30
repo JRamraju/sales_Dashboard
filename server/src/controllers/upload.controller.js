@@ -1,6 +1,8 @@
 import fs from 'node:fs';
 import UploadBatch from '../models/UploadBatch.model.js';
 import SalesRecord from '../models/SalesRecord.model.js';
+import { nextSequence } from '../models/Counter.model.js';
+import { releaseMasterData } from '../services/masterData.service.js';
 import { enqueueUploadJob } from '../queues/upload.queue.js';
 import { ApiError } from '../middlewares/error.middleware.js';
 import { clearBatchCache } from './analytics.controller.js';
@@ -35,7 +37,12 @@ export async function uploadFile(req, res) {
   let batch;
   let job;
   try {
-    batch = await UploadBatch.create({ fileName: req.file.originalname, status: 'queued' });
+    // sequence = "File 1", "File 2", ...; the worker processes files in this order.
+    batch = await UploadBatch.create({
+      fileName: req.file.originalname,
+      status: 'queued',
+      sequence: await nextSequence('uploadBatch'),
+    });
 
     job = await enqueueUploadJob({
       batchId: batch._id,
@@ -61,6 +68,7 @@ export async function uploadFile(req, res) {
   res.status(202).json({
     batchId: batch._id,
     jobId: job.id,
+    sequence: batch.sequence,
     fileName: batch.fileName,
     status: batch.status,
     message: 'File received and queued for processing.',
@@ -69,18 +77,22 @@ export async function uploadFile(req, res) {
 
 /**
  * GET /api/v1/uploads
- * Previously uploaded batches (newest first) so the user can switch datasets
- * without re-uploading. errorLogs are left out of the list; fetch one batch
- * to see them.
+ * Every uploaded file in upload order (File 1 first). They all feed the
+ * combined dashboard; the "view by file" filter picks which ones to show.
+ * errorLogs / duplicateLogs are left out of the list; fetch one file to see them.
  */
 export async function listUploads(req, res) {
-  const batches = await UploadBatch.find().select('-errorLogs').sort({ uploadedAt: -1 }).limit(200).lean();
+  const batches = await UploadBatch.find()
+    .select('-errorLogs -duplicateLogs')
+    .sort({ sequence: 1, uploadedAt: 1 }) // File 1, File 2, ... (the file filter lists them in this order)
+    .limit(200)
+    .lean();
   res.json(batches.map(toClientBatch));
 }
 
 /**
  * GET /api/v1/uploads/:batchId
- * One batch including its skipped-row error log (status polling / "View Skipped Rows").
+ * One batch including its skipped-row error log and duplicate log (status polling / "View Skipped Rows").
  */
 export async function getUpload(req, res) {
   assertBatchId(req.params.batchId);
@@ -93,7 +105,7 @@ export async function getUpload(req, res) {
 
 /**
  * DELETE /api/v1/uploads/:batchId
- * Removes an old upload and all of its sales records.
+ * Removes one file and all of its sales records (the other files are untouched).
  */
 export async function deleteUpload(req, res) {
   assertBatchId(req.params.batchId);
@@ -108,6 +120,9 @@ export async function deleteUpload(req, res) {
   }
 
   const { deletedCount } = await SalesRecord.deleteMany({ batchId: batch._id });
+  // Customers / products only this file introduced are removed; ones a later
+  // file also uses are handed to that file (it becomes their "first" file).
+  await releaseMasterData(batch._id);
   await batch.deleteOne();
   clearBatchCache(batch._id);
 

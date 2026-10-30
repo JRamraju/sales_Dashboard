@@ -25,7 +25,7 @@ export const toClientErrorLogs = (logs) => (Array.isArray(logs) ? logs.map(toCli
 export function toClientBatch(batch) {
   if (!batch) return batch;
   const plain = typeof batch.toObject === 'function' ? batch.toObject() : batch;
-  const { errorLogs, ...rest } = plain;
+  const { errorLogs, duplicateLogs, ...rest } = plain;
 
   return {
     ...rest,
@@ -33,6 +33,7 @@ export function toClientBatch(batch) {
     totalRows: plain.totalRowsRead ?? 0,
     // errorLogs is left out of list queries; only emit it when it was loaded.
     ...(errorLogs !== undefined && { errorLogs: toClientErrorLogs(errorLogs) }),
+    ...(duplicateLogs !== undefined && { duplicateLogs: toClientErrorLogs(duplicateLogs) }),
   };
 }
 
@@ -57,9 +58,14 @@ export function buildBatchSnapshot(batch) {
         fileName: batch.fileName,
         inserted: batch.validRowsInserted ?? 0,
         skipped: batch.invalidRowsCount ?? 0,
+        duplicates: batch.duplicateRowsCount ?? 0,
+        newCustomers: batch.newCustomersCount ?? 0,
+        newProducts: batch.newProductsCount ?? 0,
         totalRows: batch.totalRowsRead ?? 0,
         errorLogs: toClientErrorLogs(batch.errorLogs),
         errorLogsTruncated: (batch.invalidRowsCount ?? 0) > (batch.errorLogs?.length ?? 0),
+        duplicateLogs: toClientErrorLogs(batch.duplicateLogs),
+        duplicateLogsTruncated: (batch.duplicateRowsCount ?? 0) > (batch.duplicateLogs?.length ?? 0),
         dateOrder: batch.dateOrder,
         notes: batch.notes ?? [],
       },

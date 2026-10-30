@@ -81,6 +81,14 @@ export class TtlCache {
     }
   }
 
+  /** Drops every entry whose key satisfies `predicate(key)`. */
+  invalidateWhere(predicate) {
+    this.#generation += 1;
+    for (const key of [...this.#store.keys()]) {
+      if (predicate(key)) this.#store.delete(key);
+    }
+  }
+
   clear() {
     this.#generation += 1;
     this.#store.clear();

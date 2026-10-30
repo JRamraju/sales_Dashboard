@@ -11,6 +11,9 @@ const salesRecordSchema = new Schema({
   orderId: { type: String, required: true },
   orderDate: { type: Date, required: true },
   customerId: { type: String, required: true },
+  // Links to the master records (see Customer / Product). Set by the upload worker.
+  customer: { type: Schema.Types.ObjectId, ref: 'Customer' },
+  product: { type: Schema.Types.ObjectId, ref: 'Product' },
   customerName: { type: String, required: true },
   productId: { type: String, required: true },
   productName: { type: String, required: true },
@@ -30,6 +33,10 @@ const salesRecordSchema = new Schema({
 // row more expensive to write. Set SYNC_INDEXES=true for one start-up to drop
 // the old ones from an existing database.)
 salesRecordSchema.index({ batchId: 1, orderDate: 1, category: 1, region: 1 });
+
+// Duplicate detection: "does this order line already exist in another file?"
+// The worker looks rows up by orderId (+ productId) across every batch.
+salesRecordSchema.index({ orderId: 1, productId: 1 });
 
 const SalesRecord =
   mongoose.models.SalesRecord || mongoose.model('SalesRecord', salesRecordSchema);
