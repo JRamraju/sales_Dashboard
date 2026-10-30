@@ -1,7 +1,7 @@
 // client/components/kpi/KpiCardGrid.tsx
 'use client';
 
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   ArrowDownRight,
   ArrowUpRight,
@@ -15,14 +15,44 @@ import {
 import { KpiMetrics } from '@/types/dashboard.types';
 import { formatINR, formatNumber } from '@/lib/format';
 import { enterClass, enterDelay } from '@/components/layout/AnimateIn';
+import { AnimatedNumber } from '@/components/kpi/AnimatedNumber';
 
 interface KpiCardGridProps {
   kpis: KpiMetrics | null;
   loading?: boolean;
 }
 
-const formatCurrency = (value: number): string =>
-  formatINR(value, { maximumFractionDigits: value >= 1000 ? 0 : 2 });
+/**
+ * Number formatters for the count-up. The decimal places are decided from the
+ * FINAL value, so the text does not change shape while the digits are running.
+ */
+const currencyFormatter = (target: number) => {
+  const maximumFractionDigits = target >= 1000 ? 0 : 2;
+  return (current: number): string =>
+    formatINR(current, { maximumFractionDigits });
+};
+
+const countFormatter = (current: number): string =>
+  formatNumber(Math.round(current));
+
+/** One decimal, never "-0.0" while a negative figure is still near zero. */
+const growthFormatter =
+  (showPlus: boolean) =>
+  (current: number): string => {
+    const rounded = Math.round(current * 10) / 10;
+    return `${showPlus ? '+' : ''}${(rounded === 0 ? 0 : rounded).toFixed(1)}%`;
+  };
+
+/**
+ * Count-up start times (staggered per card). During the first moments after the
+ * dashboard mounts the welcome splash is still fading out and the cards are
+ * sliding in, so counting starts a little later to be seen from the first digit.
+ * Reloads after a filter change start almost immediately.
+ */
+const INTRO_WINDOW_MS = 1500;
+const INTRO_COUNT_DELAY_MS = 400;
+const RELOAD_COUNT_DELAY_MS = 100;
+const COUNT_DELAY_STEP_MS = 80;
 
 const CARD_BASE =
   'flex min-w-0 flex-col justify-between rounded-2xl border border-slate-200/90 bg-white p-5 shadow-2xs transition-shadow hover:shadow-md';
@@ -33,37 +63,52 @@ export const KpiCardGrid: React.FC<KpiCardGridProps> = ({
 }) => {
   const showSkeleton = loading || !kpis;
 
+  const [intro, setIntro] = useState<boolean>(true);
+  useEffect(() => {
+    const timer = window.setTimeout(() => setIntro(false), INTRO_WINDOW_MS);
+    return () => window.clearTimeout(timer);
+  }, []);
+  const countDelay = (index: number): number =>
+    (intro ? INTRO_COUNT_DELAY_MS : RELOAD_COUNT_DELAY_MS) +
+    index * COUNT_DELAY_STEP_MS;
+
   const growth = Number(kpis?.revenueGrowth ?? 0);
   const isPositive = growth > 0;
   const isNegative = growth < 0;
 
   // The 5 cards are always rendered (skeleton content swaps in place) so the
   // one-time entrance animation never replays when filters trigger a reload.
+  const revenue = kpis?.totalRevenue ?? 0;
+  const aov = kpis?.averageOrderValue ?? 0;
   const cards = [
     {
       title: 'Total Revenue',
-      value: kpis ? formatCurrency(kpis.totalRevenue) : '',
+      target: revenue,
+      format: currencyFormatter(revenue),
       subtitle: 'Gross validated sales volume',
       icon: IndianRupee,
       iconBg: 'bg-indigo-50 text-indigo-600',
     },
     {
       title: 'Total Orders',
-      value: kpis ? formatNumber(kpis.totalOrders) : '',
+      target: kpis?.totalOrders ?? 0,
+      format: countFormatter,
       subtitle: 'Distinct order IDs processed',
       icon: ShoppingBag,
       iconBg: 'bg-sky-50 text-sky-600',
     },
     {
       title: 'Total Customers',
-      value: kpis ? formatNumber(kpis.totalCustomers) : '',
+      target: kpis?.totalCustomers ?? 0,
+      format: countFormatter,
       subtitle: 'Unique active buyer accounts',
       icon: Users,
       iconBg: 'bg-emerald-50 text-emerald-600',
     },
     {
       title: 'Average Order Value',
-      value: kpis ? formatCurrency(kpis.averageOrderValue) : '',
+      target: aov,
+      format: currencyFormatter(aov),
       subtitle: 'Revenue ÷ Distinct Orders',
       icon: Wallet,
       iconBg: 'bg-violet-50 text-violet-600',
@@ -123,9 +168,13 @@ export const KpiCardGrid: React.FC<KpiCardGridProps> = ({
                 <>
                   <p
                     className="truncate text-xl font-bold tracking-tight text-slate-900 2xl:text-2xl"
-                    title={card.value}
+                    title={card.format(card.target)}
                   >
-                    {card.value}
+                    <AnimatedNumber
+                      value={card.target}
+                      format={card.format}
+                      delay={countDelay(index)}
+                    />
                   </p>
                   <p className="mt-1 text-[11px] text-slate-500">
                     {card.subtitle}
@@ -167,8 +216,11 @@ export const KpiCardGrid: React.FC<KpiCardGridProps> = ({
                 <p
                   className={`text-xl font-bold tracking-tight 2xl:text-2xl ${growthTextColor}`}
                 >
-                  {isPositive ? '+' : ''}
-                  {growth.toFixed(1)}%
+                  <AnimatedNumber
+                    value={growth}
+                    format={growthFormatter(isPositive)}
+                    delay={countDelay(cards.length)}
+                  />
                 </p>
 
                 <span

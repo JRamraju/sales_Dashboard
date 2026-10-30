@@ -23,6 +23,31 @@ body {
   font-family: var(--font-geist-sans), Arial, Helvetica, sans-serif;
 }
 
+/* ------------------------------------------------------------------ */
+/* Lenis smooth scroll (same rules as lenis/dist/lenis.css)            */
+/* Lenis adds .lenis to <html>; .lenis-stopped while a popup locks it. */
+/* ------------------------------------------------------------------ */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis:not(.lenis-autoToggle).lenis-stopped {
+  overflow: clip;
+}
+
+.lenis [data-lenis-prevent],
+.lenis [data-lenis-prevent-wheel],
+.lenis [data-lenis-prevent-touch],
+.lenis [data-lenis-prevent-vertical],
+.lenis [data-lenis-prevent-horizontal] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
+}
+
 /* Anchor-scroll offset that tracks the real sticky header height
    (TopFilterBar publishes it as --app-header-h). */
 .scroll-target {
@@ -108,11 +133,270 @@ body {
   animation: welcome-bar 1.4s ease-in-out infinite;
 }
 
+/* ------------------------------------------------------------------ */
+/* Popups: rise from the bottom on open, sink back down on close       */
+/* `data-state` is driven by usePresence(); the element stays mounted  */
+/* for the exit animation (keep durations <= the hook's exitMs).       */
+/* ------------------------------------------------------------------ */
+@keyframes popup-rise {
+  from {
+    transform: translateY(100vh);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes popup-sink {
+  from {
+    transform: none;
+  }
+  to {
+    transform: translateY(100vh);
+  }
+}
+
+@keyframes popup-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes popup-fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes popup-menu-rise {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes popup-menu-sink {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+}
+
+.popup-overlay {
+  animation: popup-fade-in 320ms ease-out backwards;
+}
+
+.popup-overlay[data-state="closed"] {
+  animation: popup-fade-out 320ms ease-in forwards;
+}
+
+.popup-panel {
+  animation: popup-rise 520ms cubic-bezier(0.32, 0.72, 0, 1) backwards;
+}
+
+.popup-panel[data-state="closed"] {
+  animation: popup-sink 340ms cubic-bezier(0.5, 0, 0.75, 0) forwards;
+}
+
+.popup-menu {
+  animation: popup-menu-rise 240ms cubic-bezier(0.32, 0.72, 0, 1) backwards;
+}
+
+.popup-menu[data-state="closed"] {
+  animation: popup-menu-sink 180ms cubic-bezier(0.5, 0, 0.75, 0) forwards;
+}
+
+/* ------------------------------------------------------------------ */
+/* SweetAlert2 theme (lib/alerts.ts). Selectors are doubled-up on      */
+/* purpose: SweetAlert2 injects its own <style> after this file.       */
+/* ------------------------------------------------------------------ */
+@keyframes swal-app-toast-in {
+  from {
+    opacity: 0;
+    transform: translateY(28px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes swal-app-toast-out {
+  from {
+    opacity: 1;
+    transform: none;
+  }
+  to {
+    opacity: 0;
+    transform: translateY(28px) scale(0.98);
+  }
+}
+
+.swal2-container.swal-app-container {
+  overflow: hidden;
+  backdrop-filter: blur(3px);
+  -webkit-backdrop-filter: blur(3px);
+}
+
+.swal2-popup.swal-app-in {
+  animation: popup-rise 520ms cubic-bezier(0.32, 0.72, 0, 1) backwards;
+}
+
+.swal2-popup.swal-app-out {
+  animation: popup-sink 340ms cubic-bezier(0.5, 0, 0.75, 0) forwards;
+}
+
+.swal2-popup.swal-app-popup {
+  width: 26rem;
+  max-width: calc(100vw - 2rem);
+  padding: 1.5rem 1.5rem 1.25rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 1rem;
+  background: #fff;
+  color: #0f172a;
+  font-family: inherit;
+  box-shadow: 0 25px 50px -12px rgb(15 23 42 / 0.35);
+}
+
+.swal2-popup.swal-app-popup .swal2-icon {
+  margin: 0.25rem auto 0.75rem;
+  font-size: 0.8rem;
+}
+
+.swal2-popup.swal-app-popup .swal-app-title {
+  padding: 0;
+  color: #0f172a;
+  font-size: 1.125rem;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.swal2-popup.swal-app-popup .swal-app-text {
+  margin: 0.5rem 0 0;
+  padding: 0;
+  color: #64748b;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.swal2-popup.swal-app-popup .swal-app-actions {
+  width: 100%;
+  margin: 1.25rem 0 0;
+  gap: 0.625rem;
+}
+
+.swal-app-btn {
+  min-width: 6.5rem;
+  border: 1px solid transparent;
+  border-radius: 0.625rem;
+  padding: 0.55rem 1.1rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1.25;
+  cursor: pointer;
+  transition:
+    background-color 150ms ease,
+    box-shadow 150ms ease,
+    transform 150ms ease;
+}
+
+.swal-app-btn:focus-visible {
+  outline: 2px solid #6366f1;
+  outline-offset: 2px;
+}
+
+.swal-app-btn:active {
+  transform: scale(0.98);
+}
+
+.swal-app-btn--primary {
+  background: #4f46e5;
+  color: #fff;
+}
+
+.swal-app-btn--primary:hover {
+  background: #6366f1;
+}
+
+.swal-app-btn--danger {
+  background: #e11d48;
+  color: #fff;
+}
+
+.swal-app-btn--danger:hover {
+  background: #f43f5e;
+}
+
+.swal-app-btn--ghost {
+  border-color: #e2e8f0;
+  background: #fff;
+  color: #475569;
+}
+
+.swal-app-btn--ghost:hover {
+  background: #f8fafc;
+}
+
+.swal2-container.swal-app-toast-container {
+  padding-bottom: 1.75rem;
+}
+
+.swal2-popup.swal-app-toast-in {
+  animation: swal-app-toast-in 380ms cubic-bezier(0.32, 0.72, 0, 1) backwards;
+}
+
+.swal2-popup.swal-app-toast-out {
+  animation: swal-app-toast-out 280ms cubic-bezier(0.5, 0, 0.75, 0) forwards;
+}
+
+.swal2-popup.swal2-toast.swal-app-toast {
+  padding: 0.75rem 1rem;
+  border: 1px solid #e2e8f0;
+  border-radius: 0.875rem;
+  background: #fff;
+  color: #0f172a;
+  box-shadow: 0 8px 22px -8px rgb(15 23 42 / 0.28);
+}
+
+.swal2-popup.swal2-toast.swal-app-toast .swal2-timer-progress-bar {
+  height: 3px;
+  background: rgb(99 102 241 / 0.45);
+}
+
+.swal2-popup.swal2-toast.swal-app-toast .swal-app-toast-title {
+  margin: 0 0.25rem;
+  color: #0f172a;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+
 @media (prefers-reduced-motion: reduce) {
   .enter-from-left,
   .enter-from-right,
   .welcome-rise,
-  .welcome-bar {
+  .welcome-bar,
+  .popup-overlay,
+  .popup-panel,
+  .popup-menu,
+  .swal2-popup.swal-app-in,
+  .swal2-popup.swal-app-out,
+  .swal2-popup.swal-app-toast-in,
+  .swal2-popup.swal-app-toast-out {
     animation: none;
   }
 

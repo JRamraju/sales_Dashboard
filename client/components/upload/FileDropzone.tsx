@@ -17,6 +17,8 @@ import {
 } from '@/api/analytics.api';
 import { subscribeToBatchEvents } from '@/api/socket';
 import { useFilterContext } from '@/context/FilterContext';
+import { usePresence } from '@/hooks/usePresence';
+import { useScrollLock } from '@/hooks/useScrollLock';
 
 interface FileDropzoneProps {
   /** If true, renders inside a centered modal overlay */
@@ -70,6 +72,18 @@ export const FileDropzone: React.FC<FileDropzoneProps> = ({
     setProgress(0);
     setProcessedRows(0);
     setErrorMessage(null);
+  };
+
+  // Modal mode: slide up from the bottom on open, back down on close. The
+  // uploader is only reset once the exit animation has finished, so the card
+  // does not visibly change contents while it is leaving.
+  const { mounted, state } = usePresence(asModal && isUploadModalOpen, {
+    onExited: resetUploaderState,
+  });
+  useScrollLock(asModal && mounted);
+
+  const finishSuccessfulUpload = () => {
+    if (!asModal) resetUploaderState();
   };
 
   const onDrop = useCallback(
@@ -141,7 +155,7 @@ export const FileDropzone: React.FC<FileDropzoneProps> = ({
           },
           selectedFile.name
         );
-        resetUploaderState();
+        finishSuccessfulUpload();
         return;
       }
 
@@ -175,7 +189,7 @@ export const FileDropzone: React.FC<FileDropzoneProps> = ({
             },
             selectedFile.name
           );
-          resetUploaderState();
+          finishSuccessfulUpload();
         },
         onFailed: (ev) => {
           if (isFinished) return;
@@ -209,7 +223,7 @@ export const FileDropzone: React.FC<FileDropzoneProps> = ({
               },
               selectedFile.name
             );
-            resetUploaderState();
+            finishSuccessfulUpload();
           } else if (batchDoc.status === 'failed' && !isFinished) {
             isFinished = true;
             cleanupSubscriptions();
@@ -232,7 +246,7 @@ export const FileDropzone: React.FC<FileDropzoneProps> = ({
     }
   };
 
-  if (asModal && !isUploadModalOpen) {
+  if (asModal && !mounted) {
     return null;
   }
 
@@ -245,7 +259,10 @@ export const FileDropzone: React.FC<FileDropzoneProps> = ({
             <UploadCloud className="h-5 w-5" />
           </div>
           <div>
-            <h2 className="text-base font-bold text-slate-900">
+            <h2
+              id={asModal ? 'upload-dialog-title' : undefined}
+              className="text-base font-bold text-slate-900"
+            >
               Upload Sales Dataset (CSV / Excel)
             </h2>
             <p className="text-xs text-slate-500">
@@ -260,10 +277,7 @@ export const FileDropzone: React.FC<FileDropzoneProps> = ({
             disabled={
               stage === 'uploading_http' || stage === 'processing_worker'
             }
-            onClick={() => {
-              resetUploaderState();
-              closeUploadModal();
-            }}
+            onClick={closeUploadModal}
             className="rounded-lg p-1.5 text-slate-400 hover:bg-slate-100 hover:text-slate-600 disabled:opacity-40 cursor-pointer"
           >
             <X className="h-5 w-5" />
@@ -396,8 +410,24 @@ export const FileDropzone: React.FC<FileDropzoneProps> = ({
   }
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/60 p-4 backdrop-blur-xs">
-      {cardBody}
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="upload-dialog-title"
+      inert={state === 'closed'}
+      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+    >
+      <div
+        data-state={state}
+        aria-hidden="true"
+        className="popup-overlay absolute inset-0 bg-slate-950/60 backdrop-blur-xs"
+      />
+      <div
+        data-state={state}
+        className="popup-panel relative flex w-full justify-center"
+      >
+        {cardBody}
+      </div>
     </div>
   );
 };

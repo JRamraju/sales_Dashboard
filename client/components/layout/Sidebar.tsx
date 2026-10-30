@@ -18,6 +18,7 @@ import {
 import { useFilterContext } from '@/context/FilterContext';
 import { useScrollSpy } from '@/hooks/useScrollSpy';
 import { enterClass } from '@/components/layout/AnimateIn';
+import { lockScroll } from '@/lib/smoothScroll';
 
 interface NavItem {
   id: string;
@@ -83,21 +84,22 @@ export const Sidebar: React.FC<SidebarProps> = ({ open, onClose }) => {
   const closeButtonRef = useRef<HTMLButtonElement>(null);
 
   const handleNavClick = (href: string) => {
+    const id = href.slice(1);
     onClose();
-    scrollToSection(href.slice(1));
+    if (open) {
+      // Next tick: the drawer's scroll lock (which stops Lenis) is released as
+      // the drawer closes, and Lenis would cancel a glide started before that.
+      window.setTimeout(() => scrollToSection(id), 0);
+    } else {
+      scrollToSection(id);
+    }
   };
 
   // Drawer behaviour: lock page scroll, close on Escape, move focus inside.
   useEffect(() => {
     if (!open) return;
 
-    const { body } = document;
-    const previousOverflow = body.style.overflow;
-    const previousPaddingRight = body.style.paddingRight;
-    const scrollbarWidth =
-      window.innerWidth - document.documentElement.clientWidth;
-    body.style.overflow = 'hidden';
-    if (scrollbarWidth > 0) body.style.paddingRight = `${scrollbarWidth}px`;
+    const releaseScrollLock = lockScroll();
 
     const onKeyDown = (event: KeyboardEvent) => {
       if (event.key === 'Escape') {
@@ -131,8 +133,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ open, onClose }) => {
     closeButtonRef.current?.focus({ preventScroll: true });
 
     return () => {
-      body.style.overflow = previousOverflow;
-      body.style.paddingRight = previousPaddingRight;
+      releaseScrollLock();
       document.removeEventListener('keydown', onKeyDown);
     };
   }, [open, onClose]);
@@ -295,7 +296,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ open, onClose }) => {
 
   return (
     <>
-      {/* Mobile drawer: stays mounted so it can slide in from the LEFT.
+      {/* Mobile drawer: stays mounted so it can slide in from the RIGHT.
           The trigger button lives in TopFilterBar (top-right corner). */}
       <div
         className={`fixed inset-0 z-50 lg:hidden ${

@@ -11,6 +11,8 @@ import {
   X,
 } from 'lucide-react';
 import { useFilterContext } from '@/context/FilterContext';
+import { usePresence } from '@/hooks/usePresence';
+import { useScrollLock } from '@/hooks/useScrollLock';
 import { ValidationErrorLog } from '@/types/dashboard.types';
 
 /**
@@ -113,6 +115,10 @@ export const ValidationModal: React.FC = () => {
 
   const [searchQuery, setSearchQuery] = useState('');
 
+  // Slides up from the bottom on open and back down on close.
+  const { mounted, state } = usePresence(isValidationModalOpen);
+  useScrollLock(mounted);
+
   const errorLogs: ValidationErrorLog[] = useMemo(() => {
     if (healthBanner && healthBanner.errorLogs?.length > 0) {
       return healthBanner.errorLogs;
@@ -138,7 +144,7 @@ export const ValidationModal: React.FC = () => {
     });
   }, [errorLogs, searchQuery]);
 
-  if (!isValidationModalOpen) return null;
+  if (!mounted) return null;
 
   const exportQuarantineCsv = () => {
     const headers = ['Row Number,Field,Validation Error Reason'];
@@ -159,8 +165,22 @@ export const ValidationModal: React.FC = () => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-950/60 p-4 backdrop-blur-xs">
-      <div className="flex max-h-[85vh] w-full max-w-3xl flex-col rounded-2xl border border-slate-200 bg-white shadow-2xl overflow-hidden">
+    <div
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="validation-dialog-title"
+      inert={state === 'closed'}
+      className="fixed inset-0 z-50 flex items-center justify-center p-4"
+    >
+      <div
+        data-state={state}
+        aria-hidden="true"
+        className="popup-overlay absolute inset-0 bg-slate-950/60 backdrop-blur-xs"
+      />
+      <div
+        data-state={state}
+        className="popup-panel relative flex max-h-[85vh] w-full max-w-3xl flex-col rounded-2xl border border-slate-200 bg-white shadow-2xl overflow-hidden"
+      >
         {/* Modal Header */}
         <div className="flex items-center justify-between border-b border-slate-200 px-6 py-4 bg-slate-50">
           <div className="flex items-center gap-3">
@@ -168,7 +188,10 @@ export const ValidationModal: React.FC = () => {
               <ShieldAlert className="h-5 w-5" />
             </div>
             <div>
-              <h3 className="text-base font-bold text-slate-900">
+              <h3
+                id="validation-dialog-title"
+                className="text-base font-bold text-slate-900"
+              >
                 Data Quarantine & Validation Report
               </h3>
               <p className="text-xs text-slate-500">
@@ -219,7 +242,7 @@ export const ValidationModal: React.FC = () => {
         </div>
 
         {/* Skipped Rows Table */}
-        <div className="flex-1 overflow-y-auto px-6 py-4">
+        <div data-lenis-prevent className="flex-1 overflow-y-auto px-6 py-4">
           {filteredLogs.length === 0 ? (
             <div className="py-12 text-center text-xs text-slate-500">
               No matching validation errors found.

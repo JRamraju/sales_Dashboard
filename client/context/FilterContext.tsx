@@ -19,6 +19,7 @@ import {
   UploadBatch,
   UploadCompletedEvent,
 } from '@/types/dashboard.types';
+import { showToast } from '@/lib/alerts';
 
 export interface DataHealthSummary {
   batchId: string;
@@ -193,6 +194,10 @@ export const FilterProvider: React.FC<{ children: React.ReactNode }> = ({
       }
     } catch (error) {
       console.error('[FilterContext] Failed to load upload batches:', error);
+      void showToast(
+        'Could not load your datasets. Please check the server connection.',
+        'error'
+      );
     } finally {
       setIsLoadingBatches(false);
     }

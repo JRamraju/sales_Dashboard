@@ -2,6 +2,7 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { getLenis } from '@/lib/smoothScroll';
 
 /** Sections whose tops are within this many px share one visual "band". */
 const SAME_BAND_TOLERANCE_PX = 8;
@@ -11,6 +12,8 @@ const BOTTOM_TOLERANCE_PX = 8;
 const ACTIVATION_GAP_PX = 24;
 /** Safety net: release the click-lock even if `scrollend` never fires. */
 const CLICK_LOCK_FALLBACK_MS = 1000;
+/** Length of the Lenis glide to a clicked section (seconds). */
+const LENIS_SCROLL_DURATION_S = 1.2;
 const FALLBACK_HEADER_PX = 112;
 
 const getHeaderHeight = (): number => {
@@ -143,6 +146,8 @@ export const useScrollSpy = (ids: readonly string[]): ScrollSpyResult => {
       commit(id);
       lockedRef.current = true;
 
+      const lenis = getLenis();
+
       const release = () => {
         lockedRef.current = false;
         releaseLockRef.current = null;
@@ -155,17 +160,34 @@ export const useScrollSpy = (ids: readonly string[]): ScrollSpyResult => {
       };
       releaseLockRef.current = release;
 
-      // scrollend: scroll finished. wheel/touch/key: the user took over.
-      window.addEventListener('scrollend', release, { once: true });
+      // wheel/touch/key: the user took over. With Lenis the glide reports its
+      // own completion (its per-frame scrolling would fire `scrollend` early);
+      // natively, `scrollend` marks the end of the browser's smooth scroll.
+      if (!lenis) window.addEventListener('scrollend', release, { once: true });
       window.addEventListener('wheel', release, { once: true, passive: true });
       window.addEventListener('touchstart', release, {
         once: true,
         passive: true,
       });
       window.addEventListener('keydown', release, { once: true });
-      const fallbackTimer = window.setTimeout(release, CLICK_LOCK_FALLBACK_MS);
+      const fallbackTimer = window.setTimeout(
+        release,
+        lenis
+          ? LENIS_SCROLL_DURATION_S * 1000 + CLICK_LOCK_FALLBACK_MS
+          : CLICK_LOCK_FALLBACK_MS
+      );
 
-      el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      if (lenis) {
+        // Lenis honours the section's `scroll-margin-top` (sticky header offset).
+        // `force` because the mobile drawer's scroll lock may still be releasing.
+        lenis.scrollTo(el, {
+          duration: LENIS_SCROLL_DURATION_S,
+          force: true,
+          onComplete: release,
+        });
+      } else {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
     },
     [commit, requestCompute]
   );

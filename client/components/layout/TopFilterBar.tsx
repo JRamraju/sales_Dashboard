@@ -18,6 +18,8 @@ import { useFilterContext } from '@/context/FilterContext';
 import { Granularity } from '@/types/dashboard.types';
 import { enterClass } from '@/components/layout/AnimateIn';
 import { MOBILE_NAV_ID } from '@/components/layout/Sidebar';
+import { usePresence } from '@/hooks/usePresence';
+import { confirmDialog, errorDialog, showToast } from '@/lib/alerts';
 
 /**
  * Reusable Multi-Select Dropdown for Category and Region Filters
@@ -41,6 +43,8 @@ const MultiSelectDropdown: React.FC<MultiSelectDropdownProps> = ({
 }) => {
   const [open, setOpen] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
+  // Keeps the menu mounted while it slides back down.
+  const menu = usePresence(open && options.length > 0, { exitMs: 200 });
 
   useEffect(() => {
     const handleOutsideClick = (event: MouseEvent) => {
@@ -87,8 +91,12 @@ const MultiSelectDropdown: React.FC<MultiSelectDropdownProps> = ({
         <ChevronDown className="h-3.5 w-3.5 text-slate-400" />
       </button>
 
-      {open && options.length > 0 && (
-        <div className="absolute left-0 mt-1.5 w-56 rounded-xl border border-slate-200 bg-white p-2 shadow-xl z-40">
+      {menu.mounted && (
+        <div
+          data-state={menu.state}
+          inert={menu.state === 'closed'}
+          className="popup-menu absolute left-0 mt-1.5 w-56 rounded-xl border border-slate-200 bg-white p-2 shadow-xl z-40"
+        >
           <div className="flex items-center justify-between border-b border-slate-100 pb-1.5 mb-1.5 px-1">
             <span className="text-[11px] font-semibold text-slate-500">
               Filter by {label}
@@ -103,7 +111,10 @@ const MultiSelectDropdown: React.FC<MultiSelectDropdownProps> = ({
               </button>
             )}
           </div>
-          <div className="max-h-52 overflow-y-auto space-y-0.5">
+          <div
+            data-lenis-prevent
+            className="max-h-52 overflow-y-auto space-y-0.5"
+          >
             {options.map((option) => {
               const isChecked = selected.includes(option);
               return (
@@ -197,16 +208,29 @@ export const TopFilterBar: React.FC<TopFilterBarProps> = ({
 
   const handleDeleteCurrentBatch = async () => {
     if (!activeBatchId || !activeBatch) return;
-    const confirmed = window.confirm(
-      `Delete dataset "${activeBatch.fileName}" and all of its sales records?`
-    );
+    const { fileName } = activeBatch;
+    const confirmed = await confirmDialog({
+      title: 'Delete this dataset?',
+      text: `"${fileName}" and all of its sales records will be permanently removed.`,
+      confirmText: 'Yes, delete it',
+      cancelText: 'Keep it',
+      tone: 'danger',
+      icon: 'warning',
+    });
     if (!confirmed) return;
 
     try {
       setIsDeleting(true);
       await removeBatch(activeBatchId);
+      void showToast(`Deleted "${fileName}"`);
     } catch (error) {
       console.error('Failed to delete batch:', error);
+      void errorDialog(
+        'Could not delete the dataset',
+        error instanceof Error && error.message
+          ? error.message
+          : 'Something went wrong while deleting. Please try again.'
+      );
     } finally {
       setIsDeleting(false);
     }
