@@ -2,26 +2,15 @@
 
 export type Granularity = 'day' | 'week' | 'month';
 export type TrendDirection = 'upward' | 'downward' | 'flat';
-export type BatchStatus = 'queued' | 'processing' | 'completed' | 'failed';
+export type BatchStatus =
+  | 'queued'
+  | 'pending'
+  | 'processing'
+  | 'completed'
+  | 'failed';
 
 /**
- * Master-data synchronization counts per uploaded file
- */
-export interface EntitySyncCounts {
-  created: number;
-  existing: number;
-}
-
-/**
- * Cross-file and intra-file duplicate order/row counts
- */
-export interface DuplicateCounts {
-  rows: number;
-  orders: number;
-}
-
-/**
- * Quarantine error log entry for invalid/skipped rows
+ * Quarantine error log or duplicate row log entry
  */
 export interface ValidationErrorLog {
   rowNumber?: number;
@@ -34,55 +23,50 @@ export interface ValidationErrorLog {
 
 /**
  * Metadata per uploaded file batch (UploadBatch model)
+ * Ordered File 1, File 2, ... by sequence.
  */
 export interface UploadBatch {
   _id: string;
-  batchId?: string;
+  batchId: string;
+  sequence: number;
   fileName: string;
   originalName?: string;
-  fileNumber?: number | null;
   status: BatchStatus;
-  totalRows?: number;
+  totalRows: number;
   validRowsInserted: number;
   invalidRowsCount: number;
-  customers?: EntitySyncCounts;
-  products?: EntitySyncCounts;
-  duplicates?: DuplicateCounts;
-  notes?: string[];
+  duplicateRowsCount: number;
+  newCustomersCount: number;
+  newProductsCount: number;
   errorLogs: ValidationErrorLog[];
+  duplicateLogs: ValidationErrorLog[];
+  errorLogsTruncated?: boolean;
+  duplicateLogsTruncated?: boolean;
+  failureReason?: string;
+  dateOrder?: string;
+  notes?: string[];
   uploadedAt?: string;
   createdAt?: string;
   updatedAt?: string;
 }
 
 /**
- * Response from POST /api/v1/uploads
+ * Response from POST /api/v1/uploads (202 Accepted)
  */
 export interface UploadInitResponse {
   batchId: string;
+  sequence: number;
   jobId?: string;
   status: BatchStatus;
-  fileName?: string;
-  fileNumber?: number | null;
+  fileName: string;
   message?: string;
   inserted?: number;
   skipped?: number;
-  customers?: EntitySyncCounts;
-  products?: EntitySyncCounts;
-  duplicates?: DuplicateCounts;
-  notes?: string[];
+  duplicates?: number;
+  newCustomers?: number;
+  newProducts?: number;
   errorLogs?: ValidationErrorLog[];
-}
-
-/**
- * Response from DELETE /api/v1/uploads/:batchId
- */
-export interface DeleteBatchResponse {
-  batchId: string;
-  deletedRecords?: number;
-  removedCustomers?: number;
-  removedProducts?: number;
-  message: string;
+  duplicateLogs?: ValidationErrorLog[];
 }
 
 /**
@@ -97,27 +81,33 @@ export interface UploadProgressEvent {
 
 export interface UploadCompletedEvent {
   batchId: string;
+  sequence?: number;
   fileName?: string;
-  fileNumber?: number | null;
+  totalRows?: number;
   inserted: number;
   skipped: number;
-  customers?: EntitySyncCounts;
-  products?: EntitySyncCounts;
-  duplicates?: DuplicateCounts;
-  notes?: string[];
+  duplicates: number;
+  newCustomers: number;
+  newProducts: number;
   errorLogs: ValidationErrorLog[];
+  errorLogsTruncated?: boolean;
+  duplicateLogs: ValidationErrorLog[];
+  duplicateLogsTruncated?: boolean;
+  dateOrder?: string;
+  notes?: string[];
 }
 
 export interface UploadFailedEvent {
   batchId: string;
+  reason?: string;
   error: string;
 }
 
 /**
  * Global Dashboard Query Filter Parameters
+ * When `batchIds` is omitted or empty, the server uses ALL completed files.
  */
 export interface DashboardFilterParams {
-  batchId?: string;
   batchIds?: string[];
   startDate?: string | null;
   endDate?: string | null;
@@ -126,17 +116,18 @@ export interface DashboardFilterParams {
 }
 
 export interface TrendFilterParams extends DashboardFilterParams {
-  batchId?: string;
-  batchIds?: string[];
   granularity?: Granularity;
 }
 
 export interface ForecastFilterParams {
-  batchId?: string;
   batchIds?: string[];
   horizon?: number; // Default 3 months
   category?: string | string[] | null;
   region?: string | string[] | null;
+}
+
+export interface NewEntitiesFilterParams extends DashboardFilterParams {
+  limit?: number; // Default 200
 }
 
 /**
@@ -215,12 +206,20 @@ export interface ForecastDataPoint {
   date: string; // YYYY-MM
   actualRevenue?: number | null;
   forecastRevenue?: number | null;
+  lower?: number | null;
+  upper?: number | null;
   isForecast?: boolean;
 }
 
 export interface ForecastResponse {
   historical: { date: string; revenue: number }[];
-  forecast: { date: string; predictedRevenue: number; revenue?: number }[];
+  forecast: {
+    date: string;
+    predictedRevenue: number;
+    revenue?: number;
+    lower?: number | null;
+    upper?: number | null;
+  }[];
   combinedSeries?: ForecastDataPoint[];
   trendDirection: TrendDirection;
   slope: number;
@@ -228,23 +227,19 @@ export interface ForecastResponse {
   rSquared: number; // Coefficient of determination (R^2)
   confidenceLabel?: 'High' | 'Moderate' | 'Low';
   methodUsed?: string;
+  note?: string;
 }
 
 /**
- * 5. GET /api/v1/analytics/new-records Types
+ * 5. GET /api/v1/analytics/new-entities Response
  */
-export interface ComparedFileRef {
-  batchId: string;
-  fileNumber: number;
-  fileName: string;
-}
-
 export interface NewCustomerItem {
   customerId: string;
   customerName: string;
-  orders: number;
-  revenue: number;
-  firstOrderDate: string;
+  totalOrders: number;
+  totalRevenue: number;
+  invoices: string[];
+  invoicesTruncated: boolean;
 }
 
 export interface NewProductItem {
@@ -252,32 +247,24 @@ export interface NewProductItem {
   productName: string;
   category: string;
   unitsSold: number;
-  revenue: number;
+  totalOrders: number;
+  totalRevenue: number;
+  invoices: string[];
+  invoicesTruncated: boolean;
 }
 
-export interface NewRecordsGroup<T> {
-  count: number;
-  revenue: number;
-  truncated: boolean;
-  items: T[];
-}
-
-export interface FileNewRecords {
+export interface NewEntitiesFileGroup {
   batchId: string;
   fileName: string;
-  fileNumber: number;
-  uploadedAt: string;
-  isFirstFile: boolean;
-  comparedWith: ComparedFileRef[];
-  newCustomers: NewRecordsGroup<NewCustomerItem>;
-  newProducts: NewRecordsGroup<NewProductItem>;
+  sequence: number;
+  isBaseline: boolean;
+  newCustomersCount: number;
+  newProductsCount: number;
+  truncated: boolean;
+  newCustomers: NewCustomerItem[];
+  newProducts: NewProductItem[];
 }
 
-export interface NewRecordsResponse {
-  files: FileNewRecords[];
-}
-
-export interface NewRecordsParams {
-  batchIds?: string[];
-  limit?: number;
+export interface NewEntitiesResponse {
+  files: NewEntitiesFileGroup[];
 }
