@@ -18,28 +18,16 @@ export const MAX_TREND_POINTS = 2000;
 const TOP_N = 10;
 
 /**
- * The dashboard now works on one or more files at once. Accepts a single id
- * (legacy `batchId`) or a list (`batchIds`) and returns the $match value for
- * the `batchId` field.
- */
-export function batchMatch({ batchId, batchIds } = {}) {
-  const ids = batchIds ?? (batchId ? [batchId] : []);
-  const objectIds = ids.map((id) => new ObjectId(id));
-  return objectIds.length === 1 ? objectIds[0] : { $in: objectIds };
-}
-
-/**
  * Filters shape (built and validated by analytics.controller.js):
- *   { batchIds: string[], startDate?: Date, endDate?: Date,
+ *   { batchId: string, startDate?: Date, endDate?: Date,
  *     categories?: string[], regions?: string[] }
- * (`batchId: string` is still accepted for a single file.)
  *
- * Aggregation pipelines do not auto-cast, so ids are converted to ObjectIds
- * here. The match keys line up with the compound index
- * { batchId, orderDate, category, region }; an empty list matches nothing.
+ * Aggregation pipelines do not auto-cast, so batchId is converted to an
+ * ObjectId here. The match keys line up with the compound index
+ * { batchId, orderDate, category, region }.
  */
-export function buildMatch({ batchId, batchIds, startDate, endDate, categories, regions }) {
-  const match = { batchId: batchMatch({ batchId, batchIds }) };
+export function buildMatch({ batchId, startDate, endDate, categories, regions }) {
+  const match = { batchId: new ObjectId(batchId) };
 
   if (startDate || endDate) {
     match.orderDate = {};
@@ -61,8 +49,8 @@ const dateOnly = (date) => (date ? dayjs.utc(date).format('YYYY-MM-DD') : null);
 /* Filter dropdown options (whole batch, independent of the active filters)    */
 /* -------------------------------------------------------------------------- */
 
-export const optionsPipeline = (batchIds) => [
-  { $match: { batchId: batchMatch(Array.isArray(batchIds) ? { batchIds } : { batchId: batchIds }) } },
+export const optionsPipeline = (batchId) => [
+  { $match: { batchId: new ObjectId(batchId) } },
   {
     $group: {
       _id: null,
@@ -75,14 +63,14 @@ export const optionsPipeline = (batchIds) => [
 ];
 
 /**
- * Dropdown options come from all the selected files so they do not shrink as filters
+ * Dropdown options come from the whole batch so they do not shrink as filters
  * apply, and the date bounds feed the date pickers' min/max. One pass over the
  * index replaces the two separate `distinct` calls the first version made.
  *
  * @returns {Promise<{categories: string[], regions: string[], minDate: string|null, maxDate: string|null}>}
  */
-export async function getFilterOptions(batchIds) {
-  const [doc] = await run(optionsPipeline(batchIds));
+export async function getFilterOptions(batchId) {
+  const [doc] = await run(optionsPipeline(batchId));
   return {
     categories: (doc?.categories ?? []).filter(Boolean).sort(),
     regions: (doc?.regions ?? []).filter(Boolean).sort(),
@@ -203,7 +191,7 @@ export async function getOverview(filters, filterOptions) {
 
   const [facetDocs, options, previousPeriodRevenue] = await Promise.all([
     run(overviewPipeline(match, { withMonthly: !hasRange })),
-    filterOptions ?? getFilterOptions(filters.batchIds ?? filters.batchId),
+    filterOptions ?? getFilterOptions(filters.batchId),
     hasRange ? getPreviousPeriodRevenue(filters) : Promise.resolve(0),
   ]);
 
@@ -439,14 +427,14 @@ export async function getBreakdowns(filters) {
  * category / region filters are honoured (the dashboard sends them, so the
  * forecast describes the same slice of the business as the KPI cards).
  *
- * @param {string | { batchId?: string, batchIds?: string[], categories?: string[], regions?: string[] }} input
+ * @param {string | { batchId: string, categories?: string[], regions?: string[] }} input
  * @returns {Promise<{month: string, revenue: number}[]>}
  */
 export async function getMonthlyRevenue(input) {
-  const { batchId, batchIds, categories, regions } = typeof input === 'string' ? { batchId: input } : input;
+  const { batchId, categories, regions } = typeof input === 'string' ? { batchId: input } : input;
 
   const rows = await run([
-    { $match: buildMatch({ batchId, batchIds, categories, regions }) },
+    { $match: buildMatch({ batchId, categories, regions }) },
     {
       $group: {
         _id: { $dateToString: { format: '%Y-%m', date: '$orderDate' } },

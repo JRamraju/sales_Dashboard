@@ -13,12 +13,6 @@ import { openRowSource, FileParseError } from '../services/fileParser.service.js
 import { validateSalesRow } from '../validators/salesRow.schema.js';
 import { DATE_ORDER_LABELS, defaultDateOrder, detectDateOrder } from '../utils/dateOrder.util.js';
 import { toClientErrorLogs } from '../utils/uploadMappers.util.js';
-import {
-  createMasterResolver,
-  findExistingLineKeys,
-  lineKey,
-  releaseMasterData,
-} from '../services/masterData.service.js';
 
 /** Valid rows are bulk-inserted in chunks of 1,000. */
 export const CHUNK_SIZE = 1000;
@@ -94,14 +88,9 @@ function describeDateOrder({ order, detected, dmy, mdy, ambiguous }) {
 }
 
 /**
- * BullMQ processor: stream rows -> sanitize -> validate (Zod) -> skip lines
- * that already exist in an earlier file -> create missing customers/products
- * and link the rows to them -> chunked bulk insert, reporting progress after
- * every chunk. Runs off the Express request cycle.
- *
- * Files are processed strictly in upload order (the worker runs one job at a
- * time), which is what makes "new in this file" and duplicate detection
- * well-defined.
+ * BullMQ processor: stream rows -> sanitize -> validate (Zod) -> chunked bulk
+ * insert, reporting progress after every chunk. Runs off the Express request
+ * cycle.
  *
  * Returns the validation summary, which the queue-events bridge broadcasts as
  * `upload:completed`.
@@ -125,7 +114,6 @@ export async function processUploadJob(job) {
 
   try {
     await SalesRecord.deleteMany({ batchId: batchObjectId });
-    await releaseMasterData(batchObjectId); // undo a crashed earlier run of this same file
 
     // Fails here (before any row work) for an empty file or missing columns.
     source = await openRowSource(filePath, originalName);
@@ -149,10 +137,7 @@ export async function processUploadJob(job) {
     let processedRows = 0;
     let inserted = 0;
     let skipped = 0;
-    let duplicates = 0;
     const errorLogs = []; // capped; `skipped` always holds the true count
-    const duplicateLogs = []; // capped; `duplicates` always holds the true count
-    const master = createMasterResolver(batchObjectId);
 
     const reject = (rowNumber, reason, field) => {
       skipped += 1;
@@ -194,30 +179,8 @@ export async function processUploadJob(job) {
         }
       }
 
-      // Order lines that already exist in an earlier file are skipped and reported.
-      const existing = await findExistingLineKeys(validDocs, batchObjectId);
-      const freshDocs = [];
-      const freshRowNumbers = [];
-      validDocs.forEach((doc, i) => {
-        if (existing.has(lineKey(doc.orderId, doc.productId))) {
-          duplicates += 1;
-          if (duplicateLogs.length < errorCap) {
-            duplicateLogs.push({
-              rowNumber: validRowNumbers[i],
-              reason: `Duplicate: order ${doc.orderId} / product ${doc.productId} already exists in another file`,
-              field: 'order_id, product_id',
-            });
-          }
-        } else {
-          freshDocs.push(doc);
-          freshRowNumbers.push(validRowNumbers[i]);
-        }
-      });
-
-      if (freshDocs.length > 0) {
-        // Create missing customers / products, link each row to its master record.
-        await master.attach(freshDocs);
-        inserted += await insertChunk(freshDocs, freshRowNumbers, reject);
+      if (validDocs.length > 0) {
+        inserted += await insertChunk(validDocs, validRowNumbers, reject);
       }
 
       processedRows += chunk.length;
@@ -243,13 +206,9 @@ export async function processUploadJob(job) {
       totalRowsRead: totalRows,
       validRowsInserted: inserted,
       invalidRowsCount: skipped,
-      duplicateRowsCount: duplicates,
-      newCustomersCount: master.newCustomers,
-      newProductsCount: master.newProducts,
       processedRows,
       progress: 100,
       errorLogs,
-      duplicateLogs,
       dateOrder,
       notes,
       finishedAt: new Date(),
@@ -260,14 +219,9 @@ export async function processUploadJob(job) {
       fileName: originalName,
       inserted,
       skipped,
-      duplicates,
-      newCustomers: master.newCustomers,
-      newProducts: master.newProducts,
       totalRows,
       errorLogs: toClientErrorLogs(errorLogs),
       errorLogsTruncated: skipped > errorLogs.length,
-      duplicateLogs: toClientErrorLogs(duplicateLogs),
-      duplicateLogsTruncated: duplicates > duplicateLogs.length,
       dateOrder,
       notes,
     };
@@ -281,7 +235,6 @@ export async function processUploadJob(job) {
 
     // Leave no half-loaded dataset behind.
     await SalesRecord.deleteMany({ batchId: batchObjectId }).catch(() => {});
-    await releaseMasterData(batchObjectId).catch(() => {});
 
     const reason =
       err instanceof FileParseError
@@ -307,10 +260,7 @@ export async function processUploadJob(job) {
 export function createUploadWorker() {
   const worker = new Worker(UPLOAD_QUEUE_NAME, processUploadJob, {
     connection: createRedisConnection(),
-    // Must stay 1: file 2 has to see everything file 1 created (customers,
-    // products, order lines). Running uploads in parallel would break the
-    // "new in this file" and duplicate checks, so WORKER_CONCURRENCY is ignored.
-    concurrency: 1,
+    concurrency: Number(process.env.WORKER_CONCURRENCY) || 1,
     // The worker renews its claim on a running job every lockDuration / 2. If
     // Redis is unreachable for longer than lockDuration (a network drop of
     // 30-40s was enough with BullMQ's 30s default) the claim expires, BullMQ

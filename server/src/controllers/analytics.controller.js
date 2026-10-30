@@ -11,7 +11,6 @@ import {
   getFilterOptions,
 } from '../services/kpi.service.js';
 import { calculateForecast, DEFAULT_HORIZON, MAX_HORIZON } from '../services/forecast.service.js';
-import { getNewEntitiesByFile } from '../services/masterData.service.js';
 import { analyticsCache } from '../utils/cache.util.js';
 
 dayjs.extend(utc);
@@ -64,40 +63,28 @@ function parseDateParam(value, name, { endOfDay = false } = {}) {
 }
 
 /**
- * Works out which files a request is about ("view by file"):
- *   ?batchIds=a,b   (or repeated / bracket params; `batchId` is accepted as an alias)
- *                   -> exactly those files
- *   nothing given   -> every COMPLETED file, i.e. the combined view
- *
- * The id list is always explicit and sorted, so it doubles as the cache key:
- * a newly finished upload changes the "all files" key by itself, and only
- * finished files are cached (a half-ingested one changes while it loads).
+ * Looks the batch up once and returns what the handlers need. The status is
+ * used for caching: only a finished batch is immutable, so only a finished
+ * batch's results are cached (a half-ingested one changes while it loads).
  */
-async function requireBatches(query) {
-  const requested = toList(query.batchIds ?? query.batchId, 'batchIds');
-
-  if (requested) {
-    const ids = [...new Set(requested)];
-    if (ids.some((id) => !OBJECT_ID.test(id))) throw new ApiError(400, 'Invalid batchIds.');
-
-    const found = await UploadBatch.find({ _id: { $in: ids } }).select('status').lean();
-    if (found.length !== ids.length) throw new ApiError(404, 'One or more files were not found.');
-
-    ids.sort();
-    return { ids, key: ids.join('+'), cacheable: found.every((b) => b.status === 'completed') };
+async function requireBatch(batchId) {
+  if (!batchId) throw new ApiError(400, 'batchId is required.');
+  if (typeof batchId !== 'string' || !OBJECT_ID.test(batchId)) {
+    throw new ApiError(400, 'Invalid batchId.');
   }
 
-  const completed = await UploadBatch.find({ status: 'completed' }).select('_id').lean();
-  const ids = completed.map((b) => String(b._id)).sort();
-  return { ids, key: ids.join('+') || 'none', cacheable: true };
+  const batch = await UploadBatch.findById(batchId).select('status').lean();
+  if (!batch) throw new ApiError(404, 'Upload batch not found.');
+
+  return { id: String(batch._id), status: batch.status };
 }
 
 /** Builds the validated filter object that kpi.service.js turns into a $match. */
 async function parseFilters(query) {
-  const batch = await requireBatches(query);
+  const batch = await requireBatch(query.batchId);
 
   const filters = {
-    batchIds: batch.ids,
+    batchId: batch.id,
     startDate: parseDateParam(query.startDate, 'startDate'),
     endDate: parseDateParam(query.endDate, 'endDate', { endOfDay: true }),
     categories: toList(query.category, 'category'),
@@ -123,22 +110,22 @@ const filterKey = (filters) =>
     sorted(filters.regions),
   ]);
 
-// Key layout: "<id>+<id>:<endpoint>:<variant>" (ObjectIds contain no ':' or '+').
 const cached = (batch, name, variant, loader) =>
-  batch.cacheable ? analyticsCache.wrap(`${batch.key}:${name}:${variant}`, loader) : loader();
+  batch.status === 'completed'
+    ? analyticsCache.wrap(`${batch.id}:${name}:${variant}`, loader)
+    : loader();
 
-/** Drops every cached result that includes this file (called when it is deleted). */
-export const clearBatchCache = (batchId) =>
-  analyticsCache.invalidateWhere((key) => key.split(':')[0].split('+').includes(String(batchId)));
+/** Drops everything cached for a batch (called when it is deleted). */
+export const clearBatchCache = (batchId) => analyticsCache.invalidatePrefix(`${batchId}:`);
 
 /* ------------------------------- Handlers -------------------------------- */
 
-/** GET /api/v1/analytics/overview — 5 KPIs, growth and filter dropdown options (for the selected files). */
+/** GET /api/v1/analytics/overview — 5 KPIs, growth and filter dropdown options. */
 export async function overview(req, res) {
   const { batch, filters } = await parseFilters(req.query);
 
   const data = await cached(batch, 'overview', filterKey(filters), async () => {
-    const options = await cached(batch, 'options', '', () => getFilterOptions(batch.ids));
+    const options = await cached(batch, 'options', '', () => getFilterOptions(batch.id));
     return getOverview(filters, options);
   });
 
@@ -180,7 +167,7 @@ export async function breakdowns(req, res) {
  * the whole history.
  */
 export async function forecast(req, res) {
-  const batch = await requireBatches(req.query);
+  const batch = await requireBatch(req.query.batchId);
   const categories = toList(req.query.category, 'category');
   const regions = toList(req.query.region, 'region');
 
@@ -194,30 +181,9 @@ export async function forecast(req, res) {
 
   const variant = `${horizon}|${filterKey({ categories, regions })}`;
   const data = await cached(batch, 'forecast', variant, async () => {
-    const monthlyRevenue = await getMonthlyRevenue({ batchIds: batch.ids, categories, regions });
+    const monthlyRevenue = await getMonthlyRevenue({ batchId: batch.id, categories, regions });
     return calculateForecast(monthlyRevenue, horizon);
   });
 
   res.json(data);
-}
-
-/**
- * GET /api/v1/analytics/new-entities?batchIds=a,b&limit=200
- * For each selected file: the customers and products that first appeared in
- * it (not present in any earlier file), with the invoices (order ids) they
- * were linked to. The baseline (earliest) file only reports counts.
- * Not cached: it reads master data that changes when files are deleted.
- */
-export async function newEntities(req, res) {
-  const batch = await requireBatches(req.query);
-
-  let limit = 200;
-  if (req.query.limit !== undefined) {
-    limit = Number(req.query.limit);
-    if (!Number.isInteger(limit) || limit < 1 || limit > 1000) {
-      throw new ApiError(400, 'limit must be a whole number between 1 and 1000.');
-    }
-  }
-
-  res.json({ files: await getNewEntitiesByFile(batch.ids, { limit }) });
 }

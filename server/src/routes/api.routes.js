@@ -12,7 +12,6 @@ import {
   trends,
   breakdowns,
   forecast,
-  newEntities,
 } from '../controllers/analytics.controller.js';
 
 const router = Router();
@@ -37,6 +36,5 @@ router.get('/analytics/overview', overview);
 router.get('/analytics/trends', trends);
 router.get('/analytics/breakdowns', breakdowns);
 router.get('/analytics/forecast', forecast);
-router.get('/analytics/new-entities', newEntities);
 
 export default router;
