@@ -8,6 +8,8 @@ import {
   ForecastFilterParams,
   ForecastResponse,
   Granularity,
+  NewRecordsParams,
+  NewRecordsResponse,
   OverviewResponse,
   RevenueTrendPoint,
   TrendFilterParams,
@@ -113,8 +115,12 @@ export const getUploadBatches = async (
     _id: String(batch._id ?? batch.batchId ?? ''),
     batchId: String(batch.batchId ?? batch._id ?? ''),
     fileName: batch.fileName || batch.originalName || 'Untitled Dataset',
+    fileNumber: batch.fileNumber ?? null,
     validRowsInserted: Number(batch.validRowsInserted ?? 0),
     invalidRowsCount: Number(batch.invalidRowsCount ?? 0),
+    duplicateRowsSkipped: Number(batch.duplicateRowsSkipped ?? 0),
+    duplicateOrdersSkipped: Number(batch.duplicateOrdersSkipped ?? 0),
+    // GET /uploads leaves errorLogs out; fetch one batch to read them.
     errorLogs: Array.isArray(batch.errorLogs) ? batch.errorLogs : [],
   }));
 };
@@ -135,19 +141,32 @@ export const getUploadBatchById = async (
     _id: String(batch._id ?? batch.batchId ?? batchId),
     batchId: String(batch.batchId ?? batch._id ?? batchId),
     fileName: batch.fileName || batch.originalName || 'Uploaded Dataset',
+    fileNumber: batch.fileNumber ?? null,
     validRowsInserted: Number(batch.validRowsInserted ?? 0),
     invalidRowsCount: Number(batch.invalidRowsCount ?? 0),
+    duplicateRowsSkipped: Number(batch.duplicateRowsSkipped ?? 0),
+    duplicateOrdersSkipped: Number(batch.duplicateOrdersSkipped ?? 0),
     errorLogs: Array.isArray(batch.errorLogs) ? batch.errorLogs : [],
   };
 };
 
+export interface DeleteUploadResult {
+  message: string;
+  batchId: string;
+  deletedRecords?: number;
+  /** Customers / products only this file used (shared ones are kept). */
+  removedCustomers?: number;
+  removedProducts?: number;
+}
+
 /**
  * DELETE /api/v1/uploads/:batchId
- * Deletes an uploaded batch and its associated sales records.
+ * Deletes one file and its sales records. Customers and products only this
+ * file used are removed too; ones other files still use are kept.
  */
 export const deleteUploadBatch = async (
   batchId: string
-): Promise<{ message: string; batchId: string }> => {
+): Promise<DeleteUploadResult> => {
   const response = await axiosInstance.delete(`/uploads/${batchId}`);
   return unwrapPayload(response.data);
 };
@@ -351,6 +370,8 @@ export const getSalesForecast = async (
       date: String(pt.date ?? pt.month ?? pt.period ?? ''),
       predictedRevenue: predictedVal,
       revenue: predictedVal,
+      lower: pt.lower ?? null,
+      upper: pt.upper ?? null,
     };
   });
 
@@ -397,6 +418,43 @@ export const getSalesForecast = async (
   };
 };
 
+/**
+ * GET /api/v1/analytics/new-records
+ * For each selected file, the customers and products that appear in no earlier
+ * file. "Earlier" always means every earlier finished file, not just the
+ * selected ones. File 1 returns empty lists (`isFirstFile: true`).
+ */
+export const getNewRecords = async (
+  params: NewRecordsParams = {},
+  config?: ApiRequestConfig
+): Promise<NewRecordsResponse> => {
+  const response = await axiosInstance.get('/analytics/new-records', {
+    ...config,
+    params: { ...params } as Record<string, unknown>,
+  });
+  const raw = unwrapPayload<Partial<NewRecordsResponse>>(response.data);
+  const files = Array.isArray(raw?.files) ? raw.files : [];
+
+  const group = (g: any) => ({
+    count: Number(g?.count ?? 0),
+    revenue: Number(g?.revenue ?? 0),
+    items: Array.isArray(g?.items) ? g.items : [],
+    truncated: Boolean(g?.truncated),
+  });
+
+  return {
+    files: files.map((f: any) => ({
+      ...f,
+      batchId: String(f.batchId),
+      fileNumber: Number(f.fileNumber ?? 0),
+      isFirstFile: Boolean(f.isFirstFile),
+      comparedWith: Array.isArray(f.comparedWith) ? f.comparedWith : [],
+      newCustomers: group(f.newCustomers),
+      newProducts: group(f.newProducts),
+    })),
+  };
+};
+
 /* ============================================================================
  * 3. PARALLEL DASHBOARD DATA LOADER HELPER
  * ========================================================================== */
@@ -409,7 +467,9 @@ export interface FullDashboardBundle {
 }
 
 /**
- * Fetches all 4 analytics endpoints in parallel when `batchId` or filters change.
+ * Fetches all 4 analytics endpoints in parallel when the file selection or
+ * filters change. An empty / missing `batchIds` means every finished file
+ * combined (the running dataset).
  */
 export const fetchFullDashboardData = async (
   filters: DashboardFilterParams & {
@@ -426,7 +486,7 @@ export const fetchFullDashboardData = async (
     getAnalyticsBreakdowns(baseFilters, { signal }),
     getSalesForecast(
       {
-        batchId: baseFilters.batchId,
+        batchIds: baseFilters.batchIds,
         horizon,
         category: baseFilters.category,
         region: baseFilters.region,

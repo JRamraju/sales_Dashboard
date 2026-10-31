@@ -186,6 +186,9 @@ export const FileDropzone: React.FC<FileDropzoneProps> = ({
               inserted: ev.inserted,
               skipped: ev.skipped,
               errorLogs: ev.errorLogs || [],
+              customers: ev.customers,
+              products: ev.products,
+              duplicates: ev.duplicates,
             },
             selectedFile.name
           );
@@ -220,6 +223,18 @@ export const FileDropzone: React.FC<FileDropzoneProps> = ({
                 inserted: batchDoc.validRowsInserted,
                 skipped: batchDoc.invalidRowsCount,
                 errorLogs: batchDoc.errorLogs || [],
+                customers: {
+                  created: batchDoc.newCustomersCreated ?? 0,
+                  existing: batchDoc.existingCustomersLinked ?? 0,
+                },
+                products: {
+                  created: batchDoc.newProductsCreated ?? 0,
+                  existing: batchDoc.existingProductsLinked ?? 0,
+                },
+                duplicates: {
+                  rows: batchDoc.duplicateRowsSkipped ?? 0,
+                  orders: batchDoc.duplicateOrdersSkipped ?? 0,
+                },
               },
               selectedFile.name
             );
@@ -229,7 +244,8 @@ export const FileDropzone: React.FC<FileDropzoneProps> = ({
             cleanupSubscriptions();
             setStage('error');
             setErrorMessage(
-              batchDoc.errorLogs?.[0]?.message ||
+              batchDoc.failureReason ||
+                batchDoc.errorLogs?.[0]?.message ||
                 'Dataset processing failed during validation.'
             );
           }

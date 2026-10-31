@@ -5,13 +5,11 @@ import React, { useEffect, useRef, useState } from 'react';
 import {
   Calendar,
   ChevronDown,
-  Database,
   Filter,
   Globe,
   Layers,
   Menu,
   RotateCcw,
-  Trash2,
   Upload,
 } from 'lucide-react';
 import { useFilterContext } from '@/context/FilterContext';
@@ -19,7 +17,7 @@ import { Granularity } from '@/types/dashboard.types';
 import { enterClass } from '@/components/layout/AnimateIn';
 import { MOBILE_NAV_ID } from '@/components/layout/Sidebar';
 import { usePresence } from '@/hooks/usePresence';
-import { confirmDialog, errorDialog, showToast } from '@/lib/alerts';
+import { FileSelector } from '@/components/layout/FileSelector';
 
 /**
  * Reusable Multi-Select Dropdown for Category and Region Filters
@@ -152,10 +150,7 @@ export const TopFilterBar: React.FC<TopFilterBarProps> = ({
   menuButtonRef,
 }) => {
   const {
-    batches,
-    activeBatchId,
-    activeBatch,
-    isLoadingBatches,
+    hasDataset,
     startDate,
     endDate,
     selectedCategories,
@@ -163,18 +158,15 @@ export const TopFilterBar: React.FC<TopFilterBarProps> = ({
     granularity,
     filterOptions,
     hasActiveFilters,
-    setActiveBatchId,
     setStartDate,
     setEndDate,
     setSelectedCategories,
     setSelectedRegions,
     setGranularity,
     resetFilters,
-    removeBatch,
     openUploadModal,
   } = useFilterContext();
 
-  const [isDeleting, setIsDeleting] = useState(false);
   // Below lg the filter row is collapsed behind a "Filters" toggle, so the
   // sticky header stays compact on phones and tablets.
   const [filtersOpen, setFiltersOpen] = useState(false);
@@ -206,36 +198,6 @@ export const TopFilterBar: React.FC<TopFilterBarProps> = ({
     };
   }, []);
 
-  const handleDeleteCurrentBatch = async () => {
-    if (!activeBatchId || !activeBatch) return;
-    const { fileName } = activeBatch;
-    const confirmed = await confirmDialog({
-      title: 'Delete this dataset?',
-      text: `"${fileName}" and all of its sales records will be permanently removed.`,
-      confirmText: 'Yes, delete it',
-      cancelText: 'Keep it',
-      tone: 'danger',
-      icon: 'warning',
-    });
-    if (!confirmed) return;
-
-    try {
-      setIsDeleting(true);
-      await removeBatch(activeBatchId);
-      void showToast(`Deleted "${fileName}"`);
-    } catch (error) {
-      console.error('Failed to delete batch:', error);
-      void errorDialog(
-        'Could not delete the dataset',
-        error instanceof Error && error.message
-          ? error.message
-          : 'Something went wrong while deleting. Please try again.'
-      );
-    } finally {
-      setIsDeleting(false);
-    }
-  };
-
   const granularities: { value: Granularity; label: string }[] = [
     { value: 'day', label: 'Daily' },
     { value: 'week', label: 'Weekly' },
@@ -258,7 +220,7 @@ export const TopFilterBar: React.FC<TopFilterBarProps> = ({
                 Executive Sales Analytics Dashboard
               </h1>
               <p className="hidden truncate text-xs text-slate-500 sm:block">
-                Real-time MongoDB $facet aggregations & OLS + WMA revenue forecasting
+                Running dataset across every uploaded file, with OLS + WMA revenue forecasting
               </p>
             </div>
 
@@ -277,42 +239,8 @@ export const TopFilterBar: React.FC<TopFilterBarProps> = ({
           </div>
 
           <div className="flex items-center gap-2 sm:gap-2.5 lg:shrink-0">
-            {/* Dataset Selector Dropdown */}
-            <div className="flex min-w-0 flex-1 items-center gap-1.5 rounded-lg border border-slate-200 bg-slate-50 px-2.5 py-1.5 lg:flex-none">
-              <Database className="h-4 w-4 text-indigo-600 shrink-0" />
-              <label htmlFor="dataset-selector" className="sr-only">
-                Active Dataset
-              </label>
-              <select
-                id="dataset-selector"
-                value={activeBatchId}
-                disabled={isLoadingBatches || batches.length === 0}
-                onChange={(e) => setActiveBatchId(e.target.value)}
-                className="min-w-0 flex-1 truncate bg-transparent text-xs font-semibold text-slate-800 focus:outline-none cursor-pointer lg:max-w-[210px] lg:flex-none"
-              >
-                {batches.length === 0 ? (
-                  <option value="">No datasets uploaded yet</option>
-                ) : (
-                  batches.map((batch) => (
-                    <option key={batch._id} value={batch._id}>
-                      {batch.fileName} ({batch.validRowsInserted.toLocaleString()} rows)
-                    </option>
-                  ))
-                )}
-              </select>
-
-              {activeBatchId && (
-                <button
-                  type="button"
-                  disabled={isDeleting}
-                  onClick={handleDeleteCurrentBatch}
-                  title="Delete selected dataset batch"
-                  className="ml-1 rounded p-1 text-slate-400 hover:bg-red-50 hover:text-red-600 transition-colors cursor-pointer disabled:opacity-40"
-                >
-                  <Trash2 className="h-3.5 w-3.5" />
-                </button>
-              )}
-            </div>
+            {/* File selector: all files combined, or pick specific files */}
+            <FileSelector />
 
             {/* Filters toggle (below lg only) */}
             <button
@@ -378,7 +306,7 @@ export const TopFilterBar: React.FC<TopFilterBarProps> = ({
                 value={startDate ?? ''}
                 min={filterOptions.minDate ?? undefined}
                 max={endDate ?? filterOptions.maxDate ?? undefined}
-                disabled={!activeBatchId}
+                disabled={!hasDataset}
                 onChange={(e) => setStartDate(e.target.value || null)}
                 className="bg-transparent text-xs text-slate-700 focus:outline-none disabled:opacity-50"
               />
@@ -389,7 +317,7 @@ export const TopFilterBar: React.FC<TopFilterBarProps> = ({
                 value={endDate ?? ''}
                 min={startDate ?? filterOptions.minDate ?? undefined}
                 max={filterOptions.maxDate ?? undefined}
-                disabled={!activeBatchId}
+                disabled={!hasDataset}
                 onChange={(e) => setEndDate(e.target.value || null)}
                 className="bg-transparent text-xs text-slate-700 focus:outline-none disabled:opacity-50"
               />
@@ -402,7 +330,7 @@ export const TopFilterBar: React.FC<TopFilterBarProps> = ({
               options={filterOptions.categories}
               selected={selectedCategories}
               onChange={setSelectedCategories}
-              disabled={!activeBatchId}
+              disabled={!hasDataset}
             />
 
             {/* Region Multi-Select */}
@@ -412,7 +340,7 @@ export const TopFilterBar: React.FC<TopFilterBarProps> = ({
               options={filterOptions.regions}
               selected={selectedRegions}
               onChange={setSelectedRegions}
-              disabled={!activeBatchId}
+              disabled={!hasDataset}
             />
 
             {/* Reset Filters Button */}
@@ -434,7 +362,7 @@ export const TopFilterBar: React.FC<TopFilterBarProps> = ({
               <button
                 key={item.value}
                 type="button"
-                disabled={!activeBatchId}
+                disabled={!hasDataset}
                 onClick={() => setGranularity(item.value)}
                 className={`rounded-md px-2.5 py-1 text-xs font-semibold transition-all cursor-pointer disabled:opacity-50 ${
                   granularity === item.value

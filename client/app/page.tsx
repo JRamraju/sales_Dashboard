@@ -27,10 +27,13 @@ import { ForecastChart } from '@/components/charts/ForecastChart';
 import { CategoryPieChart } from '@/components/charts/CategoryPieChart';
 import { TopProductsBarChart } from '@/components/charts/TopProductsBarChart';
 import { CustomerSalesTable } from '@/components/tables/CustomerSalesTable';
+import { NewRecordsPanel } from '@/components/tables/NewRecordsPanel';
 
 export default function DashboardPage() {
   const {
-    activeBatchId,
+    hasDataset,
+    selectedBatchIds,
+    datasetVersion,
     isLoadingBatches,
     startDate,
     endDate,
@@ -60,11 +63,11 @@ export default function DashboardPage() {
   // batches fetched AND (no dataset, or its analytics arrived / failed).
   const initialLoadSettled =
     !isLoadingBatches &&
-    (!activeBatchId || dashboardData !== null || errorMessage !== null);
+    (!hasDataset || dashboardData !== null || errorMessage !== null);
   const { showSplash, leaving } = useWelcomeIntro(initialLoadSettled);
 
   useEffect(() => {
-    if (!activeBatchId) {
+    if (!hasDataset) {
       setDashboardData(null);
       return;
     }
@@ -75,7 +78,8 @@ export default function DashboardPage() {
 
     fetchFullDashboardData(
       {
-        batchId: activeBatchId,
+        // Empty = every finished file combined (the running dataset).
+        batchIds: selectedBatchIds,
         startDate,
         endDate,
         category: selectedCategories,
@@ -96,7 +100,7 @@ export default function DashboardPage() {
           return;
         }
         setErrorMessage(
-          err?.message || 'Failed to load analytics data for this dataset.'
+          err?.message || 'Failed to load analytics data.'
         );
       })
       .finally(() => {
@@ -109,7 +113,9 @@ export default function DashboardPage() {
       controller.abort();
     };
   }, [
-    activeBatchId,
+    hasDataset,
+    selectedBatchIds,
+    datasetVersion,
     startDate,
     endDate,
     selectedCategories,
@@ -164,7 +170,7 @@ export default function DashboardPage() {
               )}
 
               {/* Empty State: No Dataset Uploaded Yet */}
-              {!isLoadingBatches && !activeBatchId ? (
+              {!isLoadingBatches && !hasDataset ? (
                 <AnimateIn direction="left">
                   <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-6 shadow-2xs">
                     <div className="text-center max-w-md mx-auto mb-2">
@@ -172,9 +178,9 @@ export default function DashboardPage() {
                         Welcome to SalesPulse BI
                       </h2>
                       <p className="text-xs text-slate-500 mt-1">
-                        Upload your first CSV or Excel sales dataset below to
-                        run the asynchronous ETL pipeline, inspect quarantined
-                        rows, and generate 3-month revenue forecasts.
+                        Upload your first CSV or Excel sales file below. Every
+                        file you add joins one running dataset, so KPIs, charts
+                        and the 3-month forecast always cover all of your data.
                       </p>
                     </div>
                     <FileDropzone asModal={false} />
@@ -236,6 +242,11 @@ export default function DashboardPage() {
                       />
                     </AnimateIn>
                   </div>
+
+                  {/* ROW 5: New customers & products per file */}
+                  <AnimateIn direction="left" delay={560}>
+                    <NewRecordsPanel />
+                  </AnimateIn>
                 </>
               )}
             </main>

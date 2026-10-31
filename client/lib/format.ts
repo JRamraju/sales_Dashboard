@@ -61,4 +61,48 @@ export const formatPercent = (
   return `${prefix}${num.toFixed(1)}%`;
 };
 
+/**
+ * Indian Rupee formatter (en-IN grouping, e.g. ₹12,34,567).
+ * Accepts Intl options so callers can set `maximumFractionDigits`.
+ * Takes `unknown` so it can be used directly as a Recharts formatter.
+ */
+export const formatINR = (
+  value: unknown,
+  options: Intl.NumberFormatOptions = {}
+): string => {
+  const num = Number(Array.isArray(value) ? value[0] : value ?? 0);
+  const safe = Number.isFinite(num) ? num : 0;
+  return new Intl.NumberFormat('en-IN', {
+    style: 'currency',
+    currency: 'INR',
+    maximumFractionDigits: Math.abs(safe) >= 1000 ? 0 : 2,
+    ...options,
+  }).format(safe);
+};
+
+/** Compact rupees for chart axes (₹1.2L, ₹3.4Cr). */
+export const formatCompactINR = (value: unknown): string => {
+  const num = Number(Array.isArray(value) ? value[0] : value ?? 0);
+  const safe = Number.isFinite(num) ? num : 0;
+  return new Intl.NumberFormat('en-IN', {
+    style: 'currency',
+    currency: 'INR',
+    notation: 'compact',
+    maximumFractionDigits: 1,
+  }).format(safe);
+};
+
+/** 'YYYY-MM' or 'YYYY-MM-DD' -> 'Jan 26' / '5 Jan' style axis label. */
+export const formatAxisDate = (value: unknown): string => {
+  const raw = String(value ?? '');
+  const match = /^(\d{4})-(\d{2})(?:-(\d{2}))?/.exec(raw);
+  if (!match) return raw;
+  const [, y, m, d] = match;
+  const date = new Date(Date.UTC(Number(y), Number(m) - 1, Number(d ?? 1)));
+  if (Number.isNaN(date.getTime())) return raw;
+  return d
+    ? date.toLocaleDateString('en-IN', { day: 'numeric', month: 'short', timeZone: 'UTC' })
+    : date.toLocaleDateString('en-IN', { month: 'short', year: '2-digit', timeZone: 'UTC' });
+};
+
 export default formatCurrency;

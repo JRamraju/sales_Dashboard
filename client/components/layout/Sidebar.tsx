@@ -12,6 +12,7 @@ import {
   ShieldAlert,
   TrendingUp,
   UploadCloud,
+  UserPlus,
   Users,
   X,
 } from 'lucide-react';
@@ -58,6 +59,12 @@ const NAV_ITEMS: NavItem[] = [
     href: '#leaderboards',
     icon: Users,
   },
+  {
+    id: 'new-records',
+    label: 'New Customers & Products',
+    href: '#new-records',
+    icon: UserPlus,
+  },
 ];
 
 /** Section element ids, in page order (top to bottom, left to right). */
@@ -75,10 +82,20 @@ interface SidebarProps {
 export const Sidebar: React.FC<SidebarProps> = ({ open, onClose }) => {
   const {
     activeBatch,
+    scopeBatches,
+    isAllFiles,
     batches,
     openUploadModal,
     openValidationModal,
   } = useFilterContext();
+
+  const scopeValid = scopeBatches.reduce((n, b) => n + b.validRowsInserted, 0);
+  const scopeSkipped = scopeBatches.reduce((n, b) => n + b.invalidRowsCount, 0);
+  const scopeTitle = activeBatch
+    ? `${activeBatch.fileNumber ? `File ${activeBatch.fileNumber} · ` : ''}${activeBatch.fileName}`
+    : isAllFiles
+    ? `All files (${scopeBatches.length})`
+    : `${scopeBatches.length} files selected`;
 
   const { activeId, scrollToSection } = useScrollSpy(SECTION_IDS);
   const closeButtonRef = useRef<HTMLButtonElement>(null);
@@ -227,42 +244,47 @@ export const Sidebar: React.FC<SidebarProps> = ({ open, onClose }) => {
 
       {/* Bottom Active Dataset Card */}
       <div className="p-4 border-t border-slate-800 space-y-3">
-        {activeBatch ? (
+        {scopeBatches.length > 0 ? (
           <div className="rounded-xl bg-slate-800/90 p-3.5 border border-slate-700/70">
             <div className="flex items-center gap-2 text-xs font-semibold text-slate-200 mb-1">
               <FileSpreadsheet className="h-4 w-4 text-emerald-400 shrink-0" />
-              <span className="truncate" title={activeBatch.fileName}>
-                {activeBatch.fileName}
+              <span className="truncate" title={scopeTitle}>
+                {scopeTitle}
               </span>
             </div>
+            <p className="text-[11px] text-slate-400">
+              {isAllFiles && scopeBatches.length > 1
+                ? 'Running dataset: all files combined'
+                : activeBatch
+                ? 'Viewing one file'
+                : 'Viewing selected files'}
+            </p>
 
             <div className="mt-2 grid grid-cols-2 gap-2 text-[11px]">
               <div className="rounded-lg bg-slate-900/70 p-2">
                 <span className="text-slate-400 block">Valid Rows</span>
                 <span className="font-bold text-emerald-400 text-xs">
-                  {activeBatch.validRowsInserted.toLocaleString()}
+                  {scopeValid.toLocaleString()}
                 </span>
               </div>
               <div className="rounded-lg bg-slate-900/70 p-2">
-                <span className="text-slate-400 block">Quarantined</span>
+                <span className="text-slate-400 block">Skipped</span>
                 <span
                   className={`font-bold text-xs ${
-                    activeBatch.invalidRowsCount > 0
-                      ? 'text-amber-400'
-                      : 'text-slate-300'
+                    scopeSkipped > 0 ? 'text-amber-400' : 'text-slate-300'
                   }`}
                 >
-                  {activeBatch.invalidRowsCount.toLocaleString()}
+                  {scopeSkipped.toLocaleString()}
                 </span>
               </div>
             </div>
 
-            {activeBatch.invalidRowsCount > 0 && (
+            {activeBatch && activeBatch.invalidRowsCount > 0 && (
               <button
                 type="button"
                 onClick={() => {
                   onClose();
-                  openValidationModal();
+                  openValidationModal(activeBatch._id);
                 }}
                 className="mt-2.5 flex w-full items-center justify-center gap-1.5 rounded-lg bg-amber-500/15 border border-amber-500/30 px-2.5 py-1.5 text-xs font-medium text-amber-300 hover:bg-amber-500/25 transition-colors cursor-pointer"
               >
@@ -270,12 +292,17 @@ export const Sidebar: React.FC<SidebarProps> = ({ open, onClose }) => {
                 <span>Inspect Skipped Rows</span>
               </button>
             )}
+            {!activeBatch && scopeSkipped > 0 && (
+              <p className="mt-2.5 text-[11px] leading-relaxed text-slate-400">
+                Pick a single file in the header to inspect its skipped rows.
+              </p>
+            )}
           </div>
         ) : (
           <div className="rounded-xl bg-slate-800/50 p-3.5 border border-slate-800 text-xs text-slate-400">
             <div className="flex items-center gap-2 font-medium text-slate-300 mb-1">
               <Database className="h-4 w-4 text-slate-400" />
-              <span>No Dataset Selected</span>
+              <span>No Files Yet</span>
             </div>
             <p className="text-[11px] leading-relaxed">
               Upload a CSV or Excel sales file to run the ETL pipeline.
@@ -286,7 +313,7 @@ export const Sidebar: React.FC<SidebarProps> = ({ open, onClose }) => {
         <div className="flex items-center justify-between px-1 text-[11px] text-slate-400">
           <span className="flex items-center gap-1.5">
             <CheckCircle2 className="h-3.5 w-3.5 text-emerald-400" />
-            <span> Stored Batches: {batches.length}</span>
+            <span> Uploaded files: {batches.length}</span>
           </span>
           <span className="text-slate-500">v1.0</span>
         </div>
